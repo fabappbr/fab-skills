@@ -1,0 +1,28 @@
+{
+  "name": "fab-skills",
+  "owner": {
+    "name": "Fabapp AI",
+    "url": "https://fabapp.ai"
+  },
+  "plugins": [
+    {
+      "name": "fab-skills",
+      "source": "./",
+      "description": "30 skills da Equipe Fabapp: sites, sistemas, dados, visual, textos, painéis, CRM, financeiro, estoque, atendimento, reputação e retenção.",
+      "version": "1.0.0",
+      "category": "development",
+      "tags": [
+        "fabapp",
+        "brasil",
+        "sites",
+        "apps",
+        "crm",
+        "design",
+        "copy"
+      ]
+    }
+  ],
+  "metadata": {
+    "description": "Skills da Equipe Fabapp para construir e editar apps e sites da Fabapp AI pelo terminal (CLI @fabappai/cli)."
+  }
+}
