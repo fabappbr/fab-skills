@@ -1,80 +1,84 @@
 # Fab Skills
 
-30 skills da Equipe Fabapp para construir e editar apps e sites na [Fabapp AI](https://fabapp.ai) com o seu agente de
+31 skills da Equipe Fabapp para construir e editar apps e sites na [Fabapp AI](https://fabapp.ai) com o seu agente de
 IA no terminal: Claude Code, Codex, OpenCode, Cursor, Gemini CLI, GitHub Copilot e qualquer ferramenta que leia
 skills no formato aberto (uma pasta com `SKILL.md` e `references/`).
 
 Cada skill ensina o agente a fazer uma coisa do jeito certo na Fabapp: o modelo de dados de um CRM, as regras
 brasileiras de CPF e Pix, um painel que responde uma pergunta, um site com as convenções do ramo, textos que não
 parecem de robô. Todas falam com a plataforma pelo CLI [`@fabappai/cli`](https://www.npmjs.com/package/@fabappai/cli)
-e trazem em `references/fabapp-cli.md` o contrato da plataforma pelo terminal.
-
-Para sites premium com direção de arte de agência, veja também a
-[Fab Agência](https://github.com/fabappbr/skills-fab-agencia).
+e trazem em `references/` o contrato da plataforma pelo terminal. Todas têm o prefixo `fab-`, para não se
+confundirem com outras skills instaladas.
 
 ---
 
 ## As skills
 
+**Sites premium**
+
+| Skill | O que faz |
+|---|---|
+| `fab-agencia` | Sites com acabamento de grande agência e nível de premiação: direção de arte própria, tipografia com personalidade, movimento coreografado, texto que converte, autoteste e publicação. |
+
 **Antes e depois de construir**
 
 | Skill | O que faz |
 |---|---|
-| `leitura-do-pedido` | Transforma um pedido vago em entendimento firme: nota de clareza, perguntas com opções, o que foi dito e o que foi suposto, e a lista do que não se inventa. |
-| `spec-de-sistema` | Sistemas de várias telas completos e coerentes: o que cada tela contém, campos, filtros, ações, papéis e status. |
-| `verificar-antes-de-entregar` | O agente só diz "pronto" depois de conferir: compilação, busca no código, pré-visualização e deploy. |
-| `corrigir-bug` | Causa antes de conserto, uma hipótese por vez, e a regra das três tentativas. |
+| `fab-leitura-do-pedido` | Transforma um pedido vago em entendimento firme: nota de clareza, perguntas com opções, o que foi dito e o que foi suposto, e a lista do que não se inventa. |
+| `fab-spec-de-sistema` | Sistemas de várias telas completos e coerentes: o que cada tela contém, campos, filtros, ações, papéis e status. |
+| `fab-verificar-antes-de-entregar` | O agente só diz "pronto" depois de conferir: compilação, busca no código, pré-visualização e deploy. |
+| `fab-corrigir-bug` | Causa antes de conserto, uma hipótese por vez, e a regra das três tentativas. |
 
 **Base técnica**
 
 | Skill | O que faz |
 |---|---|
-| `padroes-brasil` | CPF, CNPJ (inclusive o alfanumérico), telefone e WhatsApp, CEP, dinheiro, datas, LGPD, Pix e nota fiscal. |
-| `modelo-de-dados` | A linguagem do negócio vira o modelo: glossário, entidades, relações, estados e dados prontos para relatório. |
-| `dados-seguros` | Quem pode ler e mudar o quê, ações em massa com prévia, importação sem duplicar, pagamento confirmado só pela plataforma. |
-| `codigo-react` | Regras de React para o app gerado, com impacto e exemplo errado e certo. |
+| `fab-padroes-brasil` | CPF, CNPJ (inclusive o alfanumérico), telefone e WhatsApp, CEP, dinheiro, datas, LGPD, Pix e nota fiscal. |
+| `fab-modelo-de-dados` | A linguagem do negócio vira o modelo: glossário, entidades, relações, estados e dados prontos para relatório. |
+| `fab-dados-seguros` | Quem pode ler e mudar o quê, ações em massa com prévia, importação sem duplicar, pagamento confirmado só pela plataforma. |
+| `fab-codigo-react` | Regras de React para o app gerado, com impacto e exemplo errado e certo. |
 
 **Sistemas e apps**
 
 | Skill | O que faz |
 |---|---|
-| `ux-de-sistemas` | Painéis e sistemas internos com cara de software bem feito: tabelas de trabalho, estados, filtros e navegação. |
-| `formularios-e-onboarding` | Formulários longos em etapas e primeiros passos que levam o cliente ao primeiro resultado. |
-| `app-mobile` | App com cara de app no celular: abas, zona do polegar, toque de 44px, áreas seguras e recursos do aparelho. |
-| `dashboards-e-relatorios` | Painéis que ajudam a decidir: KPI com comparação, gráfico certo para cada pergunta, números que não enganam. |
+| `fab-ux-de-sistemas` | Painéis e sistemas internos com cara de software bem feito: tabelas de trabalho, estados, filtros e navegação. |
+| `fab-formularios-e-onboarding` | Formulários longos em etapas e primeiros passos que levam o cliente ao primeiro resultado. |
+| `fab-app-mobile` | App com cara de app no celular: abas, zona do polegar, toque de 44px, áreas seguras e recursos do aparelho. |
+| `fab-dashboards-e-relatorios` | Painéis que ajudam a decidir: KPI com comparação, gráfico certo para cada pergunta, números que não enganam. |
 
 **Visual**
 
 | Skill | O que faz |
 |---|---|
-| `direcao-de-arte` | Uma identidade própria para o app ou site, com paleta, fontes e um momento assinatura, sem cara de template. |
-| `layout-e-tipografia` | Estrutura antes do estilo: wireframe, hierarquia, escala de espaçamento e tipografia legível. |
-| `redesign-e-polimento` | Eleva um app que já existe sem quebrar nada: auditoria, nota de usabilidade e correção por ordem de risco. |
-| `estilo-minimalista` | Estilo editorial: monocromático quente, contraste tipográfico e grade limpa. |
-| `estilo-brutalista` | Estilo cru e industrial: grade rígida, tipografia extrema, cara de terminal. |
-| `estilo-premium-suave` | Estilo de agência cara: profundidade suave, vidro, movimento com mola. |
-| `da-imagem-ao-codigo` | Reproduz no app a imagem, print ou export de design que o dono mandar. |
+| `fab-direcao-de-arte` | Uma identidade própria para o app ou site, com paleta, fontes e um momento assinatura, sem cara de template. |
+| `fab-layout-e-tipografia` | Estrutura antes do estilo: wireframe, hierarquia, escala de espaçamento e tipografia legível. |
+| `fab-redesign-e-polimento` | Eleva um app que já existe sem quebrar nada: auditoria, nota de usabilidade e correção por ordem de risco. |
+| `fab-estilo-minimalista` | Estilo editorial: monocromático quente, contraste tipográfico e grade limpa. |
+| `fab-estilo-brutalista` | Estilo cru e industrial: grade rígida, tipografia extrema, cara de terminal. |
+| `fab-estilo-premium-suave` | Estilo de agência cara: profundidade suave, vidro, movimento com mola. |
+| `fab-da-imagem-ao-codigo` | Reproduz no app a imagem, print ou export de design que o dono mandar. |
 
 **Sites e textos**
 
 | Skill | O que faz |
 |---|---|
-| `sites-por-segmento` | O site com as convenções do ramo (salão, clínica, restaurante, loja, imobiliária...) e o mapa de páginas. |
-| `landing-que-converte` | Página de campanha feita a partir das objeções do cliente, com prova no lugar certo e teste A/B. |
-| `copy-que-vende` | Posicionamento, estrutura de história e títulos com revisão em sete passadas. |
-| `textos-de-interface` | Regra fixa para cada texto do app: botão, erro, estado vazio, confirmação e aviso. |
-| `texto-sem-cara-de-ia` | Tira os tiques de texto de IA em português, sem mudar fato e sem mexer em texto jurídico. |
+| `fab-sites-por-segmento` | O site com as convenções do ramo (salão, clínica, restaurante, loja, imobiliária...) e o mapa de páginas. |
+| `fab-landing-que-converte` | Página de campanha feita a partir das objeções do cliente, com prova no lugar certo e teste A/B. |
+| `fab-copy-que-vende` | Posicionamento, estrutura de história e títulos com revisão em sete passadas. |
+| `fab-textos-de-interface` | Regra fixa para cada texto do app: botão, erro, estado vazio, confirmação e aviso. |
+| `fab-texto-sem-cara-de-ia` | Tira os tiques de texto de IA em português, sem mudar fato e sem mexer em texto jurídico. |
 
 **Negócio**
 
 | Skill | O que faz |
 |---|---|
-| `crm-de-vendas` | CRM de PME: funil, contatos, "o que falta para fechar", lista de ligações do dia, higiene de dados e relatórios. |
-| `financeiro-e-cobranca` | Orçamento que vira venda, contas a receber, régua de cobrança no tom certo e Pix. |
-| `estoque-e-compras` | Quando repor e quanto comprar, pedido ao fornecedor e recebimento que bate com a conta. |
-| `atendimento-e-chamados` | Central de chamados com prioridade, prazo, fila e respostas ao cliente. |
-| `reputacao-e-avaliacoes` | Pede avaliação na hora certa, rascunha respostas e mostra o que os clientes estão dizendo. |
-| `retencao-de-clientes` | Mostra quem está sumindo e por quê, acompanha o cliente novo e reativa quem parou. |
+| `fab-crm-de-vendas` | CRM de PME: funil, contatos, "o que falta para fechar", lista de ligações do dia, higiene de dados e relatórios. |
+| `fab-financeiro-e-cobranca` | Orçamento que vira venda, contas a receber, régua de cobrança no tom certo e Pix. |
+| `fab-estoque-e-compras` | Quando repor e quanto comprar, pedido ao fornecedor e recebimento que bate com a conta. |
+| `fab-atendimento-e-chamados` | Central de chamados com prioridade, prazo, fila e respostas ao cliente. |
+| `fab-reputacao-e-avaliacoes` | Pede avaliação na hora certa, rascunha respostas e mostra o que os clientes estão dizendo. |
+| `fab-retencao-de-clientes` | Mostra quem está sumindo e por quê, acompanha o cliente novo e reativa quem parou. |
 
 ---
 
@@ -88,7 +92,7 @@ Abra a sua ferramenta (Claude Code, Codex, OpenCode, Cursor ou outra com acesso 
 > que você está usando. Cada pasta dentro de `skills/` é uma skill. Me avise quando terminar e me diga como chamar
 > uma skill.
 
-Para instalar só algumas, diga quais (por exemplo: "só `crm-de-vendas` e `padroes-brasil`").
+Para instalar só algumas, diga quais (por exemplo: "só `fab-crm-de-vendas` e `fab-padroes-brasil`").
 
 ### Com o instalador de skills (várias ferramentas de uma vez)
 
@@ -96,7 +100,7 @@ Para instalar só algumas, diga quais (por exemplo: "só `crm-de-vendas` e `padr
 npx skills add fabappbr/fab-skills                     # escolhe as skills e as ferramentas numa lista
 npx skills add fabappbr/fab-skills --list              # só lista as skills
 npx skills add fabappbr/fab-skills -g -a claude-code codex opencode cursor gemini-cli -y   # todas, nas ferramentas indicadas
-npx skills add fabappbr/fab-skills -s crm-de-vendas padroes-brasil -g                      # só estas
+npx skills add fabappbr/fab-skills -s fab-crm-de-vendas fab-padroes-brasil -g                      # só estas
 ```
 
 `-g` instala para o seu usuário (vale em todos os projetos); sem ele, instala só no projeto atual.
@@ -110,19 +114,19 @@ Dentro do Claude Code:
 /plugin install fab-skills@fab-skills
 ```
 
-As skills ficam disponíveis como `/fab-skills:<nome>` (por exemplo `/fab-skills:crm-de-vendas`) e também são
+As skills ficam disponíveis como `/fab-skills:<nome>` (por exemplo `/fab-skills:fab-crm-de-vendas`) e também são
 usadas sozinhas quando o pedido combina. Para atualizar: `/plugin update fab-skills@fab-skills`.
 
 ### GitHub CLI
 
 ```bash
-gh skill install fabappbr/fab-skills crm-de-vendas --agent claude-code
+gh skill install fabappbr/fab-skills fab-crm-de-vendas --agent claude-code
 ```
 
 ### Manual
 
 Copie a pasta da skill (inteira, com `references/`) para a pasta de skills da sua ferramenta. O `SKILL.md` precisa
-ficar direto dentro da pasta com o nome da skill, por exemplo `~/.claude/skills/crm-de-vendas/SKILL.md`.
+ficar direto dentro da pasta com o nome da skill, por exemplo `~/.claude/skills/fab-crm-de-vendas/SKILL.md`.
 
 | Ferramenta | Pasta do usuário | Pasta do projeto |
 |---|---|---|
@@ -193,7 +197,8 @@ publicação.
 - Cada skill fica em `skills/<nome>/`: `SKILL.md`, `references/` e um `README.md` com a origem, as licenças e o mapa de
   cobertura (o que veio de cada skill de referência e onde ficou).
 - `docs/fabapp-cli.md` é a fonte única do contrato da plataforma pelo terminal. Depois de editá-lo, rode
-  `./scripts/sync-cli-reference.sh` para copiá-lo para `references/fabapp-cli.md` de todas as skills.
+  `./scripts/sync-cli-reference.sh` para copiá-lo para `references/fabapp-cli.md` de todas as skills (menos a
+  `fab-agencia`, que tem o próprio contrato em `references/plataforma-fabapp.md`).
 - Regras do formato, para funcionar em todas as ferramentas: `name` igual ao nome da pasta (minúsculas, números e
   hífen, até 64 caracteres); `description` até 1024 caracteres; no topo do frontmatter só `name`, `description`,
   `license` e `metadata` (texto para texto).
@@ -201,11 +206,13 @@ publicação.
 - Estas skills também existem numa edição para o Studio da Fabapp AI, mantida pela equipe dentro da plataforma. O
   conhecimento é o mesmo; muda só a forma de falar com a plataforma.
 
-## Créditos e licenças
+## Licença e créditos
 
-O texto destas skills é da Fabapp AI, escrito a partir de técnicas de skills de código aberto (licenças MIT e
-Apache 2.0). O `README.md` de cada skill diz de quais fontes ela veio, com a licença e o aviso de copyright de cada
-uma. As fontes:
+MIT (arquivo [`LICENSE`](LICENSE)): use, adapte e redistribua, mantendo o aviso de copyright.
+
+O texto destas skills é da Fabapp AI. A `fab-agencia` é original; as outras 30 foram escritas a partir de técnicas de
+skills de código aberto (licenças MIT e Apache 2.0). O `README.md` de cada skill diz de quais fontes ela veio, com a
+licença e o aviso de copyright de cada uma, e [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) lista todas. As fontes:
 
 [anthropics/skills](https://github.com/anthropics/skills),
 [anthropics/knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins),

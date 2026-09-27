@@ -8,8 +8,8 @@
     {
       "name": "fab-skills",
       "source": "./",
-      "description": "30 skills da Equipe Fabapp: sites, sistemas, dados, visual, textos, painéis, CRM, financeiro, estoque, atendimento, reputação e retenção.",
-      "version": "1.0.0",
+      "description": "31 skills da Equipe Fabapp: sites premium (fab-agencia), sistemas, dados, visual, textos, painéis, CRM, financeiro, estoque, atendimento, reputação e retenção.",
+      "version": "1.1.0",
       "category": "development",
       "tags": [
         "fabapp",

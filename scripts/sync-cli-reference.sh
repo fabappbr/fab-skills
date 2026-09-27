@@ -4,7 +4,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 for d in skills/*/; do
+  # fab-agencia tem o próprio contrato (references/plataforma-fabapp.md)
+  [ "$d" = "skills/fab-agencia/" ] && continue
   mkdir -p "${d}references"
   cp docs/fabapp-cli.md "${d}references/fabapp-cli.md"
 done
-echo "fabapp-cli.md copiado para $(ls -d skills/*/ | wc -l | tr -d ' ') skills"
+echo "fabapp-cli.md copiado para as skills (menos fab-agencia)"
