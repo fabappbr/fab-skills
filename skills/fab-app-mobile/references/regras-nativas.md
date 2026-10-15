@@ -20,7 +20,7 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 | Média | 600 a 839 | 8 | 24 | 16 | `md:`: `gap-4`, 2 ou 3 colunas |
 | Expandida | 840 + | 12 | 24 | 24 | `lg:`: `gap-6`, até 4 colunas |
 
-  Em tela larga o conteúdo não ocupa a largura toda: texto e formulário em `max-w-3xl` (perto de 840 px), ou layout lista e detalhe lado a lado a partir de `lg`. As colunas da grade são para alinhar, não para encher de cartões. Decida por classe de largura (os breakpoints do Tailwind), nunca por aparelho.
+  Em tela larga, só o TEXTO e o FORMULÁRIO ficam estreitos (`max-w-prose` no bloco de leitura, um formulário isolado em largura de formulário); a TELA usa a largura para mostrar mais de uma vez: a coleção em quantas colunas couberem, o detalhe ao lado da lista, o apoio (progresso, resumo, próximo passo) num painel ao lado da tarefa. Nunca uma coluna única de celular para o app inteiro. Decida por tela e pelo conteúdo dela, na classe de largura (os breakpoints do Tailwind), nunca por aparelho; a tabela acima é referência de grade, não um molde.
 - **1.8 Dobra** (M R3.9, R3.10): em dobrável, nada crítico atravessando a dobra; lista e detalhe em painéis separados a partir de `md`.
 
 ## 2. Navegação (CRÍTICA)
@@ -141,7 +141,7 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 
 ## Lista de conferência
 
-- Layout: alvos ≥ 44 px (48 nos principais); nada sob as áreas do sistema; ação principal na metade de baixo; de 320 a 430 px sem quebrar; espaçamento na grade de 8; conteúdo com largura máxima em tela grande.
+- Layout: alvos ≥ 44 px (48 nos principais); nada sob as áreas do sistema; ação principal na metade de baixo; de 320 a 430 px sem quebrar; espaçamento na grade de 8; em 1280 px cada tela tem a composição dela (colunas, detalhe ao lado, painel de apoio), e só o texto e o formulário ficam estreitos.
 - Navegação: 3 a 5 abas com rótulo, só nas raízes; sem hambúrguer no celular; título grande nas raízes; toda camada com cabeçalho de voltar e título (`<Screen>`); a camada entra da direita e sai ao voltar; voltar funciona em tudo; estado guardado ao trocar de aba.
 - Texto: escala do tema em `rem`; aguenta 200%; nada abaixo de 11 px; corpo 16 px.
 - Cor: só tokens; modo escuro intencional; nada só por cor; contraste 4,5:1; uma cor para o clicável.
@@ -169,7 +169,7 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 15. Modo escuro como remendo (cor fixa no código).
 16. Barra de abas só com ícones.
 17. Dois botões flutuantes, ou flutuante para ação secundária.
-18. Conteúdo esticado de ponta a ponta no computador.
+18. No computador, conteúdo esticado de ponta a ponta, ou o oposto: o app inteiro numa coluna de celular com a tela vazia dos lados.
 19. Bloquear o app porque a pessoa negou uma permissão.
 20. Barra de navegação desenhada do zero em vez da casca da plataforma.
 21. Troca de tela seca entre raiz e detalhe num app: a camada entra e sai (`LayerLink`, `useLayerNav`).

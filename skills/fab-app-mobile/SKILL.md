@@ -4,7 +4,7 @@ description: "Deixa o app da Fabapp AI, construído ou editado pelo terminal (CL
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.1.0
+  version: 1.2.0
   title: App com Cara de App
   edition: terminal
 ---
@@ -71,6 +71,7 @@ Inclua também, como o plano de toda construção: o modelo de dados, a marca pr
 - Por código: toda lista tem estados de carregando (Skeleton), vazio (EmptyState com ação) e erro (mensagem e "Tentar de novo").
 - Por código: câmera, localização e notificação são pedidas só no toque do botão que precisa delas, depois de uma explicação, e há alternativa se a pessoa negar.
 - Na tela: em 375 px de largura, a ação principal de cada tela está na metade de baixo e nada fica escondido atrás da barra de abas.
+- Na tela: em 1280 px, cada tela usa a largura para mostrar mais (colunas, detalhe ao lado da lista, painel de apoio); nenhuma é a coluna do celular esticada.
 - Por código: toda tela fora da casca (login, checkout, onboarding) tem botão de voltar; nenhuma tela sem saída.
 
 ## A construção: implementar como app

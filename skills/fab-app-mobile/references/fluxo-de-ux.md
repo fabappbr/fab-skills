@@ -95,7 +95,7 @@ Sem abas (camada aberta por LayerLink a partir de Pedidos; sai ao voltar)
 Estados: Skeleton da faixa e das linhas; erro com "Tentar de novo"
 Saídas: Voltar → Pedidos; Falar com a loja → WhatsApp; abas
 ```
-Regras do rascunho: celular primeiro (375 px); a ação principal embaixo; o que é clicável marcado; nenhuma tela sem saída (voltar, abas ou ação); as abas só nas raízes, iguais em todas elas; toda camada com voltar e título.
+Regras do rascunho: celular (375 px) e computador (1280 px), duas composições da mesma tela: no computador diga o que ela ganha (o detalhe ao lado da lista, um painel de apoio, mais colunas), não a mesma coluna mais larga; a ação principal embaixo; o que é clicável marcado; nenhuma tela sem saída (voltar, abas ou ação); as abas só nas raízes, iguais em todas elas; toda camada com voltar e título.
 
 ## 7. Documento de entrega (no plano)
 
