@@ -37,12 +37,12 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 | Média | Lateral estreita (rail) ou cabeçalho | Lateral com grupos |
 | Larga | Lateral (rail ou fixa) | Lateral fixa com seções e divisórias |
 
-  Na plataforma: abas `md:hidden`; a partir de `md`, a mesma `NAV` como lateral (app de ferramenta, painel) ou cabeçalho (app leve). A lateral pode ter no topo o botão da ação principal. Grupos da lateral com título e divisória.
-- **2.6 Título grande nas telas de topo** (A 2.3): h1 grande; cabeçalho compacto ao entrar num detalhe (M R5.5, R5.6: barra de topo pequena na maioria das telas; se ela encolher ao rolar, que acompanhe a rolagem).
-- **2.7 Voltar** (A 2.4, M R2.10 a R2.13): nunca capture o voltar do navegador, do Android ou o gesto de borda do iPhone; o botão "voltar" da tela leva ao nível acima (`navigate(-1)` quando veio de dentro do app, senão para a lista da aba). Nunca "tem certeza?" ao voltar, salvo com dado digitado não salvo (aí `AlertDialog` "Descartar alterações?").
-- **2.8 Pilha dentro da aba** (A 2.5): lista → detalhe → edição com rotas aninhadas (`/pedidos`, `/pedidos/:id`, `/pedidos/:id/editar`); cada registro tem endereço próprio, para o push, o compartilhar e o voltar funcionarem.
+  Na plataforma: `<AppShell nav={NAV} tabs="roots" desktop="top"|"sidebar">`: abas só nas raízes no celular; a partir de `md`, a mesma `NAV` no topo (padrão) ou na lateral (só painel, área administrativa, ferramenta interna). A lateral pode ter no topo o botão da ação principal. Grupos da lateral com título e divisória.
+- **2.6 Título grande nas raízes, cabeçalho de app nas camadas** (A 2.3, M R5.5, R5.6): h1 grande na tela raiz de cada aba; toda tela abaixo dela usa o cabeçalho compacto do `<Screen>` (voltar à esquerda, título curto, até 2 ações à direita), fixo no topo com a área segura.
+- **2.7 Voltar** (A 2.4, M R2.10 a R2.13): nunca capture o voltar do navegador, do Android ou o gesto de borda do iPhone; o botão "voltar" da camada (`useLayerNav().back(raiz)`, já embutido no `<Screen>`) leva à tela anterior quando o app a abriu, senão à raiz da aba (`backTo`). Nunca "tem certeza?" ao voltar, salvo com dado digitado não salvo (aí `AlertDialog` "Descartar alterações?").
+- **2.8 Pilha dentro da aba, em camadas** (A 2.5): lista → detalhe → edição com rotas aninhadas (`/pedidos`, `/pedidos/:id`, `/pedidos/:id/editar`); cada registro tem endereço próprio, para o push, o compartilhar e o voltar funcionarem. Cada nível abaixo da raiz abre como camada: entra da direita por cima da tela anterior (`<LayerLink to>` ou `useLayerNav().push(to)`) e sai deslizando de volta ao voltar. Sem movimento quando a pessoa pediu menos movimento, e troca seca onde o navegador não tem View Transitions.
 - **2.9 Guardar estado** (A 2.6, A 2.7, M R2.14): ao voltar ou trocar de aba, a pessoa reencontra rolagem, filtro, busca e seleção. Filtros na URL; reconhecer é melhor que lembrar: onde estou, o que escolhi e para onde posso ir ficam visíveis.
-- **2.10 Barra de abas nunca some** ao descer na pilha de uma aba (A 7.5, anti-padrão 9). Somem só nas telas fora da casca (login, checkout, onboarding).
+- **2.10 Barra de abas só nas raízes** (decisão Fabapp de 14/10/2026 sobre A 7.5): a barra aparece nas telas raiz de cada aba (as rotas da `NAV`); ao descer na pilha, a camada cobre a tela com o próprio cabeçalho e a barra some, voltando com o voltar (`<AppShell tabs="roots">`). As telas fora da casca (login, checkout, onboarding) também não a têm.
 
 ## 3. Tipografia e texto que cresce (ALTA)
 
@@ -89,7 +89,7 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 
 | Precisa de | No app | Regra |
 |---|---|---|
-| Ação principal da tela | `Button` cheio, largo, embaixo; ou botão flutuante com rótulo | Um por tela (M R5.1 a R5.4); flutuante acima das abas, canto inferior direito |
+| Ação principal da tela | `Button` cheio, largo, embaixo; ou botão flutuante com rótulo | Um por tela (M R5.1 a R5.4); acima das abas numa raiz, em `bottom-0` com área segura numa camada; flutuante no canto inferior direito |
 | Ação secundária | `Button variant="outline"` | (A 7.1) |
 | Ação terciária | `Button variant="ghost"` ou link | |
 | Excluir | `Button variant="destructive"` + `AlertDialog` | (A 7.1) |
@@ -142,7 +142,7 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 ## Lista de conferência
 
 - Layout: alvos ≥ 44 px (48 nos principais); nada sob as áreas do sistema; ação principal na metade de baixo; de 320 a 430 px sem quebrar; espaçamento na grade de 8; conteúdo com largura máxima em tela grande.
-- Navegação: 3 a 5 abas com rótulo; sem hambúrguer no celular; título grande no topo; voltar funciona em tudo; estado guardado ao trocar de aba; abas visíveis dentro da pilha.
+- Navegação: 3 a 5 abas com rótulo, só nas raízes; sem hambúrguer no celular; título grande nas raízes; toda camada com cabeçalho de voltar e título (`<Screen>`); a camada entra da direita e sai ao voltar; voltar funciona em tudo; estado guardado ao trocar de aba.
 - Texto: escala do tema em `rem`; aguenta 200%; nada abaixo de 11 px; corpo 16 px.
 - Cor: só tokens; modo escuro intencional; nada só por cor; contraste 4,5:1; uma cor para o clicável.
 - Acessibilidade: nome em todo controle; ordem lógica; menos movimento respeitado; todo gesto com alternativa; teclado.
@@ -160,7 +160,7 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 6. Tamanho de fonte fixo em px que não cresce.
 7. Só cor para indicar estado.
 8. Diálogo para informação não crítica (use toast ou texto na tela).
-9. Esconder as abas ao entrar num detalhe.
+9. Barra de abas dentro de uma camada (detalhe, edição, configuração), ou camada sem cabeçalho com voltar e título.
 10. Conteúdo sob o recorte da câmera ou o indicador de início.
 11. Modal sem saída.
 12. Gesto sem alternativa.
@@ -172,3 +172,4 @@ Prioridade: CRÍTICA nunca se viola; ALTA segue-se salvo motivo registrado; MÉD
 18. Conteúdo esticado de ponta a ponta no computador.
 19. Bloquear o app porque a pessoa negou uma permissão.
 20. Barra de navegação desenhada do zero em vez da casca da plataforma.
+21. Troca de tela seca entre raiz e detalhe num app: a camada entra e sai (`LayerLink`, `useLayerNav`).

@@ -28,7 +28,7 @@ Exemplo:
 ABAS (celular embaixo, computador lateral ou cabeçalho)
 ├── Início (/)                  [entrada; logado vê o resumo dele]
 ├── Cardápio (/cardapio)
-│   └── Item (/cardapio/:id)    [folha ou tela, com voltar]
+│   └── Item (/cardapio/:id)    [camada: entra da direita, cabeçalho com voltar e título, sem abas]
 ├── Pedidos (/pedidos)
 │   └── Pedido (/pedidos/:id)
 └── Perfil (/perfil)
@@ -86,16 +86,16 @@ Para cada chamada, os erros possíveis (401, 403, 409, 422, 402 quando a IA do a
 
 ```
 TELA: Pedido (/pedidos/:id)            [dentro da aba Pedidos]
-Cabeçalho compacto: ← Voltar · "Pedido PED-0042" · [⋯ Mais]
+Cabeçalho do <Screen>: ← Voltar · "Pedido PED-0042" · [⋯ Mais]
 Faixa de status: Badge "A caminho" + horário previsto
 Itens: linhas de 48 px (nome, quantidade, R$)
 Total: R$ 87,50 (Pix)
-Barra de ação fixa embaixo (acima das abas): [Falar com a loja]
-Abas visíveis
+Barra de ação fixa embaixo (bottom-0, área segura; a camada não tem abas): [Falar com a loja]
+Sem abas (camada aberta por LayerLink a partir de Pedidos; sai ao voltar)
 Estados: Skeleton da faixa e das linhas; erro com "Tentar de novo"
 Saídas: Voltar → Pedidos; Falar com a loja → WhatsApp; abas
 ```
-Regras do rascunho: celular primeiro (375 px); a ação principal embaixo; o que é clicável marcado; nenhuma tela sem saída (voltar, abas ou ação); as abas iguais em todas as telas que as têm.
+Regras do rascunho: celular primeiro (375 px); a ação principal embaixo; o que é clicável marcado; nenhuma tela sem saída (voltar, abas ou ação); as abas só nas raízes, iguais em todas elas; toda camada com voltar e título.
 
 ## 7. Documento de entrega (no plano)
 

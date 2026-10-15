@@ -17,7 +17,8 @@ Faz o app gerado se comportar como aplicativo de celular (no navegador, instalad
 
 - **Categoria:** other
 - **Etapas:** plan, build, edit (sem briefing: a escolha entre jeito de app e jeito de site já é pergunta do briefing da plataforma, e o app nativo é configurado depois no Studio)
-- **Tokens (validador, edição terminal):** corpo ~3.950; referências ~5.700 (mais `references/fabapp-cli.md`, copiado na montagem)
+- **Tokens (validador, edição terminal):** corpo ~4.450; referências ~5.900 (mais `references/fabapp-cli.md`, copiado na montagem)
+- **1.1.0 (14/10/2026):** barra de abas só nas raízes (`AppShell tabs="roots"`), navegação em camadas que entram e saem (`Screen`, `LayerLink`, `useLayerNav`) e cabeçalho de app com voltar e título em toda tela que não é raiz.
 - **Arquivos:** `SKILL.md`, `references/regras-nativas.md`, `references/fluxo-de-ux.md`
 
 ## Origem e licenças
@@ -38,7 +39,7 @@ As regras de plataforma derivam das diretrizes públicas da Apple e do Google; o
 | Android R3.1 a R3.10 (classes de largura, grade 4/8/12 com margens e espaços, largura máxima ~840, borda a borda, dobráveis) | `regras-nativas.md` §1.7, §1.8 | Tabela convertida para breakpoints do Tailwind; margem da plataforma `px-6` prevalece sobre 16 dp |
 | iOS 2.1 a 2.7 (abas, sem hambúrguer, título grande, voltar por gesto, pilha, estado, reconhecer) | SKILL regra 3 e construção; `regras-nativas.md` §2 | Pilha por rotas aninhadas; estado em parâmetros da URL |
 | Android R2.1 a R2.14 (barra 3 a 5, rótulos, ícone cheio/vazado, indicador, rail, drawer, voltar preditivo, Up versus Back, sem "tem certeza", reconhecer) | `regras-nativas.md` §2 | Ícone cheio/vazado vira indicador em pílula (o `lucide` não tem variantes cheias); voltar preditivo é do sistema, o app só não o bloqueia |
-| Tabela de navegação por largura e quantidade de destinos | `regras-nativas.md` §2.5 | Casca de app da plataforma: abas `md:hidden`, lateral ou cabeçalho a partir de `md` |
+| Tabela de navegação por largura e quantidade de destinos | `regras-nativas.md` §2.5 | Casca de app da plataforma (`AppShell tabs="roots"`): abas só nas raízes no celular, topo ou lateral a partir de `md`; detalhes em camadas (`Screen`) |
 | iOS 3.1 a 3.6 e Android R4.1 a R4.5 (estilos, Dynamic Type até 200%, fonte customizada que escala, mínimos 11/12, entrelinha, hierarquia) | SKILL regra 5; `regras-nativas.md` §3 | `rem` do Tailwind acompanha a configuração de texto; fonte vem da marca; campo com 16 px contra zoom do iPhone (acréscimo web) |
 | iOS 4.1 a 4.7 e Android R1.1 a R1.11 (cores semânticas, claro e escuro, nunca só cor, 4,5:1, P3, fundos, uma cor de destaque, papéis "on", tema dinâmico, sementes) | SKILL regra 6; `regras-nativas.md` §4 | Tokens da marca; modo pelo patch de tema (`light`/`dark`/`system`); cor dinâmica do papel de parede, P3 e geração por semente não se aplicam (a plataforma gera e confere a paleta) |
 | iOS 5.1 a 5.8 e Android R6.1 a R6.13 (leitor de tela, ordem, negrito, menos movimento, contraste alto, alternativa a gesto, teclado, agrupar, ações customizadas, foco, canvas) | SKILL construção "Acessibilidade" e "Movimento"; `regras-nativas.md` §5 | `aria-label`, `useReducedMotion`; canvas vira "gráfico acompanhado dos números" |

@@ -302,7 +302,7 @@ O `fabapp deploy` não passa pelo QA do gerador da plataforma (só confere o bá
 - **Nunca `<img>` apontando para URL externa ou banco de imagens.** Imagem decorativa é `<AppImage slot prompt alt />`; imagem de dado vem do campo do registro. Texto sobre foto precisa de véu.
 - **Nunca `await import(` (nem `import('node:...')`), `eval`, `dangerouslySetInnerHTML`, `<script src>` externo, `process.env`**, `import.meta.env` que não seja `VITE_*`, nem `import * as` de `@/lib/fab-*`. `React.lazy(() => import('./Pesado'))` para um componente pesado DENTRO de uma página é aceito; as rotas usam import simples, porque o build já divide cada página.
 - **Layout:** container `mx-auto max-w-* px-6`; `h1` com `text-3xl sm:text-4xl`; no máximo 2 colunas no celular; `min-w-0`; sem largura fixa em px. Linha que rola de lado é `<ScrollRow>`, nunca `overflow-x-auto`. `<DatePicker>`, nunca `<input type="date">`; nunca corte `toISOString()` para data sem hora.
-- **Casca única:** uma navegação só. App: 3 a 5 abas embaixo (`md:hidden`, `pb-20 md:pb-0`). Site: cabeçalho. Login fora da casca. Rota `/api/x` inventada não existe.
+- **Casca única:** uma navegação só. App: `<AppShell nav={NAV} tabs="roots" desktop="top"|"sidebar">` (3 a 5 abas embaixo só nas raízes; detalhes em `<Screen>`, abertos por `LayerLink`; desde 14/10/2026). Site: cabeçalho. Login fora da casca. Rota `/api/x` inventada não existe.
 
 ### O kit (`src/components/ui/*`)
 
