@@ -4,7 +4,7 @@ description: "Deixa o app da Fabapp AI, construído ou editado pelo terminal (CL
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.2.0
+  version: 1.3.0
   title: App com Cara de App
   edition: terminal
 ---
@@ -81,6 +81,19 @@ Ordem: schema e automações primeiro (`fab.schema.json`, `fab.automations.json`
 - **Marca e modo:** grave a marca aprovada em `apps/<slug>/fab.config.json → theme` com as chaves reais: `mode` (`light`, `dark` ou `system`), `primary`, `primaryFg`, `bg`, `card`, `text`, `accent`, `destructive`, `radius` (NÚMERO em px; 100 ou mais vira pílula), `titleFont`, `bodyFont` (nome exato do Google Fonts; nome inexistente cai na fonte do sistema sem erro), `titleTracking`, e `dark: { bg, card, text, primary }` (o modo escuro precisa dela). Não escreva `primaryText` (é derivado). Envie com `fabapp push`; o tema só aparece no ar no próximo `fabapp deploy`. Anote em `DECISOES.md`, seção Marca, com o porquê. No código continuam SÓ tokens e classes: nada de hex, nada de `font-family`, nunca editar `index.css` nem `fab-theme.css`; estilo de títulos vai em `src/app-typography.css`, em `@layer base`, sem nome de fonte. O logo o dono sobe no Studio.
 - **Casca:** a de app da plataforma, com a barra só nas raízes: em `src/components/Layout.tsx`, `const NAV` único e `return <AppShell nav={NAV} tabs="roots" desktop="top" actions={…}/>` (`desktop="sidebar"` só em painel, área administrativa ou ferramenta interna). Ela já traz a barra com área segura, a aba ativa pela rota (cor da marca em texto, pílula atrás do ícone), o "Mais" quando há mais de 5 destinos e, no computador, a mesma `NAV` no topo ou na lateral. Nunca escreva a barra à mão.
 - **Camadas:** toda tela abaixo de uma raiz é um `<Screen title="…" backTo="/raiz-da-aba" actions={…}>` de `@/components/ui/screen`: cabeçalho compacto com voltar e título, sem a barra de abas. Abra a camada com `<LayerLink to="/pedidos/42">` (no lugar de `<Link>`) ou `const { push, back } = useLayerNav()`: ela entra da direita e sai ao voltar, como num app nativo; o voltar leva à tela anterior, ou à raiz da aba quando a pessoa chegou por link ou notificação. Tarefa curta (filtro, escolher opção, formulário rápido) continua numa `Sheet` de baixo, não numa camada.
+- **Exemplo de camada** (toda página fora da `NAV` começa assim; sem o `<Screen>` a casca até esconde a barra, mas a tela fica sem o cabeçalho de voltar e sem a transição, e um cabeçalho de voltar feito à mão é defeito):
+  ```tsx
+  import { useParams } from "react-router-dom";
+  import { Screen } from "@/components/ui/screen";
+  export default function PedidoDetalhe() {
+    const { id } = useParams();
+    return (
+      <Screen title="Pedido" backTo="/pedidos">
+        {/* conteúdo da tela: estados carregando, vazio e erro */}
+      </Screen>
+    );
+  }
+  ```
 - **Título grande** nas telas raiz (`PageHeader` ou h1 `text-3xl sm:text-4xl`); nas camadas, o cabeçalho é o do `<Screen>` (voltar, título curto, até 2 ações; o resto num `DropdownMenu` de "Mais"). Nunca a marca no título de uma camada, nunca uma camada sem voltar.
 - **Ação principal:** barra fixa embaixo com um botão largo de 48 px, ou um botão flutuante com rótulo ("+ Novo pedido") no canto inferior direito. Numa raiz ela fica acima das abas (`fixed inset-x-0 bottom-16 md:bottom-0`); numa camada não há abas, então fica em `bottom-0` com `pb-[env(safe-area-inset-bottom)]`. Um por tela, no máximo.
 - **Folhas:** tarefa curta e independente (filtros, escolher opção, formulário rápido) abre numa `Sheet` de baixo (`side="bottom"`) com alça visual no topo, título, botão de fechar e conteúdo que rola. Uma folha nunca abre outra. Confirmação de ação destrutiva usa `AlertDialog` com 2 botões ("Cancelar" e "Excluir"); diálogo só para decisão crítica.
