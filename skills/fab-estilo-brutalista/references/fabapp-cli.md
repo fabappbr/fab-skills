@@ -233,6 +233,7 @@ export default function Services() {
 - `useLive(model, { filter, sort, limit })` devolve `{ rows, loading, error, refresh }`. Nunca `setInterval` em lista.
 - `ApiError { status, message }`: mostre `e.message`; trate 401, 403, 409, 422, 402, 429.
 - `useAuth()`: `user`, `login`, `logout`, `signup`, `updateProfile`, código por e-mail (`sendEmailCode`/`loginWithEmailCode`) quando ligado em `fab.settings.json`. As telas de login são suas.
+- **Rotas privadas (desde 16/10/2026):** `<RequireAuth>` de `@/lib/fab-client` como rota de layout em volta de todas as rotas privadas (`<Route element={<RequireAuth/>}><Route element={<Layout/>}>…</Route></Route>`); `/login` e `/signup` ficam fora, em `<GuestOnly>`; depois de entrar, `nav(useReturnTo())` devolve a pessoa para onde ia. A guarda espera a sessão (sem piscar o login num F5) e redireciona ANTES de a tela aparecer. App inteiro privado: tudo, inclusive `/`, dentro da guarda; o `/login` é a única porta. Nunca uma tela que só mostra "entre na sua conta" com um botão: isso é o que a guarda evita. Papéis: `<RequireAuth roles={["admin"]} redirectTo="/">`.
 - `formatMoney`, `formatDate`, `formatDateTime`, `<Logo/>`, `<InstallPrompt/>` (todo app é PWA).
 - `admin.listUsers/updateUser/createUser(s)/invite`: exigem a permissão `users.*`.
 - `trackEvent(nome, params)`: chega ao Meta Pixel e aos analytics que o dono conectou.
