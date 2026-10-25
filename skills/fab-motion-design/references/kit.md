@@ -47,7 +47,7 @@ A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "br
 |---|---|---|
 | `<Price>` | `item`, `showWasPrice?`, `showInstallments?`, `size?: "m" | "l" | "xl"` | Formata na moeda do item e no idioma da marca. Sem preço no item, não renderiza. |
 | `<Badge>` | `item?` ou `text?`, `shape?: "circle" | "star" | "ribbon"`, `color?: "primary" | "accent"` | Com `item`, mostra o desconto calculado (só se houver preço antigo maior). Com `text`, um selo curto ("Novo"). |
-| `<Product>` | `item`, `cutout?`, `shadow?`, `motion?: "spring" | "float" | "gentle-spin"`, `height?` | Foto real do item. `cutout` usa o recorte sem fundo (a plataforma gera). Sem foto, não renderiza. |
+| `<Product>` | `item`, `cutout?`, `shadow?`, `motion?: "spring" | "float" | "gentle-spin"`, `height?` (px, ou `"s" | "m" | "l" | "xl"`) | Foto real do item. `cutout` usa o recorte sem fundo (a plataforma gera). Sem foto, não renderiza. |
 | `<ProductGrid>` | `items`, `columns?`, `showPrice?` | 2 a 4 itens. |
 | `<Compare>` | `a`, `b` (imagens), `labels: [string, string]`, `variant?: "wipe" | "side-by-side"` | Antes e depois, plano A e B. |
 
