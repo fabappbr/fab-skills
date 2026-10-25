@@ -4,7 +4,7 @@ description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Mot
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.1.0
+  version: 1.1.1
   title: Motion Design
   edition: motion
 fabapp:
