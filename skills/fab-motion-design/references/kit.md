@@ -87,6 +87,7 @@ O fundo vai em `background` da `<Scene>` (ou do `<Slide>`):
 | `"color"` | `color` (papel) | O mais comum. |
 | `"gradient"` | `color?` | Do papel para o texto. |
 | `"photo"` | `source` (de dado: `items[0].photo_url`) | Com zoom lento. |
+| `"owner-video"` | `source`, `from`, `focus`, `dim` | O vídeo do próprio dono. Só ele escolhe, pelo editor; você nunca escreve um. Num ajuste, mantenha-o como está. |
 | `"ai-image"` | `prompt`, `slot` | Imagem gerada. Barata; sai junto com a peça. |
 | `"ai-video"` | `prompt`, `slot` | Vídeo gerado de 5 a 10 s, sem som. Caro: o dono confirma o custo antes. Use um, no máximo dois por peça. |
 
