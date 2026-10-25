@@ -34,7 +34,7 @@ A bateria local e a revisão visual pontuam cada peça assim:
 | Gancho no primeiro 1,5 s | 2 |
 | Uma ideia por cena | 1 |
 | Marca aplicada: cores, fontes, logo, forma | 1 |
-| Ritmo: variação, pico, pausa, corte na batida | 2 |
+| Ritmo: variação, pico, calma antes do pico, efeito nas trocas certas | 2 |
 | Chamada final clara | 1 |
 
 Barra para lançar: média 8 ou mais nas 36 peças da bateria, sem nenhum erro de preço ou nome.

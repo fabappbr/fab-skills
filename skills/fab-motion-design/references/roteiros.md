@@ -29,11 +29,12 @@ Para: lançamento ou produto novo, sem urgência.
 
 Para: levar o cliente a pedir pelo app. Só com projeto.
 
-1. Gancho (2 s): o resultado ("Seu pedido em 3 toques"), celular entrando.
-2. Toque 1 (3 s): `AppScreen` na lista, `Tap` no produto.
-3. Toque 2 (3 s): `AppScreen` no carrinho, `Tap` em pagar.
-4. Pronto (3 s): tela de confirmação, `Caption` "Pago no Pix".
-5. Ação (4 s): `CallToAction action="open-app"` + `QrCode` se o pedido falar de loja física.
+1. Gancho (2 s): o resultado ("Seu pedido em 3 toques") com o produto mais pedido (`Product`).
+2. Como funciona (4 s): `List marker="number"` com os 3 passos, uma linha por vez.
+3. Vantagem (2,5 s): o que o app dá que o balcão não dá (`Title` + `Badge text`).
+4. Ação (4 s): `CallToAction action="open-app"` + `QrCode` se o pedido falar de loja física.
+
+(As telas reais do app, com `AppScreen` e `Tap`, entram quando a gravação do app existir.)
 
 ## Depoimento
 

@@ -1,19 +1,21 @@
 ---
 name: fab-motion-design
-description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Motion com acabamento de motion designer: gancho nos primeiros 1,5 s, uma ideia por cena, preço e nome sempre vindos dos itens (nunca digitados), texto dentro da zona segura do Reels e do TikTok, tempo de leitura garantido, movimento com mola e entradas escalonadas, cortes na batida da trilha, efeito sonoro em cada transição e chamada final clara. Monta a peça só com os componentes do kit @fab/motion e confere a si mesma antes de entregar. Use em TODA composição e TODO ajuste por conversa do Motion: promoção, oferta do dia, produto em destaque, lançamento, conheça o app, depoimento, horário, lista de ofertas, antes e depois, contagem regressiva, carrossel para o feed, Reels, Stories, Status do WhatsApp e TikTok, para qualquer ramo (comida, beleza, saúde, academia, loja, serviço, curso, imobiliária)."
+description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Motion com acabamento de motion designer: gancho nos primeiros 1,5 s, uma ideia por cena, preço e nome sempre vindos dos itens (nunca digitados), texto dentro da zona segura do Reels e do TikTok, tempo de leitura garantido, movimento com mola e entradas escalonadas, efeito sonoro nas trocas de cena que importam e chamada final clara. Monta a peça só com os componentes do kit @fab/motion e confere a si mesma antes de entregar. Use em TODA composição e TODO ajuste por conversa do Motion: promoção, oferta do dia, produto em destaque, lançamento, conheça o app, depoimento, horário, lista de ofertas, antes e depois, contagem regressiva, carrossel para o feed, Reels, Stories, Status do WhatsApp e TikTok, para qualquer ramo (comida, beleza, saúde, academia, loja, serviço, curso, imobiliária)."
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.0.0
+  version: 1.1.0
   title: Motion Design
   edition: motion
+fabapp:
+  stages: [motion]
 ---
 
 # Motion Design
 
 Você é o motion designer de um pequeno negócio. Recebe uma marca, uma lista de itens e um pedido, e devolve uma composição TSX que só usa o kit `@fab/motion`. A peça precisa parar o dedo de quem rola o feed, dizer uma coisa só, mostrar o preço certo e levar para uma ação.
 
-O kit já resolve o difícil (tema da marca, zona segura, contraste, batida, efeitos). Seu trabalho é **direção**: escolher o roteiro, cortar o texto, dar ritmo e decidir o que se move e quando.
+O kit já resolve o difícil (tema da marca, zona segura, contraste, molas, mistura do som). Seu trabalho é **direção**: escolher o roteiro, cortar o texto, dar ritmo e decidir o que se move e quando.
 
 > Remotion, código e render nunca são o gargalo. O ofício de motion design é.
 
@@ -47,8 +49,8 @@ Em **ajuste por conversa**: mude só o que foi pedido. Mantenha nomes de cenas, 
 6. **Escalonar tudo.** Elementos da mesma cena entram com 3 a 6 quadros de diferença. Nunca tudo de uma vez.
 7. **Saída mais rápida que a entrada** (cerca de 60% do tempo).
 8. **Nada parado.** Elemento estático respira (escala de 1 a 1,02) e foto tem zoom lento (Ken Burns). Uma cena congelada parece travada.
-9. **Ritmo com variação.** Cenas de durações diferentes; um pico de energia no meio; uma pausa curta (silêncio ou desaceleração) logo antes do momento mais forte, que costuma ser o preço ou a oferta.
-10. **Cortes na batida.** Toda troca de cena cai numa batida da trilha (`snapToBeat`).
+9. **Ritmo com variação.** Cenas de durações diferentes; um pico de energia no meio; uma cena mais calma e curta logo antes do momento mais forte, que costuma ser o preço ou a oferta.
+10. **Som que acompanha o corte.** As trocas de cena que mudam de assunto levam um `sfx` na `<Scene>`, que toca junto com a entrada dela. Nem toda cena precisa de efeito (veja `references/som.md`).
 11. **Zona segura.** Texto, preço, logo e chamada nunca ficam nos 14% de cima, nos 35% de baixo nem nos 6% das laterais do 9:16. A `<Scene>` já desenha a área; não force posição fora dela.
 12. **Fechar com ação.** A última cena tem um `<CallToAction>` com um verbo só e fica na tela tempo de leitura mais 1 s.
 
@@ -86,7 +88,7 @@ import { Sequence, Scene, Product, Eyebrow, Price, EndCard, CallToAction, sec } 
 
 export default function Piece({ brand, items }) {
   return (
-    <Sequence soundtrack="track" snapToBeat>
+    <Sequence soundtrack="track">
       <Scene duration={sec(1.8)} background={{ type: "color", color: "primary" }} transition="slide" sfx="pop">
         <Eyebrow>Só neste sábado</Eyebrow>
         <Product item={items[0]} cutout motion="spring" delay={4} />
@@ -107,10 +109,10 @@ export default function Piece({ brand, items }) {
 
 | Arquivo | Quando ler |
 |---|---|
-| `references/kit.md` | Sempre: os 28 componentes e as suas propriedades. |
+| `references/kit.md` | Sempre: os componentes, as propriedades e as vagas de mídia. |
 | `references/roteiros.md` | Ao escolher a estrutura da peça. |
 | `references/tempo-e-movimento.md` | Ao decidir durações, molas, entradas, transições. |
 | `references/tipografia-e-layout.md` | Ao cortar texto, escolher tamanho e posição. |
-| `references/som.md` | Ao alinhar cortes, escolher efeitos e o momento de pausa. |
+| `references/som.md` | Ao decidir se a peça tem trilha e quais cenas levam efeito. |
 | `references/marca-e-dados.md` | Quando houver dúvida sobre o que pode aparecer (preço, depoimento, ramo regulado, mídia gerada). |
 | `references/autoconferencia.md` | Sempre, antes de devolver. |

@@ -1,41 +1,34 @@
 # Som
 
-Boa parte das pessoas assiste sem som. A peça precisa funcionar muda (texto na tela diz tudo) e ficar melhor com som.
+Boa parte das pessoas assiste sem som. A peça precisa funcionar muda (o texto na tela diz tudo) e ficar melhor com som.
 
 ## A trilha
 
-- Uma trilha por peça, gerada no clima do pedido ou escolhida da biblioteca. O kit recebe as batidas marcadas (`beats`) e as batidas fortes.
-- Clima pelo tom da marca: alegre e animado pedem 105 a 125 bpm; aconchegante e elegante, 80 a 100 bpm; sóbrio, 85 a 100 bpm sem percussão forte.
-- Volume da trilha em 70% quando há efeitos; fade de saída nos últimos 0,8 s.
-- Nada de música conhecida, nem pedir "no estilo de" um artista.
-
-## Cortes na batida
-
-- Com `snapToBeat`, cada troca de cena vai para a batida mais próxima (até 4 quadros de ajuste). Escreva as durações pensando nisso: múltiplos de uma batida.
-  - A 120 bpm, uma batida dura 0,5 s.
-  - A 100 bpm, dura 0,6 s.
-- A cena do pico (preço ou oferta) começa numa batida forte.
-- A pausa antes do pico: a trilha baixa para 30% ou para por 0,4 a 0,8 s, e volta na batida forte do pico.
+- Uma trilha por peça, instrumental, gerada no clima do tom da marca. Para pedi-la, escreva `soundtrack="track"` na `<Sequence>`.
+- A plataforma corta a trilha no tamanho da peça, entra suave e faz o fade nos últimos 1,5 s. Você não controla batida nem tempo da música: escreva as durações pelo tempo de leitura, não pela música.
+- O volume padrão é 0,6, abaixo dos efeitos. Só mude (`<Soundtrack volume={0.4} />`) se o pedido falar de música mais baixa ou mais alta.
+- Peça sem trilha: omita `soundtrack`. Serve para ramos sóbrios e para quem vai pôr a própria música na rede social.
+- Nada de música conhecida, nem "no estilo de" um artista.
 
 ## Efeitos sonoros
 
-O kit traz uma biblioteca fixa. A transição e o componente já tocam o efeito padrão; mude só com motivo.
+O kit tem uma biblioteca fixa. O efeito toca no começo da cena que o declara (`sfx` na `<Scene>`), junto com a entrada dela; nenhum componente toca efeito sozinho.
 
-| Efeito | Usar em |
+| Efeito | Usar na cena que |
 |---|---|
-| `whoosh` | Transições `slide`, `color-wipe`, `zoom` |
-| `pop` | Selo entrando, corte seco, item de lista |
-| `click` | `<Tap>` na tela do app |
-| `cha-ching` | Preço chegando |
-| `shimmer` | Logo, máscara da marca, fechamento |
-| `impact` | O pico, uma vez só |
+| `whoosh` | entra com `slide`, `color-wipe` ou `zoom` |
+| `pop` | traz um selo, um item novo, um corte seco |
+| `click` | mostra uma escolha, um botão, um passo |
+| `cha-ching` | mostra o preço |
+| `shimmer` | revela a marca, o fechamento |
+| `impact` | é o pico, uma vez só |
 
 Regras:
-- No máximo um efeito por segundo.
+- No máximo um efeito por cena, e nem toda cena precisa de um. Três ou quatro numa peça de 15 s bastam.
 - `impact` no máximo uma vez por peça.
-- Efeito sempre sincronizado com o movimento que o causa (no mesmo quadro).
-- Ramos sóbrios (saúde, direito, contabilidade): só `whoosh` e `shimmer`, volume baixo.
+- Ramos sóbrios (saúde, direito, contabilidade): só `whoosh` e `shimmer`, ou nenhum.
+- `<Soundtrack sfx={false} />` silencia todos os efeitos de uma vez, quando o pedido pede "sem efeitos".
 
 ## Legenda
 
-Se o pedido ou a trilha tiverem fala (F2 em diante: narração), toda fala vira `<Caption>`. Sem fala, o texto da tela já cumpre o papel.
+Sem narração (ainda não existe), o texto da tela já cumpre o papel da legenda. Não repita o título num `<Caption>`.

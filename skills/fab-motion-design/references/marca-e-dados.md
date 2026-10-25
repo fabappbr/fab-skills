@@ -4,8 +4,8 @@
 
 | Na peça | De onde vem | Se não existir |
 |---|---|---|
-| Preço, preço de, parcelas, unidade | `item.price`, `item.wasPrice`, `item.installments`, `item.unit` | Não mostre preço. |
-| Desconto em % | Calculado pelo `<Badge>` a partir de `wasPrice` e `price` | Sem selo de %. Use "Novo" ou "Só hoje" se o pedido disser. |
+| Preço, preço de, parcelas, unidade | O `<Price item={...}>`, que lê o item (`price_minor`, `was_price_minor`, `installments`, `unit`) | Não mostre preço. |
+| Desconto em % | Calculado pelo `<Badge item={...}>` a partir do preço antigo e do atual | Sem selo de %. Use `<Badge text="Novo" />` ou "Só hoje" se o pedido disser. |
 | Nome do produto | `item.name` (pode encurtar para caber, mantendo o sentido) | Não invente nome. |
 | Depoimento e nota | `reviews`, `brand` | Não use o roteiro de depoimento. |
 | Horário e endereço | Pedido ou cadastro da marca | Não mostre. |

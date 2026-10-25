@@ -33,13 +33,13 @@ Easing quando não é mola: entrada `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3,
 
 - Elemento estático depois de entrar: respiração de escala 1 a 1,02 num ciclo de 2 a 3 s.
 - Foto e vídeo: zoom lento de 1 a 1,06 durante a cena inteira (Ken Burns), direção alternada entre cenas.
-- Nunca mais de 0,8 s com a tela inteira parada, a não ser na pausa planejada antes do clímax.
+- Nunca mais de 0,8 s com a tela inteira parada.
 
 ## Transições
 
 | Tipo | Quando | Efeito sonoro padrão |
 |---|---|---|
-| `cut` | Na batida forte, entre cenas de energia alta | nenhum ou `pop` |
+| `cut` | Entre cenas de energia alta | nenhum ou `pop` |
 | `slide` | Troca de item numa lista, carrossel virando vídeo | `whoosh` |
 | `zoom` | Do detalhe para o todo, ou para o preço | `whoosh` curto |
 | `brand-mask` | Abertura e fechamento: a forma da marca cobre e revela | `shimmer` |
@@ -61,5 +61,5 @@ energia
 
 - O gancho começa alto.
 - O miolo oscila.
-- Uma pausa curta (0,4 a 0,8 s, trilha mais baixa, movimento desacelerado) vem logo antes do pico.
+- Uma cena curta e mais calma (0,8 a 1,2 s, movimento desacelerado, sem efeito) vem logo antes do pico.
 - A ação final é calma e longa o bastante para ler e agir.
