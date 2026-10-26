@@ -4,7 +4,7 @@ Os componentes que a composição pode usar. Todos leem o tema da marca (cores, 
 
 Nomes de componentes, propriedades e valores são em inglês, como todo o código da plataforma. O texto que aparece na peça continua no idioma da marca.
 
-> Conferido contra o código do kit em 25/10/2026 (`studio/src/motion/kit`). O kit é a fonte da verdade; uma propriedade que não está aqui não existe.
+> Conferido contra o código do kit em 26/10/2026 (`studio/src/motion/kit`). O kit é a fonte da verdade; uma propriedade que não está aqui não existe.
 
 ## Utilitários e dados
 
@@ -27,7 +27,7 @@ Quase todo componente aceita `delay` (em quadros, desde o início da cena). É a
 | `<Sequence>` | `soundtrack?` | Raiz do vídeo. Toca as cenas em ordem. `soundtrack="track"` pede a trilha gerada da peça. |
 | `<Scene>` | `duration`, `background?`, `transition?`, `sfx?`, `align?: "center" | "top" | "bottom"`, `editedByOwner?` | Um momento. O conteúdo fica dentro da zona segura. `sfx` toca no começo da cena. |
 | `<Slide>` | `role: "cover" | "item" | "end"`, `background?`, `continues?` | Quadro do carrossel (o carrossel não usa `<Sequence>`). |
-| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (`false` silencia os efeitos) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música (veja `som.md`). |
+| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (`false` silencia os efeitos), `take?` e `src?` (a escolha do dono no editor) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música. `take` e `src` são escritos pelo editor: mantenha-os ao ajustar e nunca os invente (veja `som.md`). |
 
 A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "brand-mask" | "color-wipe"`. Sem `transition`, é corte seco.
 

@@ -25,6 +25,21 @@ Se o pedido falar da música (estilo, energia, instrumentos, andamento), diga is
 - Nunca nome de artista, banda, música ou filme.
 - Sem nada sobre música no pedido, omita o `mood`: a plataforma usa o tom da marca.
 
+## A escolha do dono
+
+O dono também escolhe a trilha no editor, e a escolha fica escrita no próprio `<Soundtrack>`:
+
+- `take="<id>"`: uma versão gerada que ele escolheu (outra versão do mesmo estilo, ou uma anterior).
+- `src="upload:<id>"`: a música que ele enviou.
+- `volume={…}`: o volume que ele ajustou.
+
+Regras ao ajustar uma peça:
+- Mantenha `take`, `src` e `volume` exatamente como estão, a menos que o pedido fale da música.
+- Pedido de música mais alta ou mais baixa: mude só o `volume`.
+- Pedido de outro estilo de música: escreva o `mood` novo e tire `take` e `src`, para gerar uma trilha nova.
+- Pedido de tirar a música: remova o `<Soundtrack>` e o `soundtrack` da `<Sequence>`.
+- Nunca invente um `take` ou um `src`: os ids vêm do editor.
+
 ## Efeitos sonoros
 
 O kit tem uma biblioteca fixa. O efeito toca no começo da cena que o declara (`sfx` na `<Scene>`), junto com a entrada dela; nenhum componente toca efeito sozinho.
