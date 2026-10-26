@@ -27,7 +27,7 @@ Quase todo componente aceita `delay` (em quadros, desde o início da cena). É a
 | `<Sequence>` | `soundtrack?` | Raiz do vídeo. Toca as cenas em ordem. `soundtrack="track"` pede a trilha gerada da peça. |
 | `<Scene>` | `duration`, `background?`, `transition?`, `sfx?`, `align?: "center" | "top" | "bottom"`, `editedByOwner?` | Um momento. O conteúdo fica dentro da zona segura. `sfx` toca no começo da cena. |
 | `<Slide>` | `role: "cover" | "item" | "end"`, `background?`, `continues?` | Quadro do carrossel (o carrossel não usa `<Sequence>`). |
-| `<Soundtrack>` | `volume?` (0 a 1, padrão 0,6), `sfx?` (`false` silencia os efeitos) | Opcional, dentro da `<Sequence>`, só para ajustar a mistura. |
+| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (`false` silencia os efeitos) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música (veja `som.md`). |
 
 A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "brand-mask" | "color-wipe"`. Sem `transition`, é corte seco.
 

@@ -8,7 +8,22 @@ Boa parte das pessoas assiste sem som. A peça precisa funcionar muda (o texto n
 - A plataforma corta a trilha no tamanho da peça, entra suave e faz o fade nos últimos 1,5 s. Você não controla batida nem tempo da música: escreva as durações pelo tempo de leitura, não pela música.
 - O volume padrão é 0,6, abaixo dos efeitos. Só mude (`<Soundtrack volume={0.4} />`) se o pedido falar de música mais baixa ou mais alta.
 - Peça sem trilha: omita `soundtrack`. Serve para ramos sóbrios e para quem vai pôr a própria música na rede social.
-- Nada de música conhecida, nem "no estilo de" um artista.
+- Nada de música conhecida, nem "no estilo de" um artista: o gerador recusa.
+
+## Orientar a trilha
+
+Se o pedido falar da música (estilo, energia, instrumentos, andamento), diga isso em `<Soundtrack mood="…" />`, dentro da `<Sequence>`, em poucas palavras **em inglês**, que é como o gerador entende melhor:
+
+```tsx
+<Sequence soundtrack="track">
+  <Soundtrack mood="upbeat electronic, bright synths, 120 bpm" />
+  …
+</Sequence>
+```
+
+- Descreva gênero, clima, instrumentos e andamento: `"acoustic guitar and light percussion, warm, 100 bpm"`, `"cinematic piano, hopeful, slow build"`.
+- Nunca nome de artista, banda, música ou filme.
+- Sem nada sobre música no pedido, omita o `mood`: a plataforma usa o tom da marca.
 
 ## Efeitos sonoros
 

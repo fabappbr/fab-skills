@@ -4,7 +4,7 @@ description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Mot
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.1.3
+  version: 1.1.4
   title: Motion Design
   edition: motion
 fabapp:
@@ -29,7 +29,7 @@ O kit já resolve o difícil (tema da marca, zona segura, contraste, molas, mist
 4. **Mídia gerada nunca é o produto.** Fundo, textura, cenário e ilustração podem ser gerados. O produto é sempre a foto real do item. Pessoas, só ilustradas.
 5. **Texto só em código.** Imagem e vídeo gerados não podem ter letra; peça sempre "sem texto" na vaga.
 6. **Tempo vem do `fps`.** Use `sec(1.2)` e as constantes do kit; nada de número mágico de quadro.
-7. **Código em inglês, peça no idioma da marca.** Componentes, propriedades e valores são os do kit, em inglês. Todo texto que aparece na tela segue `brand.locale`.
+7. **Código em inglês, peça no idioma de `brand.locale`.** Componentes, propriedades e valores são os do kit, em inglês. Todo texto que aparece na tela segue o `locale` que chega na marca (a plataforma já o troca pelo idioma em que o dono escreveu o pedido, quando difere).
 
 ## O fluxo
 
