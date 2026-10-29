@@ -22,6 +22,22 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] A última cena tem uma `<CallToAction>` com um verbo e fica tempo de leitura + 1 s.
 - [ ] Ramo com regra própria respeitado (`references/marca-e-dados.md`).
 
+## Motion design (contando no código)
+
+- [ ] Nenhum hook com memória (`useState`, `useEffect`, `useRef`...), nada de `Math.random`, `Date` ou CSS que anima.
+- [ ] `blur` até 24 px; um `<Grain>` por cena com `amount` até 0,12; `<Burst count>` até 60 e no máximo dois por cena.
+- [ ] Nenhum hex, `rgb()` ou nome de fonte; todo texto da tela num componente do kit (ou num seu, por `children` ou `label`).
+- [ ] Pelo menos um `transition="match"`.
+- [ ] Pelo menos uma `shape-<forma>` ou um `<Reveal shape>`.
+- [ ] Pelo menos um `<Morph>` com 2 chaves ou um `<PathDraw>`.
+- [ ] 3 tipos de transição ou mais (peça de 5 cenas ou mais); nenhum tipo em duas trocas seguidas.
+- [ ] `<Camera>` em pelo menos metade das cenas; `<Layer depth>` em pelo menos 2.
+- [ ] Os 35% de baixo do 9:16 têm forma, padrão, produto ou partícula em pelo menos metade das cenas.
+- [ ] Um momento marcante, marcado na folha de ritmo.
+- [ ] Texto principal com 96 px ou mais, apoio com 48 ou mais, nada abaixo de 30.
+- [ ] Nunca duas cenas seguidas com uma linha só sobre cor lisa.
+- [ ] As regras contáveis do estilo escolhido (`references/estilos/`).
+
 ## A nota das baterias (10 pontos)
 
 A bateria local e a revisão visual pontuam cada peça assim:

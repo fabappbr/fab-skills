@@ -42,22 +42,26 @@ Regras ao ajustar uma peça:
 
 ## Efeitos sonoros
 
-O kit tem uma biblioteca fixa. O efeito toca no começo da cena que o declara (`sfx` na `<Scene>`), junto com a entrada dela; nenhum componente toca efeito sozinho.
+O kit tem uma biblioteca fixa. Há dois lugares para um efeito, e nenhum componente toca efeito sozinho:
 
-| Efeito | Usar na cena que |
+- `sfx` na `<Scene>`: toca no primeiro quadro da cena, junto com a entrada (e a transição) dela.
+- `hits` na `<Scene>`: efeitos em quadros da própria cena, para o que acontece dentro dela: `hits={[{ at: 14, kind: "click" }, { at: 28, kind: "click" }]}`. O `at` é o quadro da cena (de 0 até a duração); fora dela, o efeito não toca.
+
+| Efeito | Usar quando |
 |---|---|
-| `whoosh` | entra com `slide`, `color-wipe` ou `zoom` |
-| `pop` | traz um selo, um item novo, um corte seco |
-| `click` | mostra uma escolha, um botão, um passo |
-| `cha-ching` | mostra o preço |
-| `shimmer` | revela a marca, o fechamento |
-| `impact` | é o pico, uma vez só |
+| `whoosh` | a cena entra com movimento (`push-*`, `whip-*`, `zoom-through`, `slide`, `color-wipe`, `zoom`) |
+| `pop` | entra um selo, um item novo, uma forma que salta, um corte seco |
+| `click` | uma palavra troca no `<WordSwap>`, uma escolha, um botão, um passo |
+| `cha-ching` | o preço assenta (no quadro em que o `<PriceTag>` termina o punch) |
+| `shimmer` | a marca se revela, o fechamento, uma marca que se desenha |
+| `impact` | o pico, uma vez só: o produto que cai, a palavra mais forte |
 
 Regras:
-- No máximo um efeito por cena, e nem toda cena precisa de um. Três ou quatro numa peça de 15 s bastam.
-- `impact` no máximo uma vez por peça.
-- Ramos sóbrios (saúde, direito, contabilidade): só `whoosh` e `shimmer`, ou nenhum.
-- `<Soundtrack sfx={false} />` silencia todos os efeitos de uma vez, quando o pedido pede "sem efeitos".
+- Por cena: no máximo um `sfx` e até 3 `hits`, e nem toda cena precisa de efeito. Numa peça de 15 s, de 4 a 8 efeitos no total bastam.
+- Um `hits` cai no quadro em que a coisa acontece na tela (o mesmo `at` do movimento, mais a duração da entrada quando o som é do assento). Som fora do movimento parece erro.
+- `impact` no máximo uma vez por peça, seja em `sfx` ou em `hits`.
+- Ramos sóbrios (saúde, direito, contabilidade): só `whoosh`, `click` e `shimmer`, e no máximo 4 na peça.
+- `<Soundtrack sfx={false} />` silencia todos os efeitos de uma vez (os de `sfx` e os de `hits`), quando o pedido pede "sem efeitos".
 
 ## Legenda
 

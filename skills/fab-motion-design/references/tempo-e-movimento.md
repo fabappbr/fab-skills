@@ -45,7 +45,26 @@ Easing quando não é mola: entrada `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3,
 | `brand-mask` | Abertura e fechamento: a forma da marca cobre e revela | `shimmer` |
 | `color-wipe` | Mudar de assunto (produto para ação) | `whoosh` |
 
-Varie: nunca a mesma transição mais de 2 vezes seguidas. A transição dura de 8 a 14 quadros.
+Na segunda camada do kit (`<Scene canvas>`), as transições de motion design:
+
+| Tipo | Quando | Efeito sonoro padrão |
+|---|---|---|
+| `match` | O mesmo elemento continua entre as cenas (forma, produto, moldura) | nenhum ou `click` |
+| `push-*` | Avançar na história, de um assunto para o seguinte | `whoosh` |
+| `whip-*` | Energia, troca rápida, perto do pico | `whoosh` |
+| `zoom-through` | Entrar no detalhe, mergulhar na próxima ideia | `whoosh` ou `pop` |
+| `stack` | O fecho sobe por cima, como um cartão | `shimmer` |
+| `shape-<forma>` | Revelar pela forma da marca (círculo, estrela, flor) | `pop` ou `shimmer` |
+| `fade` | Editorial e luxo, com calma; no máximo duas vezes | nenhum |
+
+Varie: nunca a mesma transição em duas trocas seguidas, e pelo menos 3 tipos numa peça de 5 cenas ou mais. A transição dura de 8 a 18 quadros; `transitionFrames` muda quando precisar.
+
+## Movimento calculado pelo quadro
+
+- `interpolate(frame, [a, b], [de, para], { ease: "outExpo" })` para entradas; `"snap"` para segurar e chicotear; `"inExpo"` para um mergulho de câmera que sai da cena.
+- `spring(frame, at, "bouncy")` para o que chega e quica (selo, preço, forma); `"gentle"` para editorial; `"heavy"` para o que pesa.
+- `stagger(i, 4)` escalona um grupo; `keyframes` move várias propriedades juntas.
+- O que se repete (equalizador, respiração, brilho) usa `Math.sin(frame / k)` ou `useBeat(bpm)`; o que varia usa `hash01(seed, i)`. Nunca `Math.random`.
 
 ## A curva de energia
 
