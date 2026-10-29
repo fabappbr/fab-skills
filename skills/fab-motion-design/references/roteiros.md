@@ -96,3 +96,18 @@ Proporção de cada parte do roteiro (vale para todos os roteiros de vídeo):
 | Ação | 1,5 s | 2,7 s | 3 a 4,6 s | 6,5 s |
 
 Em 6 s, corte a pausa e o prazo. Em 30 s, repita o miolo com outro item ou outra prova, nunca com o mesmo texto.
+
+## Peças longas (45 a 120 s)
+
+Para: vídeo institucional, cardápio ou catálogo inteiro, apresentação de serviço, YouTube e site.
+
+| Ato | Tempo em 60 s | O que tem |
+|---|---|---|
+| Gancho | 6 a 8 s | 2 ou 3 cenas: a promessa da peça, o produto ou o resultado |
+| Ato 1 | 12 a 15 s | Título curto do ato e 3 ou 4 cenas de um assunto (um produto, um serviço, um passo) |
+| Ato 2 | 12 a 15 s | Outro assunto, com enquadramento e fundo diferentes do ato 1 |
+| Ato 3 (opcional) | 10 a 12 s | O diferencial ou a prova (avaliação real, número de dado) |
+| Pausa e pico | 6 a 8 s | Uma cena calma e curta, depois o momento marcante |
+| Fecho | 6 a 8 s | A marca e a chamada |
+
+Em 90 s e 120 s, some atos (até 4 no meio) em vez de alongar cenas. Com muitos itens, um ato por grupo de até 4 itens.

@@ -4,7 +4,7 @@ description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Mot
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.2.0
+  version: 1.3.0
   title: Motion Design
   edition: motion
 fabapp:
@@ -35,6 +35,8 @@ O kit já resolve o difícil (tema da marca, zona segura, contraste, molas, mist
 10. **Código em inglês, peça no idioma de `brand.locale`.** Componentes, propriedades e valores são os do kit, em inglês. Todo texto que aparece na tela segue o `locale` que chega na marca (a plataforma já o troca pelo idioma em que o dono escreveu o pedido, quando difere).
 
 ## O fluxo
+
+A plataforma compõe em duas etapas. A **direção** lê o pedido e devolve o estilo, a trilha e o roteiro de planos em JSON (`references/direcao.md`); a **animação** escreve as cenas desse roteiro em partes de cerca de 15 s (`references/animacao-em-partes.md`), e a plataforma junta as partes num arquivo só. Os passos abaixo valem para as duas: a direção faz os passos 1 a 3 no roteiro; a animação, os passos 4 e 5 na sua parte.
 
 1. **Ler o pedido.** Objetivo (vender agora, lançar, lembrar, mostrar o app), público, tom, prazo e o que **não** pode faltar. Veja se há itens e quantos têm foto e preço; sem itens, a peça é da marca.
 2. **Escolher o roteiro e o estilo.** Um dos roteiros de `references/roteiros.md` (se nenhum servir, adapte o mais próximo) e um dos estilos de `references/estilos/` pelo pedido e pela marca: tipografia cinética, editorial, gráfico ousado e produto herói, cinematográfico, minimal luxo. Siga as regras contáveis do estilo e use a peça de referência dele (`references/examples/`) como medida de acabamento, sem copiar o texto.
@@ -88,6 +90,7 @@ Aprendido nas peças de referência. Cada regra se confere contando no código.
 | Tipo | Duração | Cenas | Notas |
 |---|---|---|---|
 | Vídeo 9:16 (Reels, Stories, Status, TikTok) | 6 a 30 s | 3 a 7 | Formato principal. Zona segura completa. |
+| Vídeo longo, qualquer formato | 45 a 120 s | 14 a 40 | Contado em atos (veja `references/direcao.md`). Escrito em partes de cerca de 15 s. |
 | Vídeo 4:5 (feed) | 6 a 20 s | 3 a 5 | Sem interface por cima, margens de 6%. |
 | Vídeo 1:1 | 6 a 15 s | 3 a 4 | Títulos 10% menores. |
 | Vídeo 16:9 (YouTube, site, apresentação) | 6 a 30 s | 3 a 7 | Horizontal. Margens de 7% em cima e embaixo e 5% nas laterais; o `<Safe>` encolhe o texto uns 5%. Use a largura: texto de um lado, produto do outro. |
@@ -146,6 +149,8 @@ export default function Piece({ brand, items }) {
 | `references/kit.md` | Sempre: os componentes, as propriedades, as regras do validador e as vagas de mídia. |
 | `references/estilos/*.md` | Ao escolher o estilo: as regras contáveis de cada um. |
 | `references/examples/*.md` | As peças de referência de cada estilo, como medida de acabamento. |
+| `references/direcao.md` | Na direção: o roteiro de planos, quantas cenas por duração e as peças longas. |
+| `references/animacao-em-partes.md` | Na animação: o formato da resposta de uma parte e do ajuste de cenas. |
 | `references/roteiros.md` | Ao escolher a estrutura da peça. |
 | `references/tempo-e-movimento.md` | Ao decidir durações, molas, entradas, transições. |
 | `references/tipografia-e-layout.md` | Ao cortar texto, escolher tamanho e posição. |

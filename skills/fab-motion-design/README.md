@@ -2,7 +2,7 @@
 
 Skill que dirige a composição de vídeos curtos e carrosséis no Fabapp Motion: roteiro, ritmo, texto, movimento, som e autoconferência, sempre sobre o kit `@fab/motion`.
 
-Criada pela Equipe Fabapp. Versão 1.2.0 (29/10/2026): a segunda camada do kit (motion design), as regras do validador, o ofício contável, os estilos e as peças de referência.
+Criada pela Equipe Fabapp. Versão 1.3.0 (29/10/2026): a composição em duas etapas (direção e animação em partes), as peças longas de até 120 s e o ajuste de cenas. A 1.2.0 trouxe a segunda camada do kit (motion design), as regras do validador, o ofício contável, os estilos e as peças de referência.
 
 - **Edição motion:** não é usada pelo terminal. A plataforma injeta esta skill inteira (corpo e `references/`) em toda composição e todo ajuste por conversa do Motion, pelo `skills/inject.py`. O Jev pode somar a ela uma skill de estilo (`fab-estilo-*`).
 - **Cerca de 60 KB** de texto (corpo e `references/*.md`), abaixo do teto de 60 mil tokens por chamada. As peças de `references/examples/` (cerca de 43 KB) ficam fora do texto de toda composição: a plataforma as entrega à parte (`motion.service.skill_examples`), para o compositor receber 1 ou 2 do estilo escolhido.
@@ -14,7 +14,9 @@ Criada pela Equipe Fabapp. Versão 1.2.0 (29/10/2026): a segunda camada do kit (
 |---|---|
 | `SKILL.md` | Contrato, fluxo, as 12 regras de motion, proibições, formato da resposta |
 | `references/kit.md` | As duas camadas do kit (os 28 componentes da primeira e o motion design), as propriedades e as regras do validador |
-| `references/roteiros.md` | 7 roteiros de vídeo, o carrossel e a conversão de duração |
+| `references/direcao.md` | A direção: o roteiro de planos em JSON, quantas cenas por duração, as peças longas em atos (só a chamada da direção lê) |
+| `references/animacao-em-partes.md` | A animação: o formato da resposta de uma parte e do ajuste de cenas de uma peça longa |
+| `references/roteiros.md` | 7 roteiros de vídeo, o carrossel, a conversão de duração e as peças longas (só a chamada da direção lê) |
 | `references/tempo-e-movimento.md` | Molas por tom da marca, entradas, saídas, transições, curva de energia |
 | `references/tipografia-e-layout.md` | Zonas seguras por formato, tamanhos, corte de texto, contraste |
 | `references/som.md` | Trilha, corte na batida, pausa antes do pico, efeitos |
