@@ -188,7 +188,7 @@ export type Metric = { id: string; label: string; formula: string; better: "up" 
   `new Date('2026-09-01T00:00:00-03:00')` (troque o deslocamento junto com o fuso). Campo `date`
   (sem hora) é texto `aaaa-mm-dd`; compare como texto, nunca passe por `toISOString()`.
 - Volume alto ou cálculo pesado: função de backend (`functions/<nome>.ts` com entrada em `fab.functions.json`;
-  recurso de plano pago, 30 s por chamada, uma coisa por chamada) ou o modelo
+  recurso do plano Starter ou maior, 30 s por chamada, uma coisa por chamada) ou o modelo
   de resumo diário de `armadilhas-de-metrica.md`. Nunca `setInterval` em lista; painel operacional ao vivo usa `useLive`.
 
 **Período.** Seletor no topo com "Este mês" (padrão), "Últimos 7 dias", "Últimos 30 dias", "Últimos 90 dias", "Este ano".

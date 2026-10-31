@@ -111,7 +111,7 @@ export default async function (req: Request, ctx) {
 - O autor é sempre `ctx.user`, nunca um `userId` do corpo. Preço e total vêm do registro, nunca do corpo.
 - Função `public` que grava é um endpoint aberto: só uma inserção validada (um lead), sem deixar o corpo escolher modelo ou campos.
 - `ctx.sendPush` e agentes dentro da função rodam com privilégio da plataforma: função que avisa "todos" é `role:admin`.
-- Funções exigem um plano pago que as inclua (abaixo dele a chamada devolve 403 `feature_locked`). Sem elas, a regra de acesso do modelo tem de dar conta sozinha; se não der, diga ao dono o limite em vez de simular a checagem no navegador.
+- Funções exigem o plano Starter ou maior (abaixo dele a chamada devolve 403 `feature_locked`). Sem elas, a regra de acesso do modelo tem de dar conta sozinha; se não der, diga ao dono o limite em vez de simular a checagem no navegador.
 
 ## A construção: operações em massa
 

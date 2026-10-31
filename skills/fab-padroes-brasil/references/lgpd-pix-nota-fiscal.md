@@ -178,4 +178,4 @@ A partir de 2026 os layouts de nota ganharam campos de IBS e CBS (ano de teste p
 
 ### Emissão automática
 
-Só com emissor externo que tenha API: o dono cadastra o emissor como conector no Studio e o app chama por uma função de backend (`functions/<nome>.ts`; o plano que libera o CLI já libera funções). Sem isso, diga ao dono: "O app guarda suas notas e mostra o que falta emitir. A emissão continua no seu emissor."
+Só com emissor externo que tenha API: o dono cadastra o emissor como conector no Studio e o app chama por uma função de backend (`functions/<nome>.ts`; funções vêm desde o plano Starter). Sem isso, diga ao dono: "O app guarda suas notas e mostra o que falta emitir. A emissão continua no seu emissor."

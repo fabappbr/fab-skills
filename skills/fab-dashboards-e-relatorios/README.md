@@ -144,7 +144,7 @@ Análise usada: `fabapp-skills-referencia-2/01-dashboards-bi/ANALISE.md`.
 ## O que foi trocado e por quê
 
 - **Agregação no servidor e SQL**: a plataforma só faz `count`; somas vêm de `list` paginado com `fields`, de função de
-  backend (Pro+) ou do modelo de resumo diário.
+  backend (Starter ou maior) ou do modelo de resumo diário.
 - **Tarefa agendada que calcula**: não existe; a automação só avisa. O relatório calcula ao abrir e o aviso leva o
   link. Semanal e mensal usam `relative` sobre registros de entrega pré-criados, porque `schedule` só tem diário e
   por hora.

@@ -241,13 +241,13 @@ export default function Services() {
 
 ## 7. Lado servidor
 
-### Funções de backend (plano Builder ou maior)
+### Funções de backend (plano Starter ou maior)
 
 - Uma por arquivo: `functions/<nome>.ts` na RAIZ do workspace (não em `src/`, sem subpasta). Nome com letras, dígitos, `_` e `-`.
 - Manifesto obrigatório `fab.functions.json` na raiz: `{"functions": {"contact": {"auth": "public"}, "close-month": {"auth": "role:manager"}}}`. Valores: `"user"` (logado), `"public"`, `"role:<slug>"`. **O `fabapp deploy` não confere o manifesto:** entrada faltando ou JSON quebrado vira `"user"` em silêncio Confira antes.
 - `export default async function (req: Request, ctx) { ... }` devolvendo `Response`. Recusa com status 4xx e corpo `{ "detail": "..." }` (é o que vira `ApiError.message`). Use `try/catch`: exceção que escapa manda a pilha ao navegador.
 - `ctx`: `user` (`{id, email}` ou `null`), `collection()` (roda com privilégio da PLATAFORMA, ignora o `access`: a função é a fronteira de autorização, confira `ctx.user` contra o registro), `ai.invokeLLM/generateImage/extractData`, `notify(canal, { message, to, subject?, link? })` com canais `email`, `sms`, `slack`, `discord`, `discord_dm`, `sendPush`, `integrations.call`, `callConnector`, `google.*`, `orgs.*`, `callFunction`, `agent(nome).run`, `log`. Não há `ctx.secrets`, `ctx.env`, `ctx.admin`.
-- 30 segundos por chamada. `fetch` para URL pública permitido. Proibidos: `process.env`, `eval`, `import()` dinâmico, `child_process`. Pacotes npm só se declarados no `package.json`.
+- 30 segundos por chamada síncrona. Execução em segundo plano: até 120 s e 2 ao mesmo tempo no Starter, até 900 s e 5 ao mesmo tempo no Builder ou maior. `fetch` para URL pública permitido. Proibidos: `process.env`, `eval`, `import()` dinâmico, `child_process`. Pacotes npm só se declarados no `package.json`.
 - No app: `await callFunction<T>("nome", payload)` de `@/lib/fab-client`. Nunca importe `functions/*` de `src/`.
 - Função `public` que grava: um único insert validado. É também o único endpoint de entrada (webhook com lógica).
 
@@ -333,7 +333,7 @@ O Studio continua sendo do dono para o que é dele: trocar e gerar imagens dos s
 
 ## 11. Limites e custos que o dono precisa ouvir
 
-- CLI e funções de backend: plano Builder ou maior (abaixo dele, `callFunction` responde 403 `feature_locked`). Domínio próprio e remoção do selo: recurso de plano, configurado no Studio.
+- CLI: plano Builder ou maior. Funções de backend: plano Starter ou maior (no gratuito, `callFunction` responde 403 `feature_locked`). Franquia mensal de funções por plano: Starter 60 GiB-hora em até 2 apps, Builder 200, Business 600, Enterprise 2000 (Builder ou maior sem limite de apps). Tamanho Standard: Business ou maior. Sempre ligada: Enterprise. Domínio próprio e remoção do selo: recurso de plano, configurado no Studio.
 - Escrever código aqui não gasta créditos da plataforma. Gerar imagem ou código pela IA do Studio gasta créditos de criação; IA no app e canais pagos gastam créditos de integração.
 - Preços: confira no site da Fabapp, não repita número daqui.
 
@@ -348,7 +348,7 @@ Nunca guarde segredo, token ou dado pessoal de cliente nesse arquivo.
 ## Divergências conferidas
 
 - CLI: npm publica 0.1.6; o repositório tem 0.1.7 (o `deploy` recusa arquivo não texto). Use `@latest`.
-- Plano: "Builder" (docs) e "Pro+" (contrato do Studio) são o mesmo plano (código `pro`, nome Builder), que liga `cli` e `functions`.
+- Plano: "Builder" (docs) e "Pro+" (contrato do Studio) são o mesmo plano (código `pro`, nome Builder), que liga o `cli`; o `functions` já vem desde o Starter.
 - `@/lib/fab-sdk` não exporta `formatMoney`, `formatDate`, `callFunction`, `agent`, `RequirePlan`, `QuotaGate` nem as peças, ao contrário do que a documentação sugere; `@/lib/fab-client` exporta tudo.
 - `notify` no cliente aceita também `email` (a doc do SDK omite).
 - `src/components/ui/*` e as peças `fab-*.tsx` são editáveis no modo padrão `app-owned`; só a camada do SDK é imutável.

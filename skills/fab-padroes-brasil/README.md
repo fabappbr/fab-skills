@@ -11,7 +11,7 @@ Cursor, Gemini CLI) com o CLI `@fabappai/cli`. O conhecimento é o mesmo da edi�
 - Os critérios de aceite (até 8, `kind:'code'`) viraram a lista de conferência do plano, sem teto.
 - Correção de registros antigos (`propose_data_fill`, `read_records`): o token do CLI não grava nem lê registros; o
   dono corrige no CMS do Studio (ou por planilha) ou por uma tela de administração do app.
-- Emissão automática de nota: a função de backend está disponível no mesmo plano que libera o CLI.
+- Emissão automática de nota: a função de backend está disponível no plano Starter ou maior.
 - Acrescentados: "Conferir antes de dizer pronto" (busca no código pelos erros do checklist e conferência na
   pré-visualização), "O que o dono faz no Studio" (gateway, cookies, WhatsApp, Google Maps, conector do emissor),
   `DECISOES.md`, primeiro movimento, contrato ao vivo e a regra das duas mãos. `references/fabapp-cli.md` é copiado
@@ -73,7 +73,7 @@ O código de `references/codigo-br.md` foi escrito pela Equipe Fabapp e testado 
 | Nota fiscal NFS-e / NF-e / NFC-e por tipo de negócio | SKILL e modelo `invoice` | O app guarda, não emite |
 | Registrar regime (MEI, Simples, Presumido) | `tax_regime` | Acrescentado Lucro Real; só informativo |
 | Guardar número, chave, status, XML/PDF | Modelo `invoice` | `file` para PDF e XML; `extractData` lê o PDF |
-| Integrar com emissor terceiro | Referência, "Emissão automática" | Só por conector do dono + função de backend (plano pago mais alto) |
+| Integrar com emissor terceiro | Referência, "Emissão automática" | Só por conector do dono + função de backend (plano Starter ou maior) |
 | Prever IBS/CBS | Campo `taxes` json | Sem cálculo; datas marcadas como fonte secundária |
 | Tratamento "você" | "Texto e tratamento" | Da ANALISE de copy |
 | Feriados nacionais | `nationalHolidays`, `closed_day` | Páscoa calculada; estaduais e municipais cadastrados pelo dono |
