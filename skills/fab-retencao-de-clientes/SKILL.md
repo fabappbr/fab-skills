@@ -160,7 +160,7 @@ valor], limit:200, offset})` até voltar menos que 200; agrupe por cliente no na
 modelo existe no app: cobrança vencida, `ticket` aberto, `feedback`/`review`, `retention_task` sem resposta. Mostre
 progresso ("Lendo 1.200 pedidos…"). Acima de 10 mil eventos na janela, avise o dono que a tela vai ficar lenta e
 sugira, como próximo pedido, um resumo calculado por função de backend (`functions/<nome>.ts` com entrada em
-`fab.functions.json`; exige o mesmo plano pago que libera o CLI).
+`fab.functions.json`; exige o plano Starter ou maior).
 
 **Criar plano de contato.** Botão na lista e na ficha. Monta as tarefas do roteiro da faixa (Vermelho ou Amarelo,
 em `references/risco-e-relatorios.md`) com datas a partir de agora, responsável = responsável do cliente (ou quem

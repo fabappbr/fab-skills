@@ -141,7 +141,7 @@ Aplique a seção LGPD de `references/lgpd-pix-nota-fiscal.md` inteira. O mínim
 - O app **não emite** nota fiscal. Ele registra a nota que o dono emitiu no emissor dele (prefeitura, Sebrae, contador, sistema emissor): número, série, chave, tipo, status, data, valor, PDF e XML anexados, ligados ao pedido ou atendimento. Modelo e tela em `references/lgpd-pix-nota-fiscal.md`.
 - O tipo segue o que o negócio vende: serviço (salão, clínica, academia, consultoria, oficina na mão de obra) usa NFS-e; produto em venda para empresa ou envio usa NF-e; produto no balcão para consumidor usa NFC-e. O app guarda o regime tributário do dono (MEI, Simples Nacional, Lucro Presumido, Lucro Real) nas configurações, só como informação.
 - O app nunca calcula imposto (ISS, ICMS, IBS, CBS). Se o emissor devolver os valores, o app só guarda e mostra.
-- Pedido "emitir nota automática": diga ao dono que o app guarda a nota e avisa quando falta emitir; a emissão automática depende de um emissor externo com API, ligado pelo dono como conector no Studio, e de uma função de backend (`functions/<nome>.ts`; o plano que libera o CLI já libera funções).
+- Pedido "emitir nota automática": diga ao dono que o app guarda a nota e avisa quando falta emitir; a emissão automática depende de um emissor externo com API, ligado pelo dono como conector no Studio, e de uma função de backend (`functions/<nome>.ts`; funções vêm desde o plano Starter).
 
 ### Texto e tratamento
 

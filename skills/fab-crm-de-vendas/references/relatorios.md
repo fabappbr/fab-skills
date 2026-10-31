@@ -6,7 +6,7 @@
 - Filtro de período e escopo vai no servidor (`closed_at` com `gte`/`lt`, `seller`, `status`); o agrupamento vem depois.
 - Dinheiro somado em centavos inteiros (`Math.round(v * 100)`) e mostrado com `formatMoney`. Percentual com uma casa (`12,5%`).
 - Nomes de vendedor pelo `seller__label` que o `ref` já traz; sem dono aparece como "Sem dono".
-- Base grande (mais de 5.000 negócios): o relatório carrega por período e avisa quando o período é longo; se ainda pesar, numa mudança depois o agente cria um modelo de resumo mensal gravado por função de backend (exige o mesmo plano pago que libera o CLI).
+- Base grande (mais de 5.000 negócios): o relatório carrega por período e avisa quando o período é longo; se ainda pesar, numa mudança depois o agente cria um modelo de resumo mensal gravado por função de backend (exige o plano Starter ou maior).
 - Cada número tem o filtro que o gerou visível ("Negócios ganhos de 01/09/2026 a 30/09/2026, equipe toda"). Vazio aparece como "sem dados no período", nunca 0 inventado.
 
 ## Gráficos

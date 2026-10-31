@@ -115,7 +115,7 @@ export const ORDER_TRANSITIONS: Record<OrderStatus, { to: OrderStatus; action: s
 };
 ```
 
-A tela de detalhe mostra só os botões de `ORDER_TRANSITIONS[atual]` que o papel da pessoa permite; as demais ações não aparecem desabilitadas sem motivo. Os rótulos do enum e dos badges saem desse arquivo. O servidor só confere o `access` do modelo (ele não conhece transições): transição crítica de dinheiro ou aprovação fica restrita também no `access.update` do modelo ao papel certo; quando a regra precisar ser garantida no servidor, use uma função de backend com `auth` `role:<slug>` (só em plano pago que inclua funções) e diga ao dono esse limite.
+A tela de detalhe mostra só os botões de `ORDER_TRANSITIONS[atual]` que o papel da pessoa permite; as demais ações não aparecem desabilitadas sem motivo. Os rótulos do enum e dos badges saem desse arquivo. O servidor só confere o `access` do modelo (ele não conhece transições): transição crítica de dinheiro ou aprovação fica restrita também no `access.update` do modelo ao papel certo; quando a regra precisar ser garantida no servidor, use uma função de backend com `auth` `role:<slug>` (só no plano Starter ou maior) e diga ao dono esse limite.
 
 **O que cada transição dispara.** Automação não tem condição: `{type:"data", event:"updated"}` dispara em toda edição do modelo. Por isso:
 - Aviso em toda transição: grave o evento em `<modelo>_event` (tipo, de, para, `description` já escrita pelo código, `ref` para o registro e para a pessoa avisada) e crie a automação `data created` nesse modelo com `body: "{{description}}"`, em `fab.automations.json` (sempre `fabapp pull` antes, porque o `push` substitui o conjunto inteiro):

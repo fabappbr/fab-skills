@@ -40,7 +40,7 @@ Use a tabela para formar a PRIMEIRA hipótese, nunca para pular a confirmação.
 | Valor com centavo errado (0,30000000004) | Soma de float | Somar em centavos inteiros e formatar com `formatMoney` |
 | Lista lenta ou incompleta | Busca tudo e filtra no navegador; sem paginação | `filter`, `sort`, `limit`, `offset` no servidor; busca com espera de ~300 ms |
 | Lista não atualiza sozinha | Esperado: `list` é uma leitura. `setInterval` em lista é proibido | `useLive(model, { filter, sort, limit })` |
-| Conteúdo externo não carrega (feed, API de terceiros) | O navegador bloqueia (CORS) | Função de backend (`functions/<nome>.ts`, com `fetch` para a URL pública); o plano que libera o CLI já libera funções |
+| Conteúdo externo não carrega (feed, API de terceiros) | O navegador bloqueia (CORS) | Função de backend (`functions/<nome>.ts`, com `fetch` para a URL pública); funções vêm desde o plano Starter |
 | Imagem quebrada | `<img>` com URL externa | `AppImage` (decorativa) ou imagem do registro |
 
 ## Automação, notificação e pagamento
@@ -66,4 +66,4 @@ Use a tabela para formar a PRIMEIRA hipótese, nunca para pular a confirmação.
 | Imagens escolhidas no Studio sumiram depois de um deploy | O Studio gravou o `src` no código do servidor e o deploy mandou por cima a versão antiga do arquivo | Depois de trocas no Studio, publicar o que é seu e rodar `fabapp dev --reset` ANTES de editar; para recuperar, o dono troca de novo ou restaura pelo histórico do Studio |
 | O `dev` avisa que o template mudou | A plataforma atualizou o template desde que o workspace foi montado | Deploy das suas edições, depois `fabapp dev --reset` (apaga as edições locais) |
 | Visitante sem login é recusado numa função que devia ser pública | Entrada faltando ou JSON quebrado em `fab.functions.json`: o `deploy` não confere e usa `"user"` em silêncio | Uma entrada por arquivo de `functions/`, JSON válido, deploy |
-| `callFunction` responde 403 `feature_locked` | Recurso de plano | Dizer ao dono que funções exigem plano pago |
+| `callFunction` responde 403 `feature_locked` | Recurso de plano | Dizer ao dono que funções exigem o plano Starter ou maior |
