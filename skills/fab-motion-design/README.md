@@ -2,10 +2,10 @@
 
 Skill que dirige a composição de vídeos curtos e carrosséis no Fabapp Motion: roteiro, ritmo, texto, movimento, som e autoconferência, sempre sobre o kit `@fab/motion`.
 
-Criada pela Equipe Fabapp. Versão 1.3.0 (29/10/2026): a composição em duas etapas (direção e animação em partes), as peças longas de até 120 s e o ajuste de cenas. A 1.2.0 trouxe a segunda camada do kit (motion design), as regras do validador, o ofício contável, os estilos e as peças de referência.
+Criada pela Equipe Fabapp. Versão 1.5.0 (01/11/2026): corte na batida da trilha, sem efeitos sobre a música, `<Kinetic fit>`, `<Icon>`, `<SocialPost>` e `<Picture>`, um esquema de cor por peça, o `carry` entre cenas e as receitas de cena. A 1.3.0 trouxe a composição em duas etapas (direção e animação em partes), as peças longas de até 120 s e o ajuste de cenas. A 1.2.0 trouxe a segunda camada do kit (motion design), as regras do validador, o ofício contável, os estilos e as peças de referência.
 
 - **Edição motion:** não é usada pelo terminal. A plataforma injeta esta skill inteira (corpo e `references/`) em toda composição e todo ajuste por conversa do Motion, pelo `skills/inject.py`. O Jev pode somar a ela uma skill de estilo (`fab-estilo-*`).
-- **Cerca de 60 KB** de texto (corpo e `references/*.md`), abaixo do teto de 60 mil tokens por chamada. As peças de `references/examples/` (cerca de 43 KB) ficam fora do texto de toda composição: a plataforma as entrega à parte (`motion.service.skill_examples`), para o compositor receber 1 ou 2 do estilo escolhido.
+- **Cerca de 95 KB** de texto (corpo e `references/*.md`), abaixo do teto de 60 mil tokens por chamada. As peças de `references/examples/` (cerca de 43 KB) ficam fora do texto de toda composição: a plataforma as entrega à parte (`motion.service.skill_examples`), para o compositor receber 1 ou 2 do estilo escolhido.
 - **Kit:** `references/kit.md` descreve as exportações de `studio/src/motion/kit/index.ts`. O teste `studio/src/motion/kit/skillDocs.test.ts` da plataforma falha quando uma exportação falta aqui, quando o arquivo cita um componente que não existe ou quando um exemplo difere da peça de referência.
 
 ## Arquivos
@@ -33,4 +33,4 @@ Criada pela Equipe Fabapp. Versão 1.3.0 (29/10/2026): a composição em duas et
 - Guias da Meta e do TikTok para Reels e anúncios em vídeo: zonas seguras de 9:16 (14% em cima, 35% embaixo, 6% nas laterais) e gancho nos primeiros 3 s ([resumo](https://www.cinerads.com/blog/meta-ads-video-creative-best-practices)).
 - `fab-agencia/references/motion-e-interacao.md`: a ideia de personalidade de movimento por marca, adaptada de site para vídeo.
 
-O que é nosso: o contrato de dados (preço e prova só de dado, mídia gerada nunca é o produto), os roteiros para pequeno negócio brasileiro, as regras por ramo regulado e a nota de 10 pontos das baterias.
+O que é nosso: o contrato de dados (preço e prova só de dado, foto real antes de mídia gerada), os roteiros para pequeno negócio brasileiro, as regras por ramo regulado e a nota de 10 pontos das baterias.

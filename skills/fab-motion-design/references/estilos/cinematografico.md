@@ -6,8 +6,8 @@ Referência: ainda não há peça de referência deste estilo. Use a textura da 
 
 ## Regras contáveis
 
-- Fundo de imagem ou vídeo em **pelo menos metade das cenas** (`ai-video`, `ai-image`, `photo` do item); no máximo **2 vagas `ai-video`** na peça.
-- Letreiro: **uma linha** de até 4 palavras por cena, de **110 a 170 px**, com `blur-in` ou `mask-up` por linha; sempre dentro de `<Safe>`.
+- Fundo de imagem ou vídeo em **pelo menos metade das cenas** (`ai-video`, `ai-image`, `photo` do item); `ai-video` nas cenas em que o movimento conta.
+- Letreiro: **uma linha** de até 4 palavras por cena, de **150 a 220 px** (`<Kinetic fit>`), com `blur-in` ou `mask-up` por linha; sempre dentro de `<Safe>`.
 - `<Grain amount>` de 0,06 a 0,1 em **toda cena**, `<Vignette>` em toda cena com imagem; `<LightLeak>` em no máximo **2 cenas**.
 - Câmera lenta e contínua (zoom de 1 a 1,08 na cena inteira, direção alternada entre cenas).
 - Transições: `fade`, `match`, `zoom-through`, `whip-*` no pico; nenhuma `shape-*` além de uma.

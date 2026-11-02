@@ -16,9 +16,10 @@ Se o pedido trouxer um preço diferente do item, use o do item e escreva no come
 
 ## Mídia gerada
 
-- Pode: fundo, textura, cenário, ilustração, luz, forma abstrata.
-- Não pode: o produto do dono, a fachada, o ambiente real, uma pessoa realista, qualquer letra ou número.
-- O pedido de mídia gerada sempre termina com "sem texto" e, se houver risco, "sem pessoas".
+- Pode: fundo, textura, cenário, ilustração, luz, forma abstrata, e o produto quando ele não tem foto.
+- Quando há foto (do item, de um anexo do dono ou da mídia dele), a cena usa a foto, nunca uma imitação gerada: vale para o produto, a fachada e o ambiente. Sem foto, a vitrine, o lugar e o ambiente podem ser gerados como cenário (uma entrada de `pictures` na direção), descritos de forma concreta, nunca apresentados como a foto real do lugar.
+- As palavras da tela vêm da tipografia do kit: o pedido de mídia gerada termina com "sem texto" e, se houver risco, "sem pessoas".
+- Vídeo gerado entra onde o movimento ajuda a cena; o dono confirma o preço de cada um antes de ele ser feito.
 - Pessoas, quando necessárias, são ilustradas.
 
 ## Fotos e vídeos do dono

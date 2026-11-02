@@ -7,13 +7,14 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] Só imports de `@fab/motion`.
 - [ ] Nenhum preço, número, nota ou porcentagem escrito à mão em componente de texto.
 - [ ] Nenhum depoimento fora de `reviews`.
-- [ ] Nenhuma vaga de mídia gerada pede o produto, pessoa realista ou texto.
+- [ ] Nenhuma vaga de mídia gerada imita um produto que tem foto, pede pessoa realista ou pede texto legível.
 - [ ] A soma das durações fecha com a duração pedida (diferença máxima de 0,2 s).
 - [ ] Toda cena dura pelo menos `0,6 s + 0,3 s × palavras` e nunca menos de 1,2 s.
 
 ## Ofício
 
-- [ ] A primeira cena mostra produto, benefício ou oferta em até 1,5 s.
+- [ ] A primeira cena É o valor ou a oferta: até 4 palavras inteiras na tela até o quadro 15, sem digitação.
+- [ ] A quantidade de cenas segue a duração (`references/direcao.md`): 6 a 10 s, 3 a 5; 15 s, 5 a 7; 30 s, 9 a 13.
 - [ ] Nenhum título com mais de 7 palavras; nenhuma lista com mais de 5 linhas.
 - [ ] As cenas têm durações diferentes; existe um pico e uma pausa antes dele.
 - [ ] Nenhuma transição repetida mais de 2 vezes seguidas.
@@ -32,9 +33,15 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] Pelo menos um `<Morph>` com 2 chaves ou um `<PathDraw>`.
 - [ ] 3 tipos de transição ou mais (peça de 5 cenas ou mais); nenhum tipo em duas trocas seguidas.
 - [ ] `<Camera>` em pelo menos metade das cenas; `<Layer depth>` em pelo menos 2.
-- [ ] Os 35% de baixo do 9:16 têm forma, padrão, produto ou partícula em pelo menos metade das cenas.
+- [ ] O visual principal ocupa pelo menos 60% da largura e a faixa de baixo tem o material da cena (foto, cartão, textura), nunca uma forma solta estacionada.
+- [ ] Um esquema só (claro ou escuro) em todas as cenas; nenhum `bg="text"` sem o pedido pedir.
+- [ ] Todo objeto nomeado no pedido (coração, curtida, post, botão, cursor) é `<Icon>`, `<SocialPost>`, `<Picture>` ou foto, nunca `<Shape>`.
+- [ ] Texto digitado é `<Kinetic mode="type">`; um eixo de alinhamento por cena.
+- [ ] Peça com trilha: nenhum `sfx` nem `hits` (só com `<Soundtrack sfx />`, quando o pedido pede efeitos).
+- [ ] Cada troca de cena cai na grade de batidas (120 bpm: múltiplos de 0,5 s) e pelo menos 1 em cada 3 cortes leva algo (`carry`).
+- [ ] No máximo uma camada de decoração (`<Grid>`, `<Dots>`, `<Lines>`, `<Rings>`, `<Glow>`) por cena e pelo menos 30% das cenas sem nenhuma.
 - [ ] Um momento marcante, marcado na folha de ritmo.
-- [ ] Texto principal com 96 px ou mais, apoio com 48 ou mais, nada abaixo de 30.
+- [ ] Herói com 150 px ou mais (`<Kinetic fit>`), apoio com 60 ou mais, rótulo com 48 ou mais; `<CallToAction>` nunca com `size` abaixo de 64, parado no último segundo.
 - [ ] Nunca duas cenas seguidas com uma linha só sobre cor lisa.
 - [ ] As regras contáveis do estilo escolhido (`references/estilos/`).
 
@@ -50,7 +57,7 @@ A bateria local e a revisão visual pontuam cada peça assim:
 | Gancho no primeiro 1,5 s | 2 |
 | Uma ideia por cena | 1 |
 | Marca aplicada: cores, fontes, logo, forma | 1 |
-| Ritmo: variação, pico, calma antes do pico, efeito nas trocas certas | 2 |
+| Ritmo: variação, pico, calma antes do pico, cortes na batida | 2 |
 | Chamada final clara | 1 |
 
 Barra para lançar: média 8 ou mais nas 36 peças da bateria, sem nenhum erro de preço ou nome.
@@ -62,4 +69,5 @@ Barra para lançar: média 8 ou mais nas 36 peças da bateria, sem nenhum erro d
 - Ritmo chapado, sem pico.
 - Material igual do começo ao fim.
 - Brilho, partícula ou explosão sem motivo.
+- Forma genérica no lugar de objeto, cena clara e escura misturadas, texto fora do eixo.
 - Frase genérica ("qualidade que você merece", "venha conferir").

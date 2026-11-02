@@ -13,10 +13,10 @@ O kit tem duas camadas. A **primeira** (cenas em coluna, `<Title>`, `<Price>`, `
 | Nome | O que é |
 |---|---|
 | `sec(seconds)` | Converte segundos em quadros (30 por segundo). Use sempre; nunca escreva quadros à mão. |
-| `brand` | `{ name, logo_url, colors: { primary, accent, background, text }, fonts: { heading, body }, radius, tone, locale }` |
+| `brand` | `{ name, logo_url, colors: { primary, accent, background, text }, fonts: { heading, body }, radius, tone, locale }`. Não traz `scheme` nem `tones`: esses vêm na nota BRAND do pedido, para você ler, nunca para o código ler. |
 | `items` | `[{ name, price_minor, was_price_minor, currency, unit, installments, photo_url, description, link }]`, já conferidos pelo dono. |
 | `reviews` | `[{ author, text, rating }]`, só reais. Pode vir vazio. |
-| Cores | Onde se pede cor, use o nome do papel: `"primary" | "accent" | "background" | "text"`. Hex não é aceito. |
+| Cores | Onde se pede cor, use o nome do papel: `"primary" | "accent" | "background" | "text"`, mais `"ink"` para texto que você estiliza (e `"white"`, `"black"` para formas). Hex não é aceito. |
 
 Passe o item inteiro para o componente (`item={items[0]}`). A composição nunca lê `price_minor`, `was_price_minor` nem `installments` para escrever na tela: quem formata preço é o `<Price>`, e o desconto é o `<Badge>`. O nome (`items[0].name`) pode ir num `<Title>`.
 
@@ -29,7 +29,7 @@ Quase todo componente aceita `delay` (em quadros, desde o início da cena). É a
 | `<Sequence>` | `soundtrack?` | Raiz do vídeo. Toca as cenas em ordem. `soundtrack="track"` pede a trilha gerada da peça. |
 | `<Scene>` | `duration`, `background?`, `transition?`, `sfx?`, `align?: "center" | "top" | "bottom"`, `editedByOwner?` | Um momento. O conteúdo fica dentro da zona segura. `sfx` toca no começo da cena. |
 | `<Slide>` | `role: "cover" | "item" | "end"`, `background?`, `continues?` | Quadro do carrossel (o carrossel não usa `<Sequence>`). |
-| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (`false` silencia os efeitos), `take?` e `src?` (a escolha do dono no editor) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música. `take` e `src` são escritos pelo editor: mantenha-os ao ajustar e nunca os invente (veja `som.md`). |
+| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (com trilha, os efeitos só tocam com `sfx` escrito, quando o pedido pede efeitos), `take?` e `src?` (a escolha do dono no editor) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música. `take` e `src` são escritos pelo editor: mantenha-os ao ajustar e nunca os invente (veja `som.md`). |
 
 A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "brand-mask" | "color-wipe"`. Sem `transition`, é corte seco.
 
@@ -41,7 +41,7 @@ A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "br
 | `<Eyebrow>` | `variant?: "uppercase" | "pill"` | A linha pequena acima do título: urgência, data, categoria. Até 4 palavras. |
 | `<Caption>` | `position?: "center" | "safe-bottom"` | Para quem assiste sem som. Até 8 palavras. |
 | `<List>` | `items` (textos), `marker?: "number" | "dot" | "check"`, `interval?` (quadros entre linhas) | Até 5 linhas. Cada linha entra separada. |
-| `<AnimatedNumber>` | `value`, `suffix?`, `duration?` | Conta até o valor. O valor vem de dado, nunca digitado. |
+| `<AnimatedNumber>` | `value`, `suffix?`, `duration?` | Conta até o valor em algarismos tabulares. O valor vem de dado, nunca digitado. Por padrão termina até 60% da cena e fica parado no valor final (um `duration` escrito vence). |
 
 ## Comércio
 
@@ -75,7 +75,7 @@ A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "br
 
 | Componente | Propriedades | Notas |
 |---|---|---|
-| `<CallToAction>` | `action: "whatsapp" | "open-app" | "link-in-bio" | "call" | "order"`, `text` | Um verbo. |
+| `<CallToAction>` | `action: "whatsapp" | "link" | "link-in-bio" | "call" | "visit" | "open-app" | "order" | "book"`, `text`, `variant?: "pill" | "outline" | "text" | "bar"`, `color?` (papel, padrão `accent`), `size?` (px do texto, padrão 72), `arrow?`, `align?: "start" | "center" | "end"` | Um verbo. É herói: o kit já desenha o botão com texto de 72 px, pelo menos 150 px de altura e 56% da largura do quadro; `variant="bar"` ocupa 84% da largura. Não diminua: texto de 64 a 80 px. Fica parado no último segundo. Ocupa a largura das próprias palavras e segue o alinhamento da coluna em que está (num `<Safe>` centrado, fica centrado). Escolha o `variant` que combina com a peça: `pill` cheio é o padrão, `outline` num fechamento elegante, `text` (palavras com seta, sublinhadas) num estilo editorial, `bar` (bloco largo com seta) num fechamento de impacto. Não feche toda peça com o mesmo botão. `action="whatsapp"` pinta o botão de verde WhatsApp quando não há `color`: use só quando o pedido manda para o WhatsApp; para site ou endereço, `action="link"`. |
 | `<QrCode>` | `target`, `caption?` | Para vitrine, TV da loja, impresso. |
 
 `<AppScreen>` e `<Tap>` existem no kit, mas a gravação das telas do app ainda não. Não use: sem a tela, aparece um celular vazio.
@@ -91,7 +91,7 @@ O fundo vai em `background` da `<Scene>` (ou do `<Slide>`):
 | `"photo"` | `source` (de dado: `items[0].photo_url`) | Com zoom lento. |
 | `"owner-video"` | `source`, `from`, `focus`, `dim` | O vídeo do próprio dono. Só ele escolhe, pelo editor; você nunca escreve um. Num ajuste, mantenha-o como está. |
 | `"ai-image"` | `prompt`, `slot` | Imagem gerada. Barata; sai junto com a peça. |
-| `"ai-video"` | `prompt`, `slot` | Vídeo gerado de 5 a 10 s, sem som. Caro: o dono confirma o custo antes. Use um, no máximo dois por peça. |
+| `"ai-video"` | `prompt`, `slot` | Vídeo gerado de 5 a 10 s, sem som. Caro: o dono confirma o preço de cada um antes. Use onde o movimento ajuda a cena. |
 
 Campos comuns: `dim?` (0 a 1; escurece para o texto passar; com foto ou mídia o padrão já é 0,45) e `blur?`.
 
@@ -105,8 +105,37 @@ Pedir mídia gerada é declarar uma vaga (`slot`) com um nome curto e um `prompt
 ```
 
 - Uma vaga por fundo. Repetir o mesmo `slot` reaproveita a mesma mídia.
-- O `prompt` descreve cenário, luz e movimento. A plataforma já acrescenta "sem texto e sem logo"; não peça letra, produto nem pessoa realista.
+- O `prompt` descreve assunto, cenário, luz e movimento. A plataforma já acrescenta "sem texto e sem logo"; não peça letra nem pessoa realista, e nunca imite um produto, uma fachada ou um ambiente que tem foto (a foto real vai na cena). Sem foto, o produto e o lugar podem ser gerados.
 - Ao ajustar uma peça, mantenha `slot` e `prompt` de um fundo que não mudou: a mídia pronta é reaproveitada sem custo.
+- `prompt` e `slot` são **texto literal** no próprio elemento (`prompt="…"`, `slot="…"`) ou uma `const NOME = "…"` no topo do arquivo. Prop, template com `${}`, `.map` sobre uma lista ou chamada de função a plataforma não lê: a mídia nunca seria gerada, e o validador recusa (`media_prompt`).
+
+## Imagem como elemento: `<Picture>`
+
+A imagem gerada serve primeiro ao **assunto**: a vitrine, o prato, o lugar, a foto dentro do post ou da tela do celular, o produto sem foto. Ela entra na composição como elemento, não só como fundo atrás de tudo. Fundo abstrato e textura vêm depois.
+
+| Componente | Props | Notas |
+|---|---|---|
+| `<Picture>` | `slot`, `prompt`, `type?: "ai-image" \| "ai-video" \| "photo"` (padrão `"ai-image"`), `src?`, `fit?: "cover" \| "contain"`, `focus?: "top" \| "center" \| "bottom"`, `width?`, `height?`, `aspect?` (`1`, `"4/5"`, `"16/9"`), `radius?` (px ou `"brand"`, o padrão), `shape?: "rect" \| "circle"`, `frame?: "none" \| "polaroid" \| "phone"`, `zoom?` (Ken Burns lento, ligado), `shadow?`, `dim?`, `from?`, `alt?`, `style?` | Ocupa a caixa onde está (100% × 100%) ou o tamanho dado. Até o arquivo ficar pronto, mostra um degradê da marca com um brilho lento, nunca uma caixa vazia. Declara a vaga como o fundo: a plataforma gera e cobra igual. `type="photo"` com a vaga `owner-photo-N` põe a foto do dono; `src={items[0].photo_url}` põe a foto do item. |
+
+```tsx
+const P2_SHOP = "vitrine de padaria com pães dourados, luz quente da manhã, close-up, sem texto";
+
+function P2Post() {
+  return (
+    <div style={{ width: 640, height: 640, borderRadius: 48, overflow: "hidden" }}>
+      <Picture slot="post-photo" prompt={P2_SHOP} />
+    </div>
+  );
+}
+
+<Picture slot="chef" prompt="padeira sorrindo com avental de linho, ilustração editorial" shape="circle" width={360} />
+<Picture slot="loaf" prompt="pão de fermentação natural sobre tábua, luz lateral" frame="polaroid" width={520} aspect="4/5" />
+<Picture type="photo" slot="owner-photo-1" frame="phone" />
+```
+
+- Cada imagem de coisa que o pedido manda mostrar é uma `<Picture>` com vaga própria, na cena que a mostra.
+- Anime a caixa em volta (ou envolva com `<Reveal>`, `<Move>`): a `<Picture>` não tem entrada própria.
+- Cada imagem gerada (fundo ou `<Picture>`) conta no limite de imagens que a peça inclui; passando dele, cada uma espera o clique do dono.
 
 ---
 
@@ -121,7 +150,8 @@ Pedir mídia gerada é declarar uma vaga (`slot`) com um nome curto e um `prompt
   - `blur` de no máximo **24 px** (em `filter`, em `<Move keys>` e onde mais aparecer);
   - **um** `<Grain>` por cena, com `amount` de no máximo **0,12**;
   - `<Burst>` com `count` de no máximo **60**, e no máximo **dois** `<Burst>` por cena.
-- **Cor e fonte vêm da marca.** Nunca escreva hex, `rgb()` nem nome de fonte. Use o papel (`color="accent"`) ou `usePalette()`: `c("primary")`, `alpha("text", 0.2)`, `mix("accent", "primary", 0.5)` e as fontes `heading`/`body`. Os papéis são `primary`, `accent`, `background`, `text`, mais `white` e `black`.
+- **Cor e fonte vêm da marca.** Nunca escreva hex, `rgb()` nem nome de fonte. Use o papel (`color="accent"`) ou `usePalette()`: `c("primary")`, `alpha("text", 0.2)`, `mix("accent", "primary", 0.5)` e as fontes `heading`/`body`. Os papéis são `primary`, `accent`, `background`, `text`, mais `white` e `black`, e `ink`.
+- **Texto que você mesmo estiliza usa `c("ink")`** (ou `color="ink"` num componente do kit): é a cor que lê sobre a cena em que o texto está (clara na cena escura, escura na clara, branca sobre foto escurecida). Nunca `c("white")`, `c("black")` nem `c("background")` fixos para palavras: esses são para formas e preenchimentos; um rótulo dentro de uma caixa que você pintou usa um papel que contrasta com a caixa. A plataforma mede cada palavra contra os pixels atrás dela e devolve para correção o que ficar abaixo de 3:1 (4,5:1 no texto pequeno).
 - **Preço só do item.** `<PriceTag item={...}>` ou `<Price item={...}>`. Nunca escreva valor, moeda ou porcentagem.
 - **Texto da tela só em componente do kit.** `<Kinetic>`, `<WordSwap>`, `<Marquee>`, `<Title>`, `<Eyebrow>`, `<Caption>`, `<CallToAction>`, ou num componente seu que recebe o texto como `children` ou como `label`/`text`. É assim que o editor do dono acha e edita cada texto. Texto solto dentro de `<div>` não aparece para o dono.
 
@@ -176,8 +206,17 @@ Tempo comum (`Timed`): `at` (quadro de início), `dur` (quadros), `ease`, ou `pr
 |---|---|---|
 | `<Reveal>` | `shape?: forma ou "rect"`, `from?: "left" | "right" | "top" | "bottom" | "center"`, `origin?: [x, y]`, `rotate?`, mais o tempo | Recorte que abre e mostra o que está dentro. A revelação por forma da marca é um dos momentos mais fortes. |
 | `<Morph>` | `keys: [{ at, shape, ease?, seed? }]`, `size?` (raio em px), `color?`, `rotate?`, `spin?` (graus por segundo), `scale?`, `stroke?`, `strokeWidth?`, `x?`, `y?` | Uma forma que vira outra (círculo → estrela → flor). `blob` com `seed` diferente dá formas orgânicas. |
-| `<Shape>` | `shape`, e as mesmas de `<Morph>` sem `keys` | Uma forma parada (pode girar com `spin`). |
+| `<Shape>` | `shape`, e as mesmas de `<Morph>` sem `keys` | Uma forma parada (pode girar com `spin`). É forma abstrata da marca, nunca um objeto: coração, botão ou estrela de avaliação são `<Icon>`. |
 | `<PathDraw>` | `path?` ou `d?` (caixa 0 a 100), `width?`, `height?`, `color?`, `stroke?`, `tail?`, mais o tempo | Linha que se desenha. `tail` faz a linha sumir atrás, como um traço que passa. |
+
+## Objetos: ícones e post de rede social
+
+Quando o pedido nomeia um objeto, ele aparece como ele mesmo. Uma `<Shape>` no lugar dele (estrela por coração, círculo por botão) é o erro que mais denuncia peça amadora.
+
+| Componente | Propriedades | Notas |
+|---|---|---|
+| `<Icon>` | `name`, `size?` (px, padrão 96), `color?`, `solid?`, `weight?` (traço na grade de 24), `at?`, `entrance?: "pop" | "draw" | "none"`, `pulse?` (quadros por batida), `x?`, `y?`, `style?` | Ícone de verdade, uma família só (traço redondo). `name`: `heart`, `like`, `comment`, `share`, `send`, `bookmark`, `check`, `check-circle`, `cursor`, `play`, `sparkle`, `star`, `bolt`, `bell`, `cart`, `bag`, `gift`, `clock`, `calendar`, `pin`, `phone`, `music`, `camera`, `image`, `video`, `user`, `search`, `plus`, `arrow-right`, `trend-up`, `wand`, `eye`. `solid` preenche os que fazem sentido cheios (coração, estrela, play, raio, comentário, marcador, cursor, brilho). `pulse={15}` faz o coração bater. Com `x`/`y` fica solto no quadro, centrado no ponto. |
+| `<SocialPost>` | `label?` (nome da conta; padrão, o da marca), `likes?`, `from?`, `at?`, `countAt?`, `count?` (quadros da contagem), `pulse?`, `heart?` (papel), `width?` (px, padrão 760), `caption?`, `children` (a imagem), `style?` | A contagem termina até 60% da cena por padrão e fica no valor final (um `count` escrito vence). Um post de verdade: avatar com o logo, nome, a imagem quadrada, a fileira de ações com ícones e o contador de curtidas que corre de `from` até `likes` enquanto o coração bate. A superfície segue o esquema da peça. A imagem vai como filho: `<SocialPost likes={12480}><Picture slot="post-demo" prompt="..." radius={0} /></SocialPost>`. `caption` troca a palavra "curtidas" quando a peça fala outra língua que a marca. |
 
 ## Padrões e partículas
 
@@ -193,10 +232,10 @@ Tempo comum (`Timed`): `at` (quadro de início), `dur` (quadros), `ease`, ou `pr
 
 | Componente | Propriedades | Notas |
 |---|---|---|
-| `<Kinetic>` | `children` (o texto), `mode?`, `by?: "word" | "letter" | "line"`, `at?`, `step?`, `dur?`, `out?`, `size?` (px), `color?`, `font?: "heading" | "body"`, `weight?`, `italic?`, `upper?`, `tracking?`, `leading?`, `align?`, `accent?`, `marks?`, `markColor?`, `markAt?`, `ease?`, `style?` | O texto herói. Cada unidade (palavra, letra ou linha) entra pelo quadro. |
-| `<WordSwap>` | `words: string[]`, `at?`, `every?` (quadros por palavra), `mode?: "mask" | "slot" | "flip"`, `size?`, `color?`, `font?`, `weight?`, `italic?`, `loop?` | Uma palavra que troca no lugar, na batida: "Sem **tempo / designer / câmera**". |
+| `<Kinetic>` | `children` (o texto), `mode?`, `by?: "word" | "letter" | "line"`, `at?`, `step?`, `dur?`, `out?`, `size?` (px), `fit?` (`true` ou `[min, max]`), `color?`, `font?: "heading" | "body"`, `weight?`, `italic?`, `upper?`, `tracking?`, `leading?`, `align?`, `accent?`, `marks?`, `markColor?`, `markAt?`, `ease?`, `caret?`, `style?` | O texto herói. Cada unidade (palavra, letra ou linha) entra pelo quadro. `fit` mede a linha mais larga uma vez e escolhe o tamanho que a faz ocupar a largura do `<Safe>`, de 150 a 260 px (`fit={[160, 220]}` muda os limites), o mesmo em todos os quadros: é o padrão da linha heroica. |
+| `<WordSwap>` | `words: string[]`, `at?`, `every?` (quadros por palavra), `mode?: "mask" | "slot" | "flip"`, `size?`, `color?`, `font?`, `weight?`, `italic?`, `loop?`, `align?` (padrão `center`) | Uma palavra que troca no lugar, na batida: "Sem **tempo / designer / câmera**". Uma frase que quebra em duas linhas fica alinhada por `align`. |
 
-Modos de `<Kinetic>` (`mode`): `mask-up` (sobe por trás de uma máscara, o padrão), `mask-down`, `scale-punch` (chega grande e assenta com mola), `scramble` (letras embaralham e travam), `slot` (cada letra rola como caça-níquel), `outline-fill` (contorno que se preenche), `stretch` (estica de baixo para cima), `blur-in` (sai do desfoque), `fade`.
+Modos de `<Kinetic>` (`mode`): `mask-up` (sobe por trás de uma máscara, o padrão), `mask-down`, `scale-punch` (chega grande e assenta com mola), `scramble` (letras embaralham e travam), `slot` (cada letra rola como caça-níquel), `outline-fill` (contorno que se preenche), `stretch` (estica de baixo para cima), `blur-in` (sai do desfoque), `fade`, `type` (máquina de escrever: letra por letra, `step` quadros por letra, padrão 1,6, com um cursor que pisca no fim; `caret` é o papel da cor do cursor, ou `false`). O `type` monta a linha inteira desde o primeiro quadro e o cursor não tem largura, então o texto centrado não anda enquanto é digitado: é a única forma de digitar texto na tela. Digitação é para uma cena que demonstra um pedido, uma busca ou um chat; nunca no gancho, que precisa ser lido inteiro até o quadro 15.
 
 Marcas (`marks`): `marker` (marca-texto atrás), `underline` (sublinhado que se desenha), `circle` (círculo à mão em volta), `strike` (risco).
 
@@ -204,7 +243,7 @@ Como escrever o texto:
 - Texto simples entre as tags: `<Kinetic mode="mask-up" size={190}>tempo.</Kinetic>`.
 - Com quebra de linha, uma string com `\n`: `<Kinetic by="line">{"Sua pele\nmerece"}</Kinetic>`.
 - Do dado, uma expressão: `{brand.name}`, `{bread?.name ?? ""}`. O dono não edita esse texto; ele vem da marca ou do item.
-- `accent={{ pele: "primary" }}` pinta uma palavra; `marks={{ você: "circle" }}` marca uma palavra depois que ela entra. A chave é a palavra normalizada: minúscula, só letras e números (`"você."` vira `você`). Uma chave que não é palavra do texto não faz nada.
+- `accent={{ pele: "primary" }}` pinta uma palavra; `marks={{ você: "circle" }}` marca uma palavra depois que ela entra. A palavra marcada reserva o próprio espaço (0,42 em em volta do círculo, 0,1 em do marca-texto), então não encosta nas vizinhas. Uma ênfase por palavra (cor OU marca, nunca as duas) e círculo só em palavra de até 8 letras. A chave é a palavra normalizada: minúscula, só letras e números (`"você."` vira `você`). Uma chave que não é palavra do texto não faz nada.
 - `<WordSwap words={["tempo.", "designer.", "câmera."]} />` com textos literais: o dono edita cada palavra.
 
 ## Textura e luz
@@ -220,7 +259,7 @@ Como escrever o texto:
 
 | Nome | Assinatura | Notas |
 |---|---|---|
-| `usePalette()` | `{ c, alpha, mix, heading, body }` | `c("accent")` é a cor do papel; `alpha("text", 0.2)` com transparência; `mix("primary", "text", 0.4)` mistura; `heading` e `body` são as fontes da marca. Para desenhar formas próprias com as cores da marca. |
+| `usePalette()` | `{ c, alpha, mix, heading, body }` | `c("accent")` é a cor do papel; `c("ink")` é a cor de texto que lê na cena atual; `alpha("text", 0.2)` com transparência; `mix("primary", "text", 0.4)` mistura; `heading` e `body` são as fontes da marca. Para desenhar formas próprias com as cores da marca. Os papéis já trazem a paleta da peça quando o pedido pediu cores ou um visual (a direção grava a paleta; logo, nome e fontes seguem da marca): escreva sempre o papel, nunca o hex que o pedido citou. A nota BRAND que vem com o pedido traz `scheme` (`light` ou `dark`) e `tones` (o tom de cada papel): leia-os ali para escolher os papéis; o objeto `brand` do código não os tem. O texto vai no papel de tom oposto ao do fundo. |
 | `<PriceTag>` | `item`, `size?` (px do número), `role?`, `at?`, `entrance?: "punch" | "none"`, `style?` | O preço como herói tipográfico: moeda pequena, número grande, centavos no alto. Formatado do item, no idioma da marca. Sem preço no item, não desenha nada. Os algarismos nunca animam. |
 | `<Logo>` | `height?`, `role?`, `style?` | O logo da marca; sem logo, o nome como assinatura. |
 
@@ -250,17 +289,17 @@ export default function Piece({ items }) {
   return (
     <Sequence soundtrack="track">
       <Soundtrack />
-      <Scene canvas duration={sec(2)} bg="text" sfx="impact" hits={[{ at: 18, kind: "click" }]}>
+      <Scene canvas duration={sec(2)} bg="primary">
         <Camera keys={[{ at: 0, zoom: 1.15 }, { at: 60, zoom: 1, ease: "outQuint" }]}>
-          <Layer depth={1.5}><Grid color="background" alpha={0.07} size={135} drift={[0, -40]} /></Layer>
+          <Layer depth={1.5}><Grid color="text" alpha={0.07} size={135} drift={[0, -40]} /></Layer>
           <Safe align="flex-start">
-            <Kinetic mode="mask-up" size={190} color="background">Pão</Kinetic>
-            <WordSwap words={["quente.", "fresco.", "de hoje."]} at={4} every={14} size={190} color="accent" />
+            <Kinetic mode="mask-up" fit color="ink">Pão</Kinetic>
+            <WordSwap words={["quente.", "fresco.", "de hoje."]} at={4} every={15} size={190} color="accent" />
           </Safe>
         </Camera>
         <Grain amount={0.07} />
       </Scene>
-      <Scene canvas duration={sec(2.4)} bg="accent" transition="shape-circle" sfx="cha-ching">
+      <Scene canvas duration={sec(2.4)} bg="accent" transition="shape-circle">
         <Safe>
           <Kinetic mode="mask-up" size={84} upper>{items[0]?.name ?? ""}</Kinetic>
           <PriceTag item={items[0]} size={400} role="primary" at={10} />
@@ -272,4 +311,4 @@ export default function Piece({ items }) {
 }
 ```
 
-`<Background>` também existe como elemento (`<Background type="ai-image" prompt="..." slot="..." />`, dentro da cena) e vale como a propriedade `background`. `<Transition>` só existe para peças antigas: use a propriedade `transition` da cena. As funções `sequenceLength` e `slidesOf` são do palco da plataforma; a composição não as chama.
+`<Background>` também existe como elemento (`<Background type="ai-image" prompt="..." slot="..." />`, dentro da cena) e vale como a propriedade `background`; para uma imagem dentro de um cartão, de um celular ou de uma moldura, use `<Picture>`. `<Transition>` só existe para peças antigas: use a propriedade `transition` da cena. As funções `sequenceLength` e `slidesOf` são do palco da plataforma; a composição não as chama.

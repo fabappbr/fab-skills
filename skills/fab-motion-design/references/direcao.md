@@ -5,7 +5,7 @@ A peça nasce em duas etapas. Primeiro a **direção** decide o estilo, a trilha
 ## O que a direção decide
 
 - **Estilo:** um dos de `references/estilos/`, pelo pedido e pela marca. Se o dono escolheu um estilo, ele vale.
-- **Trilha:** o clima da música em poucas palavras em inglês (`"warm acoustic guitar, 100 bpm"`), ou `null` para uma peça sem música (ramo sóbrio, ou o dono pediu sem música).
+- **Trilha:** o clima da música em poucas palavras em inglês, terminando no andamento (`"warm acoustic guitar, 100 bpm"`), ou `""` para a trilha padrão da marca (conte 120 bpm), ou `null` para uma peça sem música (ramo sóbrio, ou o dono pediu sem música). O andamento é a grade dos cortes.
 - **Momento marcante:** um só, com a cena em que acontece.
 - **O roteiro de planos:** uma entrada por cena, na ordem, com:
 
@@ -17,23 +17,29 @@ A peça nasce em duas etapas. Primeiro a **direção** decide o estilo, a trilha
 | `intent` | Por que a cena existe (gancho, prova, preço, pausa antes do pico, fecho) |
 | `framing` | O que ocupa o quadro (o produto grande, a palavra sozinha, a tela dividida) |
 | `camera` | O movimento da câmera (empurra devagar, recua, gira, parada com respiração) |
-| `reveal` | Como o elemento principal entra (máscara de baixo, recorte em círculo, linha que se desenha) |
+| `reveal` | Como o elemento principal entra (máscara de baixo, recorte em círculo, linha que se desenha). Em cena com mais de 3 s, as batidas internas: `"word lands, then swaps, then the card rises"` |
 | `texts` | O texto da tela: `{"text": ...}` para palavras, `{"item": i, "field": "name"}` (ou `"price"`, `"photo"`) para dado de item, `{"cta": ..., "action": ...}` para a chamada final |
 | `transition` | A transição de entrada da cena (a primeira não tem) |
-| `sfx` | O efeito sonoro da entrada, ou `null` |
-| `media` | `none`, `ai-image`, `ai-video` ou `photo` (a foto real do item) |
+| `carry` | O que atravessa o corte e chega NESTA cena vindo da anterior, até 8 palavras em inglês (`"the orange button grows into the frame"`), ou `null`. Pelo menos 1 em cada 3 cortes leva alguma coisa |
+| `sfx` | O efeito sonoro da entrada, ou `null`. Peça com trilha: sempre `null`, a menos que o pedido peça efeitos sonoros |
+| `media` | O FUNDO da cena: `none`, `ai-image`, `ai-video` ou `photo` (a foto real do item) |
+| `pictures` | Opcional. As imagens geradas que entram COMO ELEMENTO da cena (a foto dentro do post, a tela do celular, a polaroide, o produto, o lugar), uma descrição curta em inglês para cada, até 3 por cena |
 
 ## Regras contáveis
 
 1. **Preço só por referência.** `{"item": 0, "field": "price"}`, e só para item com preço. Nunca um preço ou um desconto escrito num `text`.
-2. **Gancho até 2,5 s** com o produto, o benefício ou a oferta. Nunca logo, saudação ou "Conheça a".
+2. **Gancho até 2,5 s** com o produto, o benefício ou a oferta: as palavras dele SÃO o valor, em até 4 palavras inteiras na tela até o quadro 15 (0,5 s). Nunca logo, saudação, "Conheça a" nem texto digitado letra a letra (digitação é de uma cena posterior que demonstra um pedido, uma busca, um chat).
 3. **Tempo de leitura:** cada cena dura pelo menos `0,6 s + 0,3 s por palavra` e nunca menos que 1,2 s; no máximo 8 s.
-4. **Ritmo:** durações variadas, uma cena mais calma e curta logo antes do momento mais forte.
-5. **Fecho:** a última cena tem a `cta` e dura o tempo de leitura mais 1 s.
-6. **Transições e efeitos:** nunca a mesma transição três vezes seguidas; efeito sonoro em parte das cenas, `impact` uma vez só.
-7. **Mídia:** `photo` só de item com foto; `ai-video` em no máximo 2 cenas e só quando o pedido ou o estilo pede imagem em movimento.
+4. **Ritmo:** durações variadas, uma cena mais calma e curta logo antes do momento mais forte. Até 30 s, um corte a cada 1,5 a 3 s; cena com mais de 3 s escreve no `reveal` ou na `camera` uma batida interna pelo menos a cada 1 s ("A, then B, then C"), senão a plataforma avisa.
+5. **Corte na batida:** cada troca de cena cai na grade de batidas do andamento da trilha (120 bpm: 0,5 s; 100 bpm: 0,6 s), então as durações são batidas inteiras, e o pico cai num tempo forte (múltiplo de 4 batidas). A plataforma acerta para a grade o que errar por pouco.
+6. **Sem molde repetido:** nunca 3 cenas seguidas com o mesmo enquadramento, a mesma receita de fundo ou o herói no mesmo lugar; uma palavra heroica vive numa cena só; pelo menos 2 cenas com um visual vazando pela borda; pelo menos 30% das cenas sem `Grid`, `Dots` nem `Glow`.
+7. **Fecho:** a última cena tem a `cta` e dura o tempo de leitura mais 1 s.
+8. **Transições e efeitos:** nunca a mesma transição três vezes seguidas. Efeito sonoro só em peça sem trilha (`music` nulo): em parte das cenas, `impact` uma vez só. Com trilha, `sfx` é sempre `null`.
+9. **Mídia:** `photo` só de item com foto, e a cena que mostra esse item usa a foto. `ai-image` e `ai-video` podem mostrar fundo, textura, cenário e o produto sem foto; `ai-video` onde o movimento ajuda (o dono confirma o preço de cada vídeo). Quando o pedido manda mostrar coisas (uma vitrine, um prato, um ambiente, um antes e depois), cada uma vira uma entrada de `pictures` na cena que a mostra, descrita de forma concreta (assunto, cenário, luz). Fundos `ai-image` e `pictures` somam no limite de imagens incluídas (`generated_images_included`); gaste-as primeiro no assunto.
 
 ## Quantas cenas
+
+Menos cenas que o mínimo da tabela volta para a direção corrigir. Uma peça de 30 s em 8 cenas de 4,5 a 5,7 s parece apresentação de slides.
 
 | Duração | Cenas | Duração média |
 |---|---|---|
@@ -56,7 +62,7 @@ Uma peça longa não é uma peça curta esticada. Ela se conta em **atos**:
 Para não cansar:
 - alterne o enquadramento (perto, longe, tela dividida, só tipografia) e o fundo a cada cena;
 - repita um **motivo visual** da marca (uma forma, uma linha, uma cor) no começo de cada ato, para a peça parecer uma só;
-- a cada 15 a 20 s, uma mudança de energia: fundo escuro para claro, câmera parada para câmera rápida;
+- a cada 15 a 20 s, uma mudança de energia: câmera parada para câmera rápida, fundo liso para foto, cor de fundo para a principal (sempre dentro do esquema claro ou escuro da peça);
 - com muitos itens, um ato por grupo (até 4 itens por ato), nunca uma fila de cenas iguais.
 
 A animação escreve a peça em partes de cerca de 15 s. Escreva cada cena completa no roteiro: quem anima uma parte só vê as cenas dela por inteiro e o título das outras.
