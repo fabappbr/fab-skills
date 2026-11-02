@@ -6,7 +6,7 @@ Referências: `references/examples/aurea.md` e `references/examples/aurea-opus.m
 
 ## Regras contáveis
 
-- Título na fonte `heading`, peso **300 a 400**, de **150 a 210 px** (`<Kinetic fit>` com `fit={[150, 210]}`); itálico em **uma palavra por cena** no máximo.
+- Título na fonte `heading`, peso **300 a 400**, de **150 px** ou mais (`fit={[150, 210]}`: o teto de 210 deixa respiro à serifa leve; o kit só o sobe o bastante para a linha chegar a cerca de 72% do quadro); itálico em **uma palavra por cena** no máximo.
 - Entradas lentas: `dur` de **18 a 26 quadros**, `step` de 5 a 8; modos `mask-up` por linha, `blur-in` e `fade`. Nada de `scale-punch`, `slot` nem `scramble`.
 - Cenas de **2,2 a 3,6 s**; câmera com deslocamento de no máximo **zoom 1,1** e 40 px.
 - Pelo menos **2 linhas que se desenham** (`<PathDraw>`: moldura, sublinhado, onda, seta) na peça.

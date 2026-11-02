@@ -11,7 +11,7 @@ A interface do Reels, dos Stories e do TikTok cobre o topo (perfil), a base (leg
 | 1:1 (1080 × 1080) | 6% | 6% | 6% |
 | Carrossel | 6% | 10% (indicador de slides) | 6% |
 
-As laterais de 6% são o mínimo para a interface da rede não cobrir nada, não a margem do desenho. **Respiro (vale para PALAVRAS):** palavras e as caixas em volta delas (cartão, painel, botão) ficam a pelo menos 8% da largura de cada borda (cerca de 86 px em 1080), em todos os quadros. Um cartão ou painel tem no máximo cerca de 84% da largura do quadro, e o zoom da `<Camera>` cresce a caixa a partir do centro: dimensione para o pico do zoom. A plataforma mede isso na peça desenhada e devolve o que encostar na borda. Foto, produto e tipografia decorativa podem vazar pela borda: isso é escolha, não erro.
+As laterais de 6% são o mínimo para a interface da rede não cobrir nada, não a margem do desenho. **Respiro (vale para PALAVRAS):** palavras e as caixas em volta delas (cartão, painel, botão) ficam a pelo menos 8% da largura de cada borda (cerca de 86 px em 1080), em todos os quadros. Um cartão ou painel tem no máximo cerca de 84% da largura do quadro, e o zoom da `<Camera>` cresce a caixa a partir do centro: dimensione para o pico do zoom. A plataforma mede isso na peça desenhada e devolve o que encostar na borda. Foto, produto e tipografia decorativa podem vazar pela borda: isso é escolha, não erro. A interface demonstrada (`<PromptBox>`, `<Checklist>`) é a exceção: caixa de 92% da largura segura ou vazando pelas duas bordas (`width="bleed"`).
 
 O `<Safe>` posiciona as palavras dentro da área livre. Fundo, foto, cartão, produto e forma da marca podem ocupar o quadro inteiro: o visual principal é grande e desce pela faixa de baixo; a faixa nunca recebe uma forma solta só para "preencher". Numa cena cujo herói é um visual (foto, `<Picture>`, `<SocialPost>`, celular, produto, painel), ele fica FORA do `<Safe>`, grande, descendo pela faixa de baixo, e as palavras ficam acima dele dentro do `<Safe>`. Nunca a cena inteira encolhida na metade de cima sobre um vazio.
 
@@ -23,7 +23,7 @@ O `<Safe>` posiciona as palavras dentro da área livre. Fundo, foto, cartão, pr
 
 ## Caixa ou sem caixa
 
-- As palavras ficam direto sobre o fundo, **ou** o cartão É o herói: pelo menos 84% da largura (ou vazando por uma borda), pelo menos 30% da altura do quadro, texto dentro de 64 px ou mais.
+- As palavras ficam direto sobre o fundo, **ou** o cartão É o herói: pelo menos 84% da largura (ou vazando por uma borda), pelo menos 30% da altura do quadro, texto dentro de 64 px ou mais. Interface demonstrada (pedido digitado, busca, chat, lista de etapas) é `<PromptBox>` ou `<Checklist>` do kit, com texto de 80 px ou mais.
 - Nada de cartão médio (um balão de 790 px com texto de 62 px no meio do quadro): ou ele cresce até ser o herói, ou some.
 - Folga interna em em, para crescer com o texto: pelo menos `0.6em` nas laterais e `0.4em` em cima e embaixo.
 
@@ -33,7 +33,7 @@ O `<Safe>` posiciona as palavras dentro da área livre. Fundo, foto, cartão, pr
 
 | Papel | Alvo no 9:16 | Piso no 9:16 | 4:5 | 1:1 |
 |---|---|---|---|---|
-| Título herói | `<Kinetic fit>`: 180 a 260 px para até 3 palavras, 75% da largura segura ou mais | 150 px | 10% menor | 15% menor |
+| Título herói | `<Kinetic fit>` puro: cerca de 72% da largura do quadro (até 340 px), 75% da largura segura ou mais | 150 px | 10% menor | 15% menor |
 | Preço (`<PriceTag>`) | 230 a 430 px | 150 px | 10% menor | 15% menor |
 | Apoio (frase sob o título, lista) | 64 a 80 px | 60 px | 56 px | 52 px |
 | Sobretítulo e rótulo (sob um número, num cartão) | 48 a 56 px, caixa alta | 48 px | 44 px | 40 px |
@@ -41,7 +41,7 @@ O `<Safe>` posiciona as palavras dentro da área livre. Fundo, foto, cartão, pr
 
 - **No máximo 4 palavras heroicas** na tela ao mesmo tempo. Frase maior vira `<WordSwap>` ou uma segunda batida dentro da cena.
 - **Proporção:** o herói tem de 2,5 a 4 vezes o tamanho do apoio. Herói de 104 com apoio de 62 não tem hierarquia.
-- `<Kinetic fit>` mede a linha mais larga uma vez e escolhe o tamanho que a faz ocupar a largura do `<Safe>` (de 150 a 260 px; `fit={[160, 220]}` muda os limites). É o padrão para a linha heroica.
+- `<Kinetic fit>` sem faixa é o padrão da linha heroica: faz a linha mais larga ocupar cerca de 72% do quadro (de 150 a 340 px) e quebra uma linha longa no ponto mais equilibrado. `fit={[min, max]}` só define um teto, e o kit o sobe (até 340 px) quando ele deixaria a linha abaixo desse preenchimento: use faixa só para segurar uma palavra abaixo de outra, nunca para encher.
 - Se o texto não cabe no tamanho do alvo, corte o texto, não diminua a fonte.
 
 ## Cortar o texto

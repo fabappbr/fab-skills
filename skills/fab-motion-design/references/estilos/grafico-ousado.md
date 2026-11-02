@@ -13,4 +13,4 @@ Referência: `references/examples/padaria.md` (a padaria: pão de queijo de sáb
 - Movimento físico: queda, achatamento e quique (`interpolate` com `inQuad` na queda, mola `bouncy` no assento) em pelo menos **uma cena**.
 - `<Burst>` no pico (o preço ou o fecho), no máximo **2 na peça**.
 - Transições de energia: `shape-burst`, `shape-circle`, `whip-*`, `push-*` e um `match` sobre o produto.
-- Texto curto em caixa alta ou peso 800: o herói de **150 a 260 px** (`<Kinetic fit>`), o apoio de 60 a 80 px.
+- Texto curto em caixa alta ou peso 800: o herói de **150 a 340 px** (`<Kinetic fit>` sem faixa), o apoio de 60 a 80 px.

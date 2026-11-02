@@ -13,14 +13,14 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 
 ## Ofício
 
-- [ ] A primeira cena É o valor ou a oferta: até 4 palavras inteiras na tela até o quadro 15, sem digitação.
+- [ ] A primeira cena É o valor ou a oferta: até 4 palavras inteiras na tela até o quadro 15 (o kit garante o quadro), sem digitação.
 - [ ] A quantidade de cenas segue a duração (`references/direcao.md`): 6 a 10 s, 3 a 5; 15 s, 5 a 7; 30 s, 9 a 13.
 - [ ] Nenhum título com mais de 7 palavras; nenhuma lista com mais de 5 linhas.
 - [ ] As cenas têm durações diferentes; existe um pico e uma pausa antes dele.
 - [ ] Nenhuma transição repetida mais de 2 vezes seguidas.
 - [ ] Todo elemento entra com 2 ou 3 propriedades e escalonado.
 - [ ] Nenhuma cena com tudo parado por mais de 0,8 s (fora da pausa planejada).
-- [ ] A última cena tem uma `<CallToAction>` com um verbo e fica tempo de leitura + 1 s.
+- [ ] A última cena tem uma `<CallToAction>` com um verbo (as palavras do dono inteiras) e fica tempo de leitura + 1 s.
 - [ ] Ramo com regra própria respeitado (`references/marca-e-dados.md`).
 
 ## Motion design (contando no código)
@@ -35,13 +35,14 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] `<Camera>` em pelo menos metade das cenas; `<Layer depth>` em pelo menos 2.
 - [ ] O visual principal ocupa pelo menos 60% da largura e a faixa de baixo tem o material da cena (foto, cartão, textura), nunca uma forma solta estacionada.
 - [ ] Um esquema só (claro ou escuro) em todas as cenas; nenhum `bg="text"` sem o pedido pedir.
-- [ ] Todo objeto nomeado no pedido (coração, curtida, post, botão, cursor) é `<Icon>`, `<SocialPost>`, `<Picture>` ou foto, nunca `<Shape>`.
-- [ ] Texto digitado é `<Kinetic mode="type">`; um eixo de alinhamento por cena.
+- [ ] Todo objeto nomeado no pedido (coração, curtida, post, botão, cursor) é `<Icon>`, `<SocialPost>`, `<Picture>` ou foto, nunca `<Shape>`; `<SocialPost>` sozinho em `<At>` (y ≈ 0,6), sem título acima na coluna nem decoração sobre as curtidas.
+- [ ] Texto digitado é `<Kinetic mode="type">` (ou o `<PromptBox>`, que digita por dentro); um eixo de alinhamento por cena.
+- [ ] Cena de interface: `<PromptBox>` ou `<Checklist>` do kit, texto 80 px+, caixa 92%+ ou vazando; nunca div à mão.
 - [ ] Peça com trilha: nenhum `sfx` nem `hits` (só com `<Soundtrack sfx />`, quando o pedido pede efeitos).
 - [ ] Cada troca de cena cai na grade de batidas (120 bpm: múltiplos de 0,5 s) e pelo menos 1 em cada 3 cortes leva algo (`carry`).
 - [ ] No máximo uma camada de decoração (`<Grid>`, `<Dots>`, `<Lines>`, `<Rings>`, `<Glow>`) por cena e pelo menos 30% das cenas sem nenhuma.
 - [ ] Um momento marcante, marcado na folha de ritmo.
-- [ ] Herói com 150 px ou mais (`<Kinetic fit>`), apoio com 60 ou mais, rótulo com 48 ou mais; `<CallToAction>` nunca com `size` abaixo de 64, parado no último segundo.
+- [ ] Herói com 150 px ou mais (`<Kinetic fit>` sem faixa; numa cena de interface, a interface é o herói), apoio com 60 ou mais, rótulo com 48 ou mais; `<CallToAction>` nunca com `size` abaixo de 64, parado no último segundo.
 - [ ] Nunca duas cenas seguidas com uma linha só sobre cor lisa.
 - [ ] As regras contáveis do estilo escolhido (`references/estilos/`).
 

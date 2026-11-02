@@ -24,6 +24,7 @@ Easing quando não é mola: entrada `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3,
 - O elemento mais importante da cena entra por último ou com mais força (mais distância, mola com mais sobra). Normalmente é o preço.
 - **Antecipação:** antes de todo soco, toque ou salto, um contramovimento de 2 a 4 quadros (o botão afunda 4% antes de crescer, a palavra recua antes do soco). Sem ele, o soco parece um corte.
 - Por letra só em títulos de até 3 palavras. Digitação (`mode="type"`) só em cena que demonstra um pedido, uma busca ou um chat; nunca no gancho.
+- **Gancho:** todo `<Kinetic>` da primeira cena (menos o `type`) assenta até o quadro 15, sejam quais forem `at`, `step` e `dur`; não encurte nada para caber.
 
 ## Saídas
 

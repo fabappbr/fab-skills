@@ -3,7 +3,7 @@
 ```tsx
 /* Benefícios em 3 batidas. 3 s = 6 batidas; um benefício a cada 2 batidas (30 quadros), nunca três cenas iguais seguidas.
  * Plano: alinhado à esquerda (varia o desenho das cenas centradas em volta); no máximo 4 palavras heroicas por vez.
- * Tamanhos: "Sem" em <Kinetic fit={[150, 200]}>, a palavra que troca em <WordSwap size={210}>; 3 ícones de 220 px na faixa de baixo.
+ * Tamanhos: "Sem" em <Kinetic fit={[150, 200]}> (teto de propósito: "Sem" não passa da palavra que troca), a palavra que troca em <WordSwap size={210}>; 3 ícones de 220 px na faixa de baixo.
  * Movimento: a troca cai na batida (every={30}); cada ícone assenta junto com a sua palavra (pop). Sem Grid, Dots nem Glow:
  * a cena é das palavras e dos ícones.
  * Leva: a câmera continua andando para a esquerda na cena seguinte (carry "camera keeps moving left", transição push-left).

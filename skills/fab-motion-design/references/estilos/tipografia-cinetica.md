@@ -6,7 +6,7 @@ Referência: `references/examples/launch.md` (o lançamento do Fabapp Motion).
 
 ## Regras contáveis
 
-- Texto principal de **150 a 260 px** em 9:16, escrito com `<Kinetic fit>`; nenhuma cena com o texto principal abaixo de 150 px. Apoio de 60 a 80 px.
+- Texto principal de **150 a 340 px** em 9:16, escrito com `<Kinetic fit>` sem faixa; nenhuma cena com o texto principal abaixo de 150 px. Apoio de 60 a 80 px.
 - **No máximo 4 palavras** na tela ao mesmo tempo no texto principal; frase maior vira `<WordSwap>` ou duas cenas.
 - Pelo menos **3 modos diferentes** de `<Kinetic>` na peça (por exemplo `mask-up`, `outline-fill`, `scale-punch`), e nenhum modo em mais de metade das cenas.
 - Pelo menos **um `<WordSwap>`** trocando na batida (`every` de 15 ou 30 quadros a 120 bpm: a grade da trilha), com `hits` de `click` nas trocas só em peça sem trilha.
