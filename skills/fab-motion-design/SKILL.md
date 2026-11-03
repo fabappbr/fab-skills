@@ -4,7 +4,7 @@ description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Mot
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.6.0
+  version: 1.6.1
   title: Motion Design
   edition: motion
 fabapp:
@@ -27,7 +27,7 @@ O kit já resolve o difícil (tema da marca, zona segura, contraste, molas, mist
 2. **O quadro é função do número dele.** Nada de `useState`, `useEffect`, `useRef` nem outro hook com memória; nada de `Math.random`, `Date.now` ou `new Date`. Movimento sai de `useShot().frame` com `interpolate`, `spring`, `keyframes`; variação sai de `rng(seed)` e `hash01`.
 3. **Teto de custo.** `blur` até 24 px; um `<Grain>` por cena, `amount` até 0,12; `<Burst count>` até 60 e no máximo dois por cena.
 4. **Cor e fonte da marca.** Nunca hex, `rgb()` ou nome de fonte: papéis (`color="accent"`) e `usePalette()` (`c`, `alpha`, `mix`, `heading`, `body`). Palavras que você estiliza usam `c("ink")`, nunca branco ou preto fixo.
-5. **Preço, nome, nota e número vêm de dado.** `<PriceTag item={items[0]} />` ou `<Price item={items[0]} />`, nunca `<Kinetic>R$ 12,90</Kinetic>`. Se o item não tem preço, a peça não mostra preço.
+5. **Preço, nome, nota e número vêm de dado.** `<PriceTag item={items[0]} />` ou `<Price item={items[0]} />`, nunca `<Kinetic>R$ 12,90</Kinetic>` para o preço de um item. Se o item não tem preço, a peça não mostra preço. Preço, data ou número que o PEDIDO escreve é texto de tela, exatamente como o dono escreveu ("R$ 480 por pessoa" fica "R$ 480 por pessoa").
 6. **Nada inventado.** Depoimento só de `reviews`; número só de dado; prêmio, desconto ou prazo só se o pedido ou o item disser. Na dúvida, deixe de fora.
 7. **Foto real primeiro, mídia gerada à vontade.** Fundo, textura, cenário, ilustração e até o produto podem ser gerados. Se o item, um anexo do dono ou a mídia dele tem foto do que a cena mostra, use a foto, nunca uma imitação gerada. Pessoas, só ilustradas.
 8. **Texto só em código, e em componente do kit.** Modelos de imagem erram letras, então o pedido de mídia gerada descreve a imagem e pede que ela venha sem letreiro. O texto da tela vai em `<Kinetic>`, `<WordSwap>`, `<Marquee>`, `<Title>`, `<Eyebrow>`, `<Caption>`, `<CallToAction>` ou num componente seu que recebe o texto como `children` ou `label`; é assim que o dono o edita. Nunca texto solto num `<div>`.
