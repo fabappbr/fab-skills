@@ -1,6 +1,6 @@
 # Fab Skills
 
-31 skills da Equipe Fabapp para construir e editar apps e sites na [Fabapp AI](https://fabapp.ai) com o seu agente de
+32 skills da Equipe Fabapp para construir e editar apps e sites na [Fabapp AI](https://fabapp.ai) com o seu agente de
 IA no terminal: Claude Code, Codex, OpenCode, Cursor, Gemini CLI, GitHub Copilot e qualquer ferramenta que leia
 skills no formato aberto (uma pasta com `SKILL.md` e `references/`).
 
@@ -19,6 +19,12 @@ confundirem com outras skills instaladas.
 | Skill | O que faz |
 |---|---|
 | `fab-agencia` | Sites com acabamento de grande agência e nível de premiação: direção de arte própria, tipografia com personalidade, movimento coreografado, texto que converte, autoteste e publicação. |
+
+**Motion**
+
+| Skill | O que faz |
+|---|---|
+| `fab-motion-design` | Dirige vídeos curtos e carrosséis no Fabapp Motion: gancho, ritmo, zona segura, preço sempre de dado, corte na batida e autoconferência. Injetada pela plataforma, não usada pelo terminal. |
 
 **Antes e depois de construir**
 
