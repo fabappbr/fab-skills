@@ -4,7 +4,7 @@ description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Mot
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.7.0
+  version: 1.8.0
   title: Motion Design
   edition: motion
 fabapp:
@@ -51,12 +51,12 @@ Em **ajuste por conversa**: mude só o que foi pedido. Mantenha nomes de cenas, 
 1. **Gancho lido no quadro 15.** A primeira cena É o valor ou a oferta, em até 4 palavras inteiras na tela até o quadro 15 (0,5 s). O kit assenta todo `<Kinetic>` da cena 1 até lá, sejam quais forem `at`, `step` e `dur`: não encurte nada à mão. Nada de texto digitado letra a letra (`mode="type"`) no gancho (digitação é de cena que demonstra um pedido, uma busca, um chat). Logo, "olá", pergunta que adia o ponto e introdução nunca abrem a peça.
 2. **Uma ideia por cena.** Título de até 7 palavras. Mais que isso vira duas cenas ou sai.
 3. **Tempo de leitura.** A cena dura pelo menos `0,6 s + 0,3 s por palavra` de texto na tela, e nunca menos que 1,2 s.
-4. **Nada linear.** Entradas com `spring` ou `ease-out-expo`. Movimento linear só no letreiro contínuo.
+4. **Curva por intenção, nada linear.** Entrada `outExpo` em 18 a 24 quadros, saída `inExpo` em 10 a 14, herói com mola de sobra 1,04 a 1,08 (`SPRINGS.hero`), câmera `inOutCubic` longa, contador `outExpo` (`INTENT`, em `references/tempo-e-movimento.md`). Sem `ease` nem `dur`, o kit já segue a tabela. Linear só na deriva da cena inteira e no letreiro contínuo; em entrada ou saída o validador aponta e a rodada de reparo corrige.
 5. **Entrada com 2 ou 3 propriedades juntas** (subir + aparecer + escala leve). Uma propriedade só parece slide.
 6. **Escalonar tudo.** Palavras entram com 2 a 3 quadros de diferença; grupos, com 4 a 8. Nunca tudo de uma vez.
-7. **Saída mais rápida que a entrada** (cerca de 60% do tempo).
+7. **Saída mais rápida que a entrada** (10 a 14 quadros, acelerando).
 8. **Nada parado.** Elemento estático respira (escala de 1 a 1,02) e foto tem zoom lento (Ken Burns). Uma cena congelada parece travada.
-9. **Ritmo com variação.** Cenas de durações diferentes; um pico de energia no meio; uma cena mais calma e curta logo antes do momento mais forte, que costuma ser o preço ou a oferta.
+9. **Ritmo com variação.** Cenas de durações diferentes, nunca três iguais seguidas numa peça de 15 s ou mais; um acento a cada 8 a 10 s (a cena mais curta da peça, uma batida abaixo da mediana e de no máximo 1,5 s, ou uma troca de família de transição); um pico de energia no meio, com uma cena mais calma e curta logo antes; e, numa peça de 15 s ou mais, a pausa antes da chamada (pelo menos 1,5 vez a duração mediana).
 10. **O corte cai na batida.** Toda troca de cena cai na grade de batidas da trilha (o bpm do clima da música; 120 quando não há: uma batida a cada 0,5 s, 15 quadros), com folga de 2 quadros, e o pico cai num tempo forte. Peça com trilha não leva `sfx` nem `hits`: efeito sintético por cima da música soa amador, e a plataforma só os toca quando o pedido pede efeitos (`<Soundtrack sfx />`). Peça sem trilha pode usar poucos efeitos (veja `references/som.md`).
 11. **Zona segura.** Texto, preço, logo e chamada nunca ficam nos 14% de cima, nos 35% de baixo nem nos 6% das laterais do 9:16. Na `<Scene canvas>`, todo texto, preço, logo e chamada fica dentro de `<Safe>`; fora dela só vai forma, padrão, partícula e imagem.
 12. **Fechar com ação.** A última cena tem um `<CallToAction>` com um verbo só e fica na tela tempo de leitura mais 1 s.

@@ -15,7 +15,7 @@
     </Move>
   </At>
   <Safe align="flex-start" justify="flex-start" gap={16}>
-    <Kinetic mode="mask-up" at={4} dur={12} size={90} color="ink" upper>{items[0]?.name ?? ""}</Kinetic>
+    <Kinetic mode="mask-up" at={4} size={90} color="ink" upper>{items[0]?.name ?? ""}</Kinetic>
     <PriceTag item={items[0]} size={300} role="accent" at={8} entrance="punch" />
   </Safe>
 </Scene>

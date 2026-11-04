@@ -11,7 +11,7 @@
 <Scene canvas duration={sec(3)} bg="background" transition="whip-left">
   <Camera keys={[{ at: 0, x: 0 }, { at: 90, x: 60, ease: "smooth" }]}>
     <Safe align="flex-start" justify="flex-start">
-      <Kinetic mode="mask-up" fit={[150, 200]} dur={12} color="ink" align="left">Sem</Kinetic>
+      <Kinetic mode="mask-up" fit={[150, 200]} color="ink" align="left">Sem</Kinetic>
       <WordSwap words={["editor.", "programa.", "espera."]} at={4} every={30} mode="mask" size={210} color="accent" align="left" />
     </Safe>
     <Icon name="check" size={220} at={4} entrance="pop" color="accent" x={0.2} y={0.84} />

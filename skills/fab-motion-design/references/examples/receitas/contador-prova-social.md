@@ -13,7 +13,7 @@ const PROOF_LIKES = 12480; // o número que o pedido deu
 
 <Scene canvas duration={sec(2.5)} bg="background" transition="push-up">
   <Safe justify="flex-start">
-    <Kinetic mode="mask-up" dur={12} size={72} color="ink" align="center">Seu post, assim:</Kinetic>
+    <Kinetic mode="mask-up" size={72} color="ink" align="center">Seu post, assim:</Kinetic>
   </Safe>
   <At x={0.5} y={0.6}>
     <Move keys={[{ at: 0, y: 260, opacity: 0 }, { at: 14, y: 0, opacity: 1, ease: "outExpo" }]}>

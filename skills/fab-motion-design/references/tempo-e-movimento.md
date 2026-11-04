@@ -2,23 +2,35 @@
 
 A peça roda a 30 quadros por segundo. Escreva sempre em segundos com `sec()`; o kit converte.
 
+## A curva por intenção
+
+Cada tipo de movimento tem a sua curva. Curva igual em tudo é o que deixa a peça correta mas sem graça: tudo chega do mesmo jeito, nada acelera, nada pesa. O kit exporta esta tabela como `INTENT`, e os componentes já a usam quando você não escreve `ease` nem `dur`.
+
+| Intenção | Curva | Duração | Onde |
+|---|---|---|---|
+| entrada (`INTENT.entrance`) | `outExpo` | 18 a 24 quadros | chega rápido e assenta devagar: palavra, cartão, selo, botão |
+| saída (`INTENT.exit`) | `inExpo` | 10 a 14 quadros | sai mais depressa do que entrou, acelerando |
+| herói (`INTENT.hero`) | mola com sobra de 1,04 a 1,08 (`SPRINGS.hero`) | assenta em 24 quadros | o único elemento de que a cena trata: o preço, a palavra principal, o ícone que pulsa |
+| câmera (`INTENT.camera`) | `inOutCubic` | longa: 1,5 s ou mais, muitas vezes a cena inteira | empurrar, panorâmica, giro, as chaves de `<Camera>` |
+| contador (`INTENT.counter`) | `outExpo` | termina até 60% da cena e segura | `<AnimatedNumber>`, a contagem do `<SocialPost>` |
+
+**Nunca `linear` na entrada ou na saída de um elemento**: o validador aponta `ease: "linear"` numa janela de até 36 quadros (`interpolate`, `progress`, `keyframes`, `<Move>`, `<Kinetic>`, `<WordSwap>`) e `useSceneProgress(de, até, "linear")`. Linear só serve para deriva na cena inteira (`useSceneProgress()` sem janela, uma chave de `<Camera>` lenta). Nunca `ease-in-out` padrão numa entrada.
+
 ## A personalidade de movimento da marca
 
-O `brand.tone` decide a mola e a duração das entradas. Use a linha da marca em todas as cenas.
+O `brand.tone` escolhe, dentro de cada faixa da tabela acima, quantos quadros a entrada e a saída duram e quanto o herói passa do ponto. Use a linha da marca em todas as cenas; os componentes do kit (`<Kinetic>`, `<Icon>`, `<Title>`) já leem o tom sozinhos. Movimento escrito à mão não conhece o tom: `spring(frame, at, "hero")` é a sobra média (cerca de 1,06) e `progress(frame, at, dur)` usa o `dur` que você escreve, então escolha-o nesta tabela.
 
-| Tom | Mola (`stiffness`, `damping`) | Entrada típica | Saída | Ritmo das cenas |
+| Tom | Sobra do herói | Entrada | Saída | Ritmo das cenas |
 |---|---|---|---|---|
-| alegre (`cheerful`) | 180, 12 (um pouco de sobra) | 0,45 s | 0,25 s | rápido, 1,5 a 2,5 s |
-| animado (`energetic`) | 220, 14 | 0,35 s | 0,2 s | muito rápido, 1,2 a 2 s |
-| aconchegante (`cozy`) | 120, 18 (sem sobra) | 0,6 s | 0,35 s | médio, 2 a 3 s |
-| elegante (`elegant`) | 90, 22 (lenta e assentada) | 0,8 s | 0,45 s | lento, 2,5 a 3,5 s |
-| sóbrio (`sober`: saúde, direito, contabilidade) | 140, 26 (sem sobra nenhuma) | 0,5 s | 0,3 s | médio, 2 a 3 s |
-
-Easing quando não é mola: entrada `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3, 1)`), saída `ease-in-quad` (`cubic-bezier(0.5, 0, 0.75, 0)`). Nunca `linear`, nunca `ease-in-out` padrão.
+| alegre (`cheerful`) | cerca de 1,07 | 18 quadros | 10 quadros | rápido, 1,5 a 2,5 s |
+| animado (`energetic`) | cerca de 1,08 | 18 quadros | 10 quadros | muito rápido, 1,2 a 2 s |
+| aconchegante (`cozy`) | cerca de 1,05 | 24 quadros | 14 quadros | médio, 2 a 3 s |
+| elegante (`elegant`) | cerca de 1,04 | 24 quadros | 14 quadros | lento, 2,5 a 3,5 s |
+| sóbrio (`sober`: saúde, direito, contabilidade) | cerca de 1,04 | 20 quadros | 12 quadros | médio, 2 a 3 s |
 
 ## Entradas
 
-- Duram de **10 a 18 quadros**, com saída suave (`outExpo`, `outQuint`) ou mola com **3 a 8% de sobra**. A coluna do tom acima escolhe dentro dessa faixa.
+- Duram de **18 a 24 quadros** em `outExpo` (a curva por intenção); o herói entra com mola de **4 a 8% de sobra**. A linha do tom acima escolhe dentro dessas faixas.
 - Junte 2 ou 3 propriedades: subir 24 a 40 px + opacidade de 0 a 1 + escala de 0,96 a 1.
 - Escalonamento: **2 a 3 quadros entre palavras**, **4 a 8 entre grupos** (o título, depois o apoio, depois o botão).
 - O elemento mais importante da cena entra por último ou com mais força (mais distância, mola com mais sobra). Normalmente é o preço.
@@ -28,7 +40,7 @@ Easing quando não é mola: entrada `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3,
 
 ## Saídas
 
-- Cerca de 60% do tempo da entrada, com curva que acelera (`inQuad`, `inCubic`).
+- **10 a 14 quadros** em `inExpo`: mais rápida que a entrada, acelerando para fora.
 - Tudo sai junto ou em ordem inversa à entrada, nunca escalonado igual à entrada.
 - Se a transição já leva a cena embora (`slide`, `color-wipe`), não anime a saída dos elementos.
 
@@ -43,7 +55,10 @@ Easing quando não é mola: entrada `ease-out-expo` (`cubic-bezier(0.16, 1, 0.3,
 ## Cadência e batida
 
 - Até 30 s, um corte a cada **1,5 a 3 s**. A quantidade de cenas pela duração está em `references/direcao.md`.
-- Cena com mais de 3 s tem uma **batida interna pelo menos a cada 1 s**: a palavra troca, um segundo elemento assenta, um contador corre, a câmera dá um soco. Cena de 5 s com uma entrada só e um zoom lento é slide.
+- **Nunca três cenas seguidas com a mesma duração** (com folga de 2 quadros, numa peça de 15 s ou mais): três iguais viram metrônomo. Varie pelo menos uma batida entre elas.
+- **Um acento a cada 8 a 10 s:** a cena mais curta da peça, uma batida inteira abaixo da mediana e de no máximo 1,5 s (uma palavra que soca, nunca abaixo de uma batida) ou uma troca de família de transição (uma sequência de cortes secos quebrada por um `whip`, um corte casado depois de `push`).
+- **Uma pausa antes da chamada:** numa peça de 15 s ou mais, a cena logo antes do fecho dura pelo menos **1,5 vez a duração mediana** das cenas. Uma ideia só, movimento lento (deriva de câmera, o elemento focal respirando), nenhuma palavra heroica nova: a chamada final chega depois de um respiro. Se o roteiro esquecer, a plataforma alonga essa cena tirando batidas da vizinha mais longa.
+- Cena com mais de 3 s tem uma **batida interna pelo menos a cada 1 s**: a palavra troca, um segundo elemento assenta, um contador corre, a câmera dá um soco. Cena de 5 s com uma entrada só e um zoom lento é slide. A única exceção é a pausa antes da chamada, que segura de propósito (a plataforma não a cobra).
 - **Os cortes caem na música.** Toda troca de cena cai na grade de batidas da trilha, com folga de 2 quadros: a 120 bpm uma batida dura 0,5 s (15 quadros), então as cenas duram 1,5, 2, 2,5 s; a 100 bpm, múltiplos de 0,6 s (18 quadros). As batidas internas também caem na grade (`useBeat(bpm)` ajuda), e o pico cai num tempo forte (múltiplo de 4 batidas desde o início). Sem bpm no clima da trilha, conte 120.
 
 ## O que atravessa o corte
@@ -83,8 +98,8 @@ Varie: nunca a mesma transição em duas trocas seguidas, e pelo menos 3 tipos n
 
 ## Movimento calculado pelo quadro
 
-- `interpolate(frame, [a, b], [de, para], { ease: "outExpo" })` para entradas; `"snap"` para segurar e chicotear; `"inExpo"` para um mergulho de câmera que sai da cena.
-- `spring(frame, at, "bouncy")` para o que chega e quica (selo, preço, forma); `"gentle"` para editorial; `"heavy"` para o que pesa.
+- `interpolate(frame, [a, b], [de, para], { ease: "outExpo" })` para entradas (`progress(frame, at, INTENT.entrance.frames)` já usa `outExpo`); `"inExpo"` para saídas; `"snap"` para segurar e chicotear.
+- `spring(frame, at, "hero")` para o herói da cena (preço, palavra principal, ícone); `"bouncy"` só para o que quica de propósito (confete, forma solta); `"gentle"` para editorial; `"heavy"` para o que pesa.
 - `stagger(i, 4)` escalona um grupo; `keyframes` move várias propriedades juntas.
 - O que se repete (equalizador, respiração, brilho) usa `Math.sin(frame / k)` ou `useBeat(bpm)`; o que varia usa `hash01(seed, i)`. Nunca `Math.random`.
 
@@ -102,6 +117,7 @@ energia
 
 - O gancho começa alto.
 - O miolo oscila.
-- Uma cena curta e mais calma (1,2 a 1,5 s, movimento desacelerado, sem efeito) vem logo antes do pico.
+- Uma cena curta e mais calma (1,2 a 1,5 s, movimento desacelerado, sem efeito) vem logo antes do pico: é o acento.
+- Numa peça de 15 s ou mais, a cena antes do fecho é a pausa: pelo menos 1,5 vez a duração mediana, um respiro antes da chamada.
 - A ação final assenta e fica **parada no último segundo**.
 - A ação final é calma e longa o bastante para ler e agir.

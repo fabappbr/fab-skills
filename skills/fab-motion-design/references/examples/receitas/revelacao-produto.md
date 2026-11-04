@@ -16,8 +16,8 @@
       </Reveal>
     </At>
     <Safe justify="flex-start" gap={20}>
-      <Kinetic mode="mask-up" fit at={30} dur={14} color="ink" align="center">{"Massa de\nfermentação"}</Kinetic>
-      <Kinetic mode="mask-up" at={60} step={2} dur={12} size={64} color="ink" align="center">natural, feita toda manhã</Kinetic>
+      <Kinetic mode="mask-up" fit at={30} color="ink" align="center">{"Massa de\nfermentação"}</Kinetic>
+      <Kinetic mode="mask-up" at={60} step={2} size={64} color="ink" align="center">natural, feita toda manhã</Kinetic>
     </Safe>
   </Camera>
 </Scene>
