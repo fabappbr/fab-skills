@@ -4,7 +4,7 @@ description: "Compõe vídeos curtos de divulgação e carrosséis no Fabapp Mot
 license: MIT
 metadata:
   author: Equipe Fabapp
-  version: 1.6.1
+  version: 1.7.0
   title: Motion Design
   edition: motion
 fabapp:
@@ -39,7 +39,7 @@ O kit já resolve o difícil (tema da marca, zona segura, contraste, molas, mist
 A plataforma compõe em duas etapas. A **direção** lê o pedido e devolve o estilo, a trilha e o roteiro de planos em JSON (`references/direcao.md`); a **animação** escreve as cenas desse roteiro em partes de cerca de 15 s (`references/animacao-em-partes.md`), e a plataforma junta as partes num arquivo só. Os passos abaixo valem para as duas: a direção faz os passos 1 a 3 no roteiro; a animação, os passos 4 e 5 na sua parte.
 
 1. **Ler o pedido.** Objetivo (vender agora, lançar, lembrar, mostrar o app), público, tom, prazo e o que **não** pode faltar. Veja se há itens e quantos têm foto e preço; sem itens, a peça é da marca.
-2. **Escolher o roteiro e o estilo.** Um dos roteiros de `references/roteiros.md` (se nenhum servir, adapte o mais próximo) e um dos estilos de `references/estilos/` pelo pedido e pela marca: tipografia cinética, editorial, gráfico ousado e produto herói, cinematográfico, minimal luxo. Siga as regras contáveis do estilo e use a peça de referência dele (`references/examples/`) como medida de acabamento, sem copiar o texto.
+2. **Escolher o roteiro e o estilo.** Um dos roteiros de `references/roteiros.md` (se nenhum servir, adapte o mais próximo) e um dos dez estilos de `references/estilos/` pelo pedido e pela marca (ou o que o dono escolheu na galeria, que então é obrigatório): kinetic suíço, dark keynote, flat explainer, risografia, UI vivo, HUD terminal, recorte de papel, VHS retrô, legenda vertical, editorial serifado. Os cinco nomes antigos (tipografia cinética, editorial, gráfico ousado, cinematográfico, minimal luxo) seguem valendo nas peças já feitas com eles. Siga as regras contáveis do estilo e use a peça de referência dele (`references/examples/`) como medida de acabamento, sem copiar o texto.
 3. **Escrever a folha de ritmo** (comentário no topo do arquivo): o estilo; e por cena, duração, o que diz em até 7 palavras, o que se move (câmera, revelação, forma), a transição e o que atravessa o corte (`carry`); efeito sonoro só em peça sem trilha. Marque o momento marcante. A soma das durações fecha com a duração pedida.
 4. **Compor.** Uma `<Scene canvas>` por linha da folha de ritmo, dentro de uma `<Sequence>` com a trilha. Use os componentes de `references/kit.md` (a segunda camada, de motion design, em toda peça nova).
 5. **Conferir.** Rode a lista de `references/autoconferencia.md` contra o seu código antes de devolver. Corrija o que falhar.
@@ -81,6 +81,16 @@ Aprendido nas peças de referência. Cada regra se confere contando no código.
 14. **Contador que chega.** Algarismos tabulares, terminando até 60% da cena e parando no valor final.
 15. **Algo atravessa o corte.** Pelo menos 1 em cada 3 cortes leva alguma coisa para a cena seguinte (o campo `carry` do roteiro): corte casado no mesmo elemento, o botão que vira o quadro seguinte, um campo de cor que varre, a câmera que continua na mesma direção. Cena com mais de 3 s muda alguma coisa pelo menos a cada 1 s.
 16. **Nada de molde repetido.** Nunca 3 cenas seguidas com o mesmo desenho (alinhamento, receita de fundo, lugar do herói); uma palavra heroica vive numa cena só ("Pronto." e depois "PRONTO EM MINUTOS" repete). No máximo uma camada de decoração de ambiente por cena (`<Grid>`, `<Dots>`, `<Lines>`, `<Rings>` ou `<Glow>`), e pelo menos 30% das cenas sem nenhuma: a textura delas é o assunto.
+
+## Referência de estilo (quando o dono manda um vídeo que ama)
+
+O dono pode anexar um vídeo como referência ("quero o meu com a cara deste Reels"). A plataforma lê o vídeo e manda só o ESTILO dele, num bloco `STYLE REFERENCE` com números: paleta, tipografia (peso, caixa, escala, família), ritmo (duração média da cena, cortes a cada 10 s, se corta na batida e o bpm), transições, verbos de movimento, enquadramento, textura, clima e o que evitar.
+
+1. **Siga o estilo, nunca o conteúdo.** Tipografia, ritmo, transições, movimento, enquadramento e textura vêm da referência. Palavras, logo, pessoas, produtos e marca dela nunca entram na peça: a referência dá a cara, o pedido e os itens dão o conteúdo.
+2. **Paleta.** Sem cor pedida no pedido, a plataforma pinta a peça com a paleta da referência (não escreva `palette` na direção). Cor que o PEDIDO pede vence a referência; nome, logo e fontes da marca continuam valendo onde a marca os tem.
+3. **Ritmo.** Cenas perto de `scene_avg_s` e cortes perto de `cuts_per_10s`, sem furar o tempo de leitura nem a contagem de cenas. Com `on_beat`, todo corte cai na batida, e o `bpm` dela é o da trilha quando o pedido não dá outro.
+4. **Estilo escolhido pelo dono.** Quando o dono também escolheu um estilo da galeria, a referência manda na paleta e no ritmo, e o estilo escolhido segue mandando na tipografia, na composição, nas transições e nas texturas.
+5. **No ajuste por conversa** com referência anexada, aplique o estilo dela só ao que o ajuste muda.
 
 ## Proibido (a revisão visual recusa)
 
