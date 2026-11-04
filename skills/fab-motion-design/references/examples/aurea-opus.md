@@ -4,12 +4,12 @@ Cópia exata de `studio/src/motion/references/aurea-opus.tsx`. Medida de acabame
 
 ```tsx
 /* Aurea Dermatologia: a skin evaluation consultation told like an editorial page. Serif, air, lines that draw slowly, one strong moment.
- * 1 hook      2.2 s  "Sua pele merece / tempo."                     slow push-in, blur-in serif, italic word, underline draws   shimmer
+ * 1 hook      2.2 s  "Sua pele merece / tempo."                     slow push-in, blur-in serif, italic word, underline draws   resolve
  * 2 consulta  2.6 s  "Consulta de / avaliação da pele"              fade, arches reveal from bottom (rect mask), mask-up type    whoosh
- * 3 calma     2.0 s  "Atendimento / sem pressa."                    match cut on the circle, circle breathes into blob, wave    click
+ * 3 calma     2.0 s  "Atendimento / sem pressa."                    match cut on the circle, circle breathes into blob, wave    tick
  * 4 plano     3.0 s  "Um plano de cuidado / feito para você."       shape-circle wipe, flower morph, outline-fill, circle mark  pop
  * 5 agenda    2.4 s  "Agendamento / pelo WhatsApp."                 push-up, chat bubble springs, dots breathe                   whoosh
- * 6 assinatura 2.8 s "Aurea / Dermatologia" + CTA                   fade, slow pull-back, swoosh draws, CTA                      shimmer
+ * 6 assinatura 2.8 s "Aurea / Dermatologia" + CTA                   fade, slow pull-back, swoosh draws, CTA                      resolve
  */
 import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, At, Camera, Layer, Move, Reveal, Kinetic, Morph,
          Shape, PathDraw, Lines, Rings, Dots, Burst, Glow, Grain, Vignette, LightLeak, interpolate, spring,
@@ -85,7 +85,7 @@ export default function Piece() {
     <Sequence soundtrack="track">
       <Soundtrack volume={0.5} />
       {/* 1. hook: a slow push, the italic word lands and is underlined */}
-      <Scene canvas duration={sec(2.2)} bg="background" sfx="shimmer">
+      <Scene canvas duration={sec(2.2)} bg="background" sfx="resolve">
         <Camera keys={[{ at: 0, zoom: 1.1, y: 30 }, { at: 66, zoom: 1, y: 0, ease: "outQuint" }]}>
           <Layer depth={1.6}><Lines angle={90} color="text" alpha={0.05} size={120} drift={[-20, 0]} /></Layer>
           <Glow color="primary" x={0.3} y={0.35} size={0.9} intensity={0.25} />
@@ -122,7 +122,7 @@ export default function Piece() {
       </Scene>
 
       {/* 3. calm: match cut on the circle, which breathes slowly into an organic form */}
-      <Scene canvas duration={sec(2)} bg="background" transition="match" sfx="click">
+      <Scene canvas duration={sec(2)} bg="background" transition="match" sfx="tick">
         <At x={0.5} y={0.09}>
           <Morph keys={[{ at: 0, shape: "circle" }, { at: 50, shape: "blob" }]} size={110} color="accent" spin={6} />
         </At>
@@ -139,7 +139,7 @@ export default function Piece() {
       </Scene>
 
       {/* 4. the strong moment: circular wipe, a flower blooms, the plan is written large */}
-      <Scene canvas duration={sec(3)} bg="primary" transition="shape-circle" sfx="pop" hits={[{ at: 40, kind: "shimmer" }]}>
+      <Scene canvas duration={sec(3)} bg="primary" transition="shape-circle" sfx="pop" hits={[{ at: 40, kind: "resolve" }]}>
         <Camera keys={[{ at: 0, zoom: 1.12, tiltX: 8 }, { at: 54, zoom: 1, tiltX: 0, ease: "outExpo" }, { at: 90, zoom: 1.03 }]}
                 perspective={1800}>
           <Layer depth={0.7}>
@@ -180,7 +180,7 @@ export default function Piece() {
       </Scene>
 
       {/* 6. signature: the name, a drawn swoosh, the CTA, a slow pull-back */}
-      <Scene canvas duration={sec(2.8)} bg="background" transition="fade" sfx="shimmer">
+      <Scene canvas duration={sec(2.8)} bg="background" transition="fade" sfx="resolve">
         <Camera keys={[{ at: 0, zoom: 1.08 }, { at: 84, zoom: 1, ease: "smooth" }]}>
           <Glow color="primary" x={0.5} y={0.4} size={1} intensity={0.3} pulse={0.5} />
           <Layer depth={1.3}><Rings color="primary" alpha={0.07} size={220} line={2} x={0.5} y={0.42} /></Layer>

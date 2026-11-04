@@ -13,4 +13,4 @@ Referência: `references/examples/aurea-opus.md` é a mais próxima (tire os pad
 - Cenas de **2,6 a 3,6 s**; no máximo **5 cenas** em 15 s.
 - Pelo menos **uma linha que se desenha** e **uma revelação** (`<Reveal>` ou `shape-circle`); nenhum `<Burst>`, `<Marquee>`, `<Grid>` nem `<Dots>`.
 - Transições: `fade`, `match` e `shape-circle`; no máximo 1 `push-*`.
-- Efeitos sonoros (só em peça sem trilha): no máximo **2** na peça, só `shimmer` e `click`.
+- Efeitos sonoros: no máximo **2** na peça, só `resolve` e `tick`.

@@ -7,10 +7,10 @@ Cópia exata de `studio/src/motion/references/launch.tsx`. Medida de acabamento 
  * 1 hook      2.0 s  "Sem tempo / designer / câmera"  camera push, word slot-swaps on the beat   impact
  * 2 prompt    2.0 s  a sentence typed into a pill       whip in, camera dives into the pill        whoosh
  * 3 payoff    2.3 s  "Vira vídeo."                       zoom-through, outline-fill, morphing star  pop
- * 4 brand     2.3 s  "Com a sua marca/cor/fonte"         squircle wipe, palette swatches spring in  click
+ * 4 brand     2.3 s  "Com a sua marca/cor/fonte"         squircle wipe, palette swatches spring in  tick
  * 5 sound     2.2 s  "Trilha e efeitos no ritmo"         push up, equalizer + rings on the beat     whoosh
  * 6 formats   1.8 s  "Pronto para Reels/Stories/Status"  whip up, the frame morphs its aspect       pop
- * 7 end       2.4 s  logo, "Fabapp Motion", CTA          stack, marker draws, confetti              shimmer
+ * 7 end       2.4 s  logo, "Fabapp Motion", CTA          stack, marker draws, confetti              resolve
  */
 import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, Camera, Layer, Move, Kinetic, WordSwap, Morph,
          Shape, PathDraw, Grid, Dots, Rings, Burst, Grain, Glow, LightLeak, Logo, Marquee, interpolate, spring,
@@ -76,7 +76,7 @@ export default function Piece() {
     <Sequence soundtrack="track">
       <Soundtrack volume={0.55} />
       {/* 1. hook: dark, a slow push in; the second word swaps on the beat */}
-      <Scene canvas duration={sec(2)} bg="text" sfx="impact" hits={[{ at: 14, kind: "click" }, { at: 28, kind: "click" }]}>
+      <Scene canvas duration={sec(2)} bg="text" sfx="impact" hits={[{ at: 14, kind: "tick" }, { at: 28, kind: "tick" }]}>
         <Camera keys={[{ at: 0, zoom: 1.18, rotate: -3 }, { at: 60, zoom: 1, rotate: 0, ease: "outQuint" }]}>
           <Layer depth={1.5}><Grid color="background" alpha={0.07} size={135} drift={[0, -40]} /></Layer>
           <Glow color="primary" x={0.5} y={0.42} size={0.9} intensity={0.55} />
@@ -117,7 +117,7 @@ export default function Piece() {
       </Scene>
 
       {/* 4. brand: wipe through the brand's rounded square; the palette springs in */}
-      <Scene canvas duration={sec(2.3)} bg="text" transition="shape-squircle" sfx="click" hits={[{ at: 24, kind: "pop" }, { at: 36, kind: "pop" }]}>
+      <Scene canvas duration={sec(2.3)} bg="text" transition="shape-squircle" sfx="tick" hits={[{ at: 24, kind: "pop" }, { at: 36, kind: "pop" }]}>
         <Layer><Rings color="primary" alpha={0.25} size={180} line={2} x={0.5} y={0.5} /></Layer>
         <Safe align="flex-start" gap={56}>
           <div>
@@ -148,7 +148,7 @@ export default function Piece() {
       </Scene>
 
       {/* 6. formats: the frame itself changes aspect as the word swaps */}
-      <Scene canvas duration={sec(1.8)} bg="background" transition="whip-up" sfx="pop" hits={[{ at: 16, kind: "click" }, { at: 34, kind: "click" }]}>
+      <Scene canvas duration={sec(1.8)} bg="background" transition="whip-up" sfx="pop" hits={[{ at: 16, kind: "tick" }, { at: 34, kind: "tick" }]}>
         <Marquee size={220} color="primary" alpha={0.08} y={0.7} speed={320}>REELS · STORIES · STATUS ·</Marquee>
         <Safe gap={50}>
           <FormatFrame />
@@ -160,7 +160,7 @@ export default function Piece() {
       </Scene>
 
       {/* 7. end: stacks over, the name lands, the marker draws, the CTA */}
-      <Scene canvas duration={sec(2.4)} bg="text" transition="stack" sfx="shimmer">
+      <Scene canvas duration={sec(2.4)} bg="text" transition="stack" sfx="resolve">
         <Camera keys={[{ at: 0, zoom: 1.06 }, { at: 72, zoom: 1 }]}>
           <Glow color="primary" x={0.5} y={0.38} size={1.1} intensity={0.7} pulse={1} />
           <Layer depth={1}><Grid color="background" alpha={0.05} size={135} drift={[0, -30]} /></Layer>

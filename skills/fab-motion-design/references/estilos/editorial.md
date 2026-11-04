@@ -14,4 +14,4 @@ Referências: `references/examples/aurea.md` e `references/examples/aurea-opus.m
 - Sobretítulo (48 a 52 px, caixa alta, espaçado) acima do título em pelo menos **2 cenas**, num componente seu que recebe o texto (`<Eyebrow>` local, `<Masthead label>`).
 - Transições calmas: `match`, `fade`, `push-*`, `shape-circle`; nenhum `whip` nem `stack`.
 - Textura discreta: `<Grain amount>` de 0,04 a 0,06; `<Burst>` só `sparks`, no máximo um na peça.
-- Efeitos sonoros (só em peça sem trilha): só `whoosh`, `click` e `shimmer`; no máximo **4** na peça.
+- Efeitos sonoros: só `whoosh`, `tick` e `resolve`; no máximo **4** na peça.

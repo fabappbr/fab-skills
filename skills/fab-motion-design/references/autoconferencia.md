@@ -38,7 +38,7 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] Todo objeto nomeado no pedido (coração, curtida, post, botão, cursor) é `<Icon>`, `<SocialPost>`, `<Picture>` ou foto, nunca `<Shape>`; `<SocialPost>` sozinho em `<At>` (y ≈ 0,6), sem título acima na coluna nem decoração sobre as curtidas.
 - [ ] Texto digitado é `<Kinetic mode="type">` (ou o `<PromptBox>`, que digita por dentro); um eixo de alinhamento por cena.
 - [ ] Cena de interface: `<PromptBox>` ou `<Checklist>` do kit, texto 80 px+, caixa 92%+ ou vazando; nunca div à mão.
-- [ ] Peça com trilha: nenhum `sfx` nem `hits` (só com `<Soundtrack sfx />`, quando o pedido pede efeitos).
+- [ ] Cada `sfx` e cada `hits` cai no quadro em que a coisa acontece (entrada em `at` assenta em `at + 20`); no máximo 3 `hits` por cena, um `impact` na peça, pelo menos uma cena em silêncio. `<Soundtrack sfx={false} />` do dono fica como está.
 - [ ] Cada troca de cena cai na grade de batidas (120 bpm: múltiplos de 0,5 s) e pelo menos 1 em cada 3 cortes leva algo (`carry`).
 - [ ] No máximo uma camada de decoração (`<Grid>`, `<Dots>`, `<Lines>`, `<Rings>`, `<Glow>`) por cena e pelo menos 30% das cenas sem nenhuma.
 - [ ] Um momento marcante, marcado na folha de ritmo.

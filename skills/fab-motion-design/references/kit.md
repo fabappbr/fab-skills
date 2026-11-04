@@ -27,9 +27,9 @@ Quase todo componente aceita `delay` (em quadros, desde o início da cena). É a
 | Componente | Propriedades | Notas |
 |---|---|---|
 | `<Sequence>` | `soundtrack?` | Raiz do vídeo. Toca as cenas em ordem. `soundtrack="track"` pede a trilha gerada da peça. |
-| `<Scene>` | `duration`, `background?`, `transition?`, `sfx?`, `align?: "center" | "top" | "bottom"`, `editedByOwner?` | Um momento. O conteúdo fica dentro da zona segura. `sfx` toca no começo da cena. |
+| `<Scene>` | `duration`, `background?`, `transition?`, `sfx?`, `hits?: [{ at, kind }]`, `align?: "center" | "top" | "bottom"`, `editedByOwner?` | Um momento. O conteúdo fica dentro da zona segura. `sfx` toca no primeiro quadro da cena (o corte); `hits` (até 3) nos quadros em que as coisas acontecem dentro dela (veja `som.md`). |
 | `<Slide>` | `role: "cover" | "item" | "end"`, `background?`, `continues?` | Quadro do carrossel (o carrossel não usa `<Sequence>`). |
-| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (com trilha, os efeitos só tocam com `sfx` escrito, quando o pedido pede efeitos), `take?` e `src?` (a escolha do dono no editor) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música. `take` e `src` são escritos pelo editor: mantenha-os ao ajustar e nunca os invente (veja `som.md`). |
+| `<Soundtrack>` | `mood?` (a música a gerar, em inglês curto), `volume?` (0 a 1, padrão 0,6), `sfx?` (os efeitos tocam por cima da trilha; `sfx={false}` é o dono desligando no editor), `take?` e `src?` (a escolha do dono no editor) | Opcional, dentro da `<Sequence>`. `mood` só quando o pedido fala da música. `take` e `src` são escritos pelo editor: mantenha-os ao ajustar e nunca os invente (veja `som.md`). |
 
 A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "brand-mask" | "color-wipe"`. Sem `transition`, é corte seco.
 
@@ -182,7 +182,7 @@ Tudo recebe o quadro (`frame`) e devolve um valor. O quadro da cena começa em 0
 
 | Componente | Propriedades | Notas |
 |---|---|---|
-| `<Scene canvas>` | `duration`, `bg?: papel ou [papel, papel]`, `background?`, `transition?`, `transitionFrames?`, `sfx?`, `hits?: [{ at, kind }]`, `editedByOwner?` | Com `canvas`, os filhos ocupam o quadro inteiro (nada de coluna automática). `bg="text"` é fundo liso; `bg={["primary", "text"]}` é degradê. `hits` toca efeitos em quadros da cena (veja `som.md`). |
+| `<Scene canvas>` | `duration`, `bg?: papel ou [papel, papel]`, `background?`, `transition?`, `transitionFrames?`, `sfx?`, `hits?: [{ at, kind }]`, `editedByOwner?` | Com `canvas`, os filhos ocupam o quadro inteiro (nada de coluna automática). `bg="text"` é fundo liso; `bg={["primary", "text"]}` é degradê. `sfx` toca no corte; `hits` toca até 3 efeitos nos quadros da cena em que a coisa acontece. Tipos: `whoosh`, `whoosh-long`, `impact`, `thud`, `tick`, `pop`, `stamp`, `riser`, `resolve`, `cha-ching` (veja `som.md`). |
 | `<Safe>` | `align?`, `justify?`, `gap?`, `style?` | A área segura do formato, em coluna flex. Texto, preço, logo e chamada vão aqui dentro. Em 1:1 e 16:9 ela encolhe o conteúdo para caber (nunca aumenta). |
 | `<At>` | `x`, `y` (frações do quadro, 0 a 1), `style?` | Caixa centrada num ponto do quadro. Para elementos gráficos fora do texto. |
 | `useSafeBox()` | `{ left, top, width, height, frameWidth, frameHeight, scale }` | A área segura em px, para desenhar alinhado a ela. |

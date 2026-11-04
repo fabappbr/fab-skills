@@ -10,7 +10,7 @@ Cópia exata de `studio/src/motion/references/padaria.tsx`. Medida de acabamento
  * 3 price    2.8 s  item name + price rolls in        match cut on the bread; starburst badge spins         cha-ching
  * 4 deadline 2.2 s  "Só até meio-dia."                whip; clock hands sweep and land on 12               impact
  * 5 pairing  2.4 s  "E pra acompanhar" café + price   push up; the cup slides in, steam draws               pop
- * 6 end      3.2 s  name, CTA WhatsApp                circle wipe; breads bounce in a row, confetti        shimmer
+ * 6 end      3.2 s  name, CTA WhatsApp                circle wipe; breads bounce in a row, confetti        resolve
  */
 import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, Camera, Layer, Move, At, Kinetic, WordSwap,
          Morph, Shape, PathDraw, Lines, Dots, Marquee, Burst, Grain, Glow, PriceTag, usePalette, useShot,
@@ -191,7 +191,7 @@ export default function Piece({ brand, items }) {
       </Scene>
 
       {/* 6. end: circle wipe into the brand colour; three breads bounce in, the call to action */}
-      <Scene canvas duration={sec(3.2)} bg="accent" transition="shape-circle" sfx="shimmer">
+      <Scene canvas duration={sec(3.2)} bg="accent" transition="shape-circle" sfx="resolve">
         <div style={{ position: "absolute", inset: 0, transform: "rotate(-8deg)" }}>
           <Marquee size={130} color="primary" alpha={0.9} y={0.05} speed={300} style={{ textTransform: "uppercase" }}>
             {items.map((it) => it.name + " · ").join("")}

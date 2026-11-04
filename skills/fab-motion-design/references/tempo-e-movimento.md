@@ -74,25 +74,25 @@ Os outros cortes são secos, na batida.
 
 ## Transições
 
-| Tipo | Quando | Efeito sonoro padrão (só em peça sem trilha) |
+| Tipo | Quando | Efeito sonoro no corte |
 |---|---|---|
-| `cut` | Entre cenas de energia alta | nenhum ou `pop` |
+| `cut` | Entre cenas de energia alta | nenhum, ou o som do que entra (`pop`, `thud`) |
 | `slide` | Troca de item numa lista, carrossel virando vídeo | `whoosh` |
 | `zoom` | Do detalhe para o todo, ou para o preço | `whoosh` curto |
-| `brand-mask` | Abertura e fechamento: a forma da marca cobre e revela | `shimmer` |
+| `brand-mask` | Abertura e fechamento: a forma da marca cobre e revela | `whoosh`, e `resolve` quando a marca assenta |
 | `color-wipe` | Mudar de assunto (produto para ação) | `whoosh` |
 
 Na segunda camada do kit (`<Scene canvas>`), as transições de motion design:
 
-| Tipo | Quando | Efeito sonoro padrão (só em peça sem trilha) |
+| Tipo | Quando | Efeito sonoro no corte |
 |---|---|---|
-| `match` | O mesmo elemento continua entre as cenas (forma, produto, moldura) | nenhum ou `click` |
+| `match` | O mesmo elemento continua entre as cenas (forma, produto, moldura) | nenhum, ou um `tick` quando algo troca no corte (nunca `whoosh`) |
 | `push-*` | Avançar na história, de um assunto para o seguinte | `whoosh` |
 | `whip-*` | Energia, troca rápida, perto do pico | `whoosh` |
 | `zoom-through` | Entrar no detalhe, mergulhar na próxima ideia | `whoosh` ou `pop` |
-| `stack` | O fecho sobe por cima, como um cartão | `shimmer` |
-| `shape-<forma>` | Revelar pela forma da marca (círculo, estrela, flor) | `pop` ou `shimmer` |
-| `fade` | Editorial e luxo, com calma; no máximo duas vezes | nenhum |
+| `stack` | O fecho sobe por cima, como um cartão | `whoosh`, e `resolve` quando a marca assenta |
+| `shape-<forma>` | Revelar pela forma da marca (círculo, estrela, flor) | `whoosh` ou `pop` |
+| `fade` | Editorial e luxo, com calma; no máximo duas vezes | nenhum, ou `resolve` quando a marca entra no fecho (nunca `whoosh`) |
 
 Varie: nunca a mesma transição em duas trocas seguidas, e pelo menos 3 tipos numa peça de 5 cenas ou mais. A transição dura de 8 a 18 quadros; `transitionFrames` muda quando precisar.
 

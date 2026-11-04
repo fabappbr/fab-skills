@@ -5,10 +5,10 @@ Cópia exata de `studio/src/motion/references/aurea.tsx`. Medida de acabamento d
 ```tsx
 /* Aurea Dermatologia: the skin assessment visit. Editorial, 9:16, 15 s. Serif, air, slow camera, lines that draw. pt-ok
  * 1 open     2.8 s  "A pele conta a sua história."     hairline frame draws, lines rise, slow drift
- * 2 listen   2.6 s  "Primeiro, a gente escuta."         match cut on the frame; circle draws round "escuta"   click
+ * 2 listen   2.6 s  "Primeiro, a gente escuta."         match cut on the frame; circle draws round "escuta"   tick
  * 3 time     3.2 s  "Sem pressa." / tempo para entender  circle wipe to green; 3D tilt settles; rule draws     whoosh
  * 4 plan     2.8 s  "Um plano de cuidado feito para você" push; a blob turns at depth; marker on "você"
- * 5 end      3.6 s  name, rule, "Agende sua avaliação"   fade to green; arrow draws to the WhatsApp call       shimmer
+ * 5 end      3.6 s  name, rule, "Agende sua avaliação"   fade to green; arrow draws to the WhatsApp call       resolve
  */
 import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, Camera, Layer, Move, Kinetic, PathDraw, Morph, Grain,
          Vignette, Glow, useShot, usePalette, interpolate, useSafeBox } from "@fab/motion";
@@ -65,7 +65,7 @@ export default function Piece({ brand }) {
       </Scene>
 
       {/* 2. match cut: the same frame, now the headline is about listening */}
-      <Scene canvas duration={sec(2.6)} bg="background" transition="match" sfx="click">
+      <Scene canvas duration={sec(2.6)} bg="background" transition="match" sfx="tick">
         <Camera keys={[{ at: 0, x: 0 }, { at: 78, x: 24, ease: "linear" }]}>
           <Layer depth={1.5}>
             <Morph keys={[{ at: 0, shape: "blob", seed: 2 }]} size={420} color="accent" x={0.76} y={0.615} spin={4}
@@ -125,7 +125,7 @@ export default function Piece({ brand }) {
       </Scene>
 
       {/* 5. end: fade to green, the name set like a masthead, an arrow draws to the call */}
-      <Scene canvas duration={sec(3.6)} bg="primary" transition="fade" transitionFrames={16} sfx="shimmer">
+      <Scene canvas duration={sec(3.6)} bg="primary" transition="fade" transitionFrames={16} sfx="resolve">
         <Camera keys={[{ at: 0, zoom: 1.04 }, { at: 108, zoom: 1, ease: "outCubic" }]}>
           <Glow color="accent" x={0.5} y={0.4} size={1} intensity={0.18} />
           <PageFrame at={4} role="background" />

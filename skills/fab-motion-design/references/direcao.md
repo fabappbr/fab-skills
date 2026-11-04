@@ -21,7 +21,8 @@ A peça nasce em duas etapas. Primeiro a **direção** decide o estilo, a trilha
 | `texts` | O texto da tela: `{"text": ...}` para palavras, `{"item": i, "field": "name"}` (ou `"price"`, `"photo"`) para dado de item, `{"cta": ..., "action": ...}` para a chamada final |
 | `transition` | A transição de entrada da cena (a primeira não tem) |
 | `carry` | O que atravessa o corte e chega NESTA cena vindo da anterior, até 8 palavras em inglês (`"the orange button grows into the frame"`), ou `null`. Pelo menos 1 em cada 3 cortes leva alguma coisa |
-| `sfx` | O efeito sonoro da entrada, ou `null`. Peça com trilha: sempre `null`, a menos que o pedido peça efeitos sonoros |
+| `sfx` | O efeito sonoro do corte que entra nesta cena (quadro 0), ou `null` |
+| `cue` | Os efeitos dentro da cena, até 3: `[{"at": 24, "kind": "thud", "on": "phone lands"}]`, com `at` no quadro em que a coisa acontece (veja `som.md`), ou `[]` |
 | `media` | O FUNDO da cena: `none`, `ai-image`, `ai-video` ou `photo` (a foto real do item) |
 | `pictures` | Opcional. As imagens geradas que entram COMO ELEMENTO da cena (a foto dentro do post, a tela do celular, a polaroide, o produto, o lugar), uma descrição curta em inglês para cada, até 3 por cena |
 
@@ -35,7 +36,7 @@ A peça nasce em duas etapas. Primeiro a **direção** decide o estilo, a trilha
 6. **Corte na batida:** cada troca de cena cai na grade de batidas do andamento da trilha (120 bpm: 0,5 s; 100 bpm: 0,6 s), então as durações são batidas inteiras, e o pico cai num tempo forte (múltiplo de 4 batidas). A plataforma acerta para a grade o que errar por pouco.
 7. **Sem molde repetido:** nunca 3 cenas seguidas com o mesmo enquadramento, a mesma receita de fundo ou o herói no mesmo lugar; uma palavra heroica vive numa cena só; pelo menos 2 cenas com um visual vazando pela borda; pelo menos 30% das cenas sem `Grid`, `Dots` nem `Glow`.
 8. **Fecho:** a última cena tem a `cta` e dura o tempo de leitura mais 1 s.
-9. **Transições e efeitos:** nunca a mesma transição três vezes seguidas. Efeito sonoro só em peça sem trilha (`music` nulo): em parte das cenas, `impact` uma vez só. Com trilha, `sfx` é sempre `null`.
+9. **Transições e efeitos:** nunca a mesma transição três vezes seguidas. O som marca a animação, com trilha ou sem: um efeito por momento para onde o olho vai, no quadro em que ele assenta, nunca num quadro parado. `whoosh` só em corte que se move (nunca em `match` nem `fade`), no pico um `thud` (o `impact`, uma vez só, quando o pico é uma pancada de verdade), e em peça de 10 s ou mais um `riser` na cena do pico com `at` no quadro do pico. Sutil por padrão: a peça se lê com o som desligado; o efeito confirma um pouso, nunca o anuncia. De 3 a 6 efeitos numa peça de 15 s, pelo menos uma cena em silêncio; ramos sóbrios só `whoosh`, `tick` e `resolve`, no máximo 4. Pedido "sem efeitos sonoros": todo `sfx` `null` e todo `cue` vazio.
 10. **Mídia:** `photo` só de item com foto, e a cena que mostra esse item usa a foto. `ai-image` e `ai-video` podem mostrar fundo, textura, cenário e o produto sem foto; `ai-video` onde o movimento ajuda (o dono confirma o preço de cada vídeo). Quando o pedido manda mostrar coisas (uma vitrine, um prato, um ambiente, um antes e depois), cada uma vira uma entrada de `pictures` na cena que a mostra, descrita de forma concreta (assunto, cenário, luz). Fundos `ai-image` e `pictures` somam no limite de imagens incluídas (`generated_images_included`); gaste-as primeiro no assunto.
 
 ## Quantas cenas

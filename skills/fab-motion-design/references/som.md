@@ -52,28 +52,39 @@ Regras ao ajustar uma peça:
 
 ## Efeitos sonoros
 
-**Peça com trilha não leva efeito.** A música já marca os cortes, e os efeitos do kit são sons sintéticos (bipes, cliques, sopros) que, por cima da trilha, soam amadores. Numa peça com `<Soundtrack>` ou `soundtrack="track"`, não escreva `sfx` nem `hits`: a plataforma não os toca. Só quando o pedido pede efeitos sonoros escreva `<Soundtrack sfx />` e use os efeitos com parcimônia (o dono também liga e desliga isso no editor).
+**O som marca a animação.** Um efeito no quadro exato em que a coisa acontece dá à peça cara de intenção: o selo que cai e estala, o logo que carimba, a palavra que troca com um tique. Os efeitos são uma biblioteca gravada, mixada por baixo da trilha (baixos na mistura, e a música abaixa um pouco em cada efeito), e tocam com trilha ou sem ela. Nenhum componente toca efeito sozinho: o som é a folha de efeitos que você escreve.
 
-Peça **sem** trilha pode ter efeitos. O kit tem uma biblioteca fixa. Há dois lugares para um efeito, e nenhum componente toca efeito sozinho:
+Dois lugares para um efeito:
 
-- `sfx` na `<Scene>`: toca no primeiro quadro da cena, junto com a entrada (e a transição) dela.
-- `hits` na `<Scene>`: efeitos em quadros da própria cena, para o que acontece dentro dela: `hits={[{ at: 14, kind: "click" }, { at: 28, kind: "click" }]}`. O `at` é o quadro da cena (de 0 até a duração); fora dela, o efeito não toca.
+- `sfx` na `<Scene>`: toca no primeiro quadro da cena, no corte.
+- `hits` na `<Scene>`: efeitos em quadros da própria cena, para o que acontece dentro dela: `hits={[{ at: 24, kind: "thud" }, { at: 40, kind: "pop" }]}`. O `at` é o quadro da cena (de 0 até a duração); fora dela, o efeito não toca.
+
+**A regra do quadro:** o `at` é sempre o quadro em que a coisa acontece na tela. Um elemento que entra em `at` assenta 20 quadros depois (a entrada do kit), então o som do assento vai em `at + 20`; a troca de palavra e o toque no botão soam no quadro deles. Nunca um efeito num quadro em que nada se move. O movimento e o pouso são trabalhos diferentes: o sopro acompanha o movimento, o baque marca o contato.
 
 | Efeito | Usar quando |
 |---|---|
-| `whoosh` | a cena entra com movimento (`push-*`, `whip-*`, `zoom-through`, `slide`, `color-wipe`, `zoom`) |
-| `pop` | entra um selo, um item novo, uma forma que salta, um corte seco |
-| `click` | uma palavra troca no `<WordSwap>`, uma escolha, um botão, um passo |
-| `cha-ching` | o preço assenta (no quadro em que o `<PriceTag>` termina o punch) |
-| `shimmer` | a marca se revela, o fechamento, uma marca que se desenha |
-| `impact` | o pico, uma vez só: o produto que cai, a palavra mais forte |
+| `whoosh` | o ar curto de um movimento ou de um corte que se move (`push-*`, `whip-*`, `zoom-through`, `slide`, `color-wipe`); nunca em `match` nem em `fade` |
+| `whoosh-long` | um movimento de câmera ou uma revelação longa |
+| `impact` | o pico da peça quando ele é uma pancada de verdade, uma vez só; no pico comum, prefira o `thud` |
+| `thud` | o herói pousa macio (o celular que sobe e para, o produto que cai) |
+| `tick` | uma palavra troca no `<WordSwap>`, um passo, um botão pressionado |
+| `pop` | entra um selo, um item, uma forma |
+| `stamp` | o logo ou um selo carimba |
+| `riser` | uma subida que termina exatamente no pico |
+| `resolve` | o nome da marca assenta, o fechamento |
+| `cha-ching` | o preço ou a venda (no quadro em que o `<PriceTag>` termina o punch) |
 
-Regras:
-- Por cena: no máximo um `sfx` e até 3 `hits`, e nem toda cena precisa de efeito. Numa peça de 15 s, de 4 a 8 efeitos no total bastam.
-- Um `hits` cai no quadro em que a coisa acontece na tela (o mesmo `at` do movimento, mais a duração da entrada quando o som é do assento). Som fora do movimento parece erro.
-- `impact` no máximo uma vez por peça, seja em `sfx` ou em `hits`.
-- Ramos sóbrios (saúde, direito, contabilidade): só `whoosh`, `click` e `shimmer`, e no máximo 4 na peça.
-- Numa peça sem trilha, `<Soundtrack sfx={false} />` não se aplica: basta não escrever efeitos.
+A plataforma alinha o som ao quadro: o `whoosh` chega ao máximo no `at`, e o `riser` termina no `at`. Por isso o `riser` vai na cena do pico, com `at` no quadro do pico (o mesmo do `thud` ou do `impact`), e sobe durante a cena anterior. Use o `riser` em peça de 10 s ou mais.
+
+Quantos:
+- Por cena: no máximo um `sfx` e até 3 `hits` (o kit ignora o que passar disso).
+- Sutil por padrão: a peça se lê com o som desligado; o efeito confirma um pouso, nunca o anuncia.
+- Numa peça de 15 s, de 3 a 6 efeitos no total (na proporção para outras durações), e pelo menos uma cena em silêncio. Nunca um `whoosh` em todo corte.
+- `impact` no máximo uma vez por peça, seja em `sfx` ou em `hits` (o kit toca só o primeiro).
+- O movimento maior leva o som mais presente; gesto pequeno leva um `tick`.
+- Ramos sóbrios (saúde, direito, contabilidade): só `whoosh`, `tick` e `resolve`, no máximo 4 na peça, ou nenhum.
+
+**A escolha do dono:** o pedido que diz "sem efeitos sonoros" não leva efeito nenhum. No editor, o dono desliga os efeitos e isso fica escrito como `<Soundtrack sfx={false} />`: mantenha assim ao ajustar a peça. Numa peça sem trilha, não escreva `<Soundtrack>` para desligar os efeitos (ele pede uma trilha): basta não escrever `sfx` nem `hits`. Os nomes antigos `click` e `shimmer` ainda tocam (como `tick` e `resolve`), mas escreva os novos.
 
 ## Legenda
 
