@@ -12,8 +12,8 @@ Cópia exata de `studio/src/motion/references/padaria.tsx`. Medida de acabamento
  * 5 pairing  2.4 s  "E pra acompanhar" café + price   push up; the cup slides in, steam draws               pop
  * 6 end      3.2 s  name, CTA WhatsApp                circle wipe; breads bounce in a row, confetti        resolve
  */
-import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, Camera, Layer, Move, At, Kinetic, WordSwap,
-         Morph, Shape, PathDraw, Lines, Dots, Marquee, Burst, Grain, Glow, PriceTag, usePalette, useShot,
+import { Sequence, Scene, Soundtrack, CallToAction, sec, Layout, Camera, Layer, Move, At, Kinetic, WordSwap,
+         Morph, Shape, PathDraw, Lines, Marquee, Burst, Grain, Glow, PriceTag, usePalette, useShot,
          spring, interpolate, hash01 } from "@fab/motion";
 
 /** The pão de queijo, drawn: a golden ball lit from the top left, darker crust below, cheese specks. */
@@ -110,16 +110,16 @@ export default function Piece({ brand, items }) {
             </div>
           </Layer>
           <At x={0.5} y={0.6}><DroppingBread at={0} size={520} /></At>
-          <Burst at={12} seed={3} x={0.5} y={0.72} count={26} kind="dots" colors={["primary", "background"]} power={1100}
-                 spread={160} angle={-90} gravity={2600} life={30} size={16} />
-          <Safe justify="flex-start" align="center">
-            <Kinetic mode="scale-punch" size={92} color="text" align="center" at={14} step={3} upper tracking="-0.01em">
+          <Layout place="upper" align="center" gap={8}>
+            <Kinetic mode="mask-up" size={92} color="text" align="center" at={0} step={3} upper tracking="-0.01em">
               {"Sábado tem"}
             </Kinetic>
-            <Kinetic mode="mask-up" size={168} color="primary" align="center" at={20} step={4} weight={800} tracking="-0.045em">
+            <Kinetic mode="mask-up" size={168} color="primary" align="center" at={4} step={4} weight={800} tracking="-0.045em">
               {"pão de queijo."}
             </Kinetic>
-          </Safe>
+          </Layout>
+          <Burst at={12} seed={3} x={0.5} y={0.72} count={26} kind="dots" colors={["primary", "background"]} power={1100}
+                 spread={160} angle={-90} gravity={2600} life={30} size={16} />
         </Camera>
         <Grain amount={0.08} />
       </Scene>
@@ -128,47 +128,47 @@ export default function Piece({ brand, items }) {
       <Scene canvas duration={sec(2.2)} bg="primary" transition="shape-burst" sfx="whoosh">
         <Lines color="accent" alpha={0.18} size={90} line={22} angle={-30} drift={[60, 0]} />
         <Camera keys={[{ at: 0, zoom: 2.8, y: 120, rotate: 12 }, { at: 40, zoom: 1, y: 0, rotate: 0, ease: "outExpo" }]}>
-          <Glow color="accent" x={0.5} y={0.52} size={0.8} intensity={0.55} />
-          <At x={0.5} y={0.52}><CheeseBread size={560} seed={2} spin={0} /></At>
+          <Glow color="accent" x={0.5} y={0.6} size={0.8} intensity={0.55} />
+          <At x={0.5} y={0.6}><CheeseBread size={560} seed={2} spin={0} /></At>
         </Camera>
-        <Safe justify="flex-start" align="flex-start">
-          <Kinetic mode="mask-up" size={130} color="background" at={24} step={5} tracking="-0.04em">{"Douradinho\npor fora."}</Kinetic>
-        </Safe>
+        <Layout place="upper">
+          <Kinetic mode="mask-up" size={150} color="background" at={24} step={5}>{"Douradinho\npor fora."}</Kinetic>
+        </Layout>
         <Grain amount={0.07} />
       </Scene>
 
       {/* 3. price: match cut on the bread, which slides left; the price rolls in under the badge */}
       <Scene canvas duration={sec(2.8)} bg="background" transition="match" sfx="pop" hits={[{ at: 26, kind: "cha-ching" }]}>
-        <Dots color="primary" alpha={0.12} size={46} line={4} drift={[0, -20]} />
         <Move keys={[{ at: 0, x: 0, y: 0, scale: 1 }, { at: 16, x: 250, y: 560, scale: 0.9, ease: "snap" }]}>
           <At x={0.5} y={0.52}><CheeseBread size={560} seed={2} /></At>
         </Move>
-        <At x={0.74} y={0.24}>
+        {/* the badge sits in the band the lower block leaves free at the top: never over the name or the price */}
+        <At x={0.72} y={0.19}>
           <Move keys={[{ at: 10, scale: 0, rotate: -120 }, { at: 26, scale: 1, rotate: 0, ease: "outBack" }]}>
             <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Morph keys={[{ at: 0, shape: "burst" }]} size={150} color="primary" spin={30} />
-              <Kinetic mode="fade" at={20} size={40} color="background" align="center" upper weight={800} leading={1}
-                       style={{ position: "absolute" }}>{"Promo\nde sábado"}</Kinetic>
+              <Morph keys={[{ at: 0, shape: "burst" }]} size={250} color="primary" spin={30} />
+              <Kinetic mode="fade" at={20} size={56} color="background" align="center" upper weight={800} leading={1.05} tracking="0.06em"
+                       style={{ position: "absolute" }}>{"Promo de\nsábado"}</Kinetic>
             </div>
           </Move>
         </At>
-        <Safe justify="center" align="flex-start" gap={0} style={{ paddingTop: 120 }}>
+        <Layout place="lower" gap={0}>
           <Kinetic mode="mask-up" size={84} color="text" at={12} upper tracking="0">{bread?.name ?? ""}</Kinetic>
           <PriceTag item={bread} size={430} role="primary" at={18} entrance="punch" />
-        </Safe>
+        </Layout>
         <Grain amount={0.05} />
       </Scene>
 
       {/* 4. deadline: whip to dark; the clock hands race and land on twelve */}
       <Scene canvas duration={sec(2.2)} bg="text" transition="whip-left" sfx="whoosh" hits={[{ at: 36, kind: "impact" }]}>
         <Camera keys={[{ at: 0, zoom: 1.1 }, { at: 36, zoom: 1, ease: "outBack" }, { at: 66, zoom: 1.03 }]}>
-          <Safe gap={60}>
+          <Layout place="center" align="center" gap={60}>
             <NoonClock at={4} size={400} />
             <div style={{ textAlign: "center" }}>
               <Kinetic mode="mask-up" size={110} color="background" align="center" at={10} upper tracking="-0.02em">Só até</Kinetic>
               <Kinetic mode="stretch" size={170} color="accent" align="center" at={34} step={3} tracking="-0.04em">meio-dia.</Kinetic>
             </div>
-          </Safe>
+          </Layout>
         </Camera>
         <Burst at={36} seed={6} x={0.5} y={0.33} count={18} kind="rays" colors={["accent"]} power={900} life={20} size={20} />
         <Grain amount={0.07} />
@@ -176,8 +176,7 @@ export default function Piece({ brand, items }) {
 
       {/* 5. pairing: push up into terracotta; the cup slides in with its steam and its own price */}
       <Scene canvas duration={sec(2.4)} bg="primary" transition="push-up" sfx="pop">
-        <Lines color="text" alpha={0.08} size={120} line={40} angle={60} drift={[30, 0]} />
-        <Safe gap={30}>
+        <Layout align="center" gap={30}>
           <div style={{ textAlign: "center" }}>
             <Kinetic mode="mask-up" size={64} color="background" align="center" at={4} upper tracking="0.06em">E pra acompanhar</Kinetic>
             <WordSwap words={[coffee?.name ?? ""]} at={8} size={140} color="accent" />
@@ -186,21 +185,21 @@ export default function Piece({ brand, items }) {
             <CoffeeCup size={400} at={14} />
           </Move>
           <PriceTag item={coffee} size={230} role="background" at={26} entrance="punch" />
-        </Safe>
+        </Layout>
         <Grain amount={0.07} />
       </Scene>
 
       {/* 6. end: circle wipe into the brand colour; three breads bounce in, the call to action */}
       <Scene canvas duration={sec(3.2)} bg="accent" transition="shape-circle" sfx="resolve">
         <div style={{ position: "absolute", inset: 0, transform: "rotate(-8deg)" }}>
-          <Marquee size={130} color="primary" alpha={0.9} y={0.05} speed={300} style={{ textTransform: "uppercase" }}>
+          <Marquee size={130} color="primary" alpha={0.3} y={0.05} speed={300} style={{ textTransform: "uppercase" }}>
             {items.map((it) => it.name + " · ").join("")}
           </Marquee>
         </div>
-        <Safe gap={40}>
+        <Layout place="center" align="center" gap={40}>
           <Kinetic mode="mask-up" size={150} color="text" align="center" at={8} step={4} tracking="-0.045em" leading={0.95}>{brand.name}</Kinetic>
           <CallToAction action="whatsapp" text="Peça pelo WhatsApp" delay={30} />
-        </Safe>
+        </Layout>
         {[0, 1, 2, 3].map((i) => (
           <At key={i} x={0.12 + i * 0.26} y={0.9 - (i % 2) * 0.05}>
             <Move keys={[{ at: 2 + i * 4, y: 900 }, { at: 16 + i * 4, y: 0, ease: "outBack" }]}>

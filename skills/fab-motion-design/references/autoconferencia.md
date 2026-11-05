@@ -23,6 +23,13 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] A última cena tem uma `<CallToAction>` com um verbo (as palavras do dono inteiras) e fica tempo de leitura + 1 s.
 - [ ] Ramo com regra própria respeitado (`references/marca-e-dados.md`).
 
+## Composição e tipos (contando no código)
+
+- [ ] Cada cena nova põe o conteúdo num `<Layout>` (um bloco só: rótulo, no máximo dois níveis de texto, ou uma interface, ou a chamada); cena com foto é `place="split"`.
+- [ ] Nenhum `justify="flex-start"` nem `top`/`left` absoluto grudando palavras ou foto numa borda.
+- [ ] Nenhuma `<Shape>`, `<Morph>` ou bolha com `x`/`y` como decoração perto de texto: decoração é `<Ornament>` ou `<Numeral>` dentro do `<Layout>`, no máximo 2 por cena, opacidade de 0,1 a 0,25.
+- [ ] O título é `<Headline>` (ou um `<Kinetic fit>` de 1 a 3 palavras) sem `weight`, `tracking` nem `leading` escritos.
+
 ## Motion design (contando no código)
 
 - [ ] Nenhum hook com memória (`useState`, `useEffect`, `useRef`...), nada de `Math.random`, `Date` ou CSS que anima.
@@ -33,9 +40,9 @@ Rode esta lista contra o seu código antes de devolver. Qualquer "não" nas elim
 - [ ] Pelo menos um `<Morph>` com 2 chaves ou um `<PathDraw>`.
 - [ ] 3 tipos de transição ou mais (peça de 5 cenas ou mais); nenhum tipo em duas trocas seguidas.
 - [ ] `<Camera>` em pelo menos metade das cenas; `<Layer depth>` em pelo menos 2.
-- [ ] O visual principal ocupa pelo menos 60% da largura e a faixa de baixo tem o material da cena (foto, cartão, textura), nunca uma forma solta estacionada.
+- [ ] O visual principal ocupa pelo menos 60% da largura; numa cena com foto, ela é a imagem de um `<Layout place="split">` (inteira nas margens ou sangrando com `bleed`), nunca uma forma solta estacionada.
 - [ ] Um esquema só (claro ou escuro) em todas as cenas; nenhum `bg="text"` sem o pedido pedir.
-- [ ] Todo objeto nomeado no pedido (coração, curtida, post, botão, cursor) é `<Icon>`, `<SocialPost>`, `<Picture>` ou foto, nunca `<Shape>`; `<SocialPost>` sozinho em `<At>` (y ≈ 0,6), sem título acima na coluna nem decoração sobre as curtidas.
+- [ ] Todo objeto nomeado no pedido (coração, curtida, post, botão, cursor) é `<Icon>`, `<SocialPost>`, `<Picture>` ou foto, nunca `<Shape>`; `<SocialPost>` como imagem de um `split`, sem decoração sobre as curtidas.
 - [ ] Texto digitado é `<Kinetic mode="type">` (ou o `<PromptBox>`, que digita por dentro); um eixo de alinhamento por cena.
 - [ ] Cena de interface: `<PromptBox>` ou `<Checklist>` do kit, texto 80 px+, caixa 92%+ ou vazando; nunca div à mão.
 - [ ] Cada `sfx` e cada `hits` cai no quadro em que a coisa acontece (entrada em `at` assenta em `at + 20`); no máximo 3 `hits` por cena, um `impact` na peça, pelo menos uma cena em silêncio. `<Soundtrack sfx={false} />` do dono fica como está.

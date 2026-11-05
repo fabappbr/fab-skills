@@ -38,7 +38,7 @@ A transição vai na cena que entra: `transition: "cut" | "slide" | "zoom" | "br
 | Componente | Propriedades | Notas |
 |---|---|---|
 | `<Title>` | `entrance?: "word" | "letter" | "line" | "rise"`, `highlight?` (palavra a colorir), `size?: "m" | "l" | "xl"` | Quebra de linha calculada pelo tamanho. Até 7 palavras. |
-| `<Eyebrow>` | `variant?: "uppercase" | "pill"` | A linha pequena acima do título: urgência, data, categoria. Até 4 palavras. |
+| `<Eyebrow>` | `variant?: "uppercase" | "pill" | "rule"` | A linha pequena acima do título: urgência, data, categoria. Até 4 palavras. Em cena nova, `variant="rule"` (o rótulo do sistema de tipos, abaixo). |
 | `<Caption>` | `position?: "center" | "safe-bottom"` | Para quem assiste sem som. Até 8 palavras. |
 | `<List>` | `items` (textos), `marker?: "number" | "dot" | "check"`, `interval?` (quadros entre linhas) | Até 5 linhas. Cada linha entra separada. |
 | `<AnimatedNumber>` | `value`, `suffix?`, `duration?` | Conta até o valor em algarismos tabulares. O valor vem de dado, nunca digitado. Por padrão termina até 60% da cena e fica parado no valor final (um `duration` escrito vence). |
@@ -153,7 +153,7 @@ function P2Post() {
 - **Cor e fonte vêm da marca.** Nunca escreva hex, `rgb()` nem nome de fonte. Use o papel (`color="accent"`) ou `usePalette()`: `c("primary")`, `alpha("text", 0.2)`, `mix("accent", "primary", 0.5)` e as fontes `heading`/`body`. Os papéis são `primary`, `accent`, `background`, `text`, mais `white` e `black`, e `ink`.
 - **Texto que você mesmo estiliza usa `c("ink")`** (ou `color="ink"` num componente do kit): é a cor que lê sobre a cena em que o texto está (clara na cena escura, escura na clara, branca sobre foto escurecida). Nunca `c("white")`, `c("black")` nem `c("background")` fixos para palavras: esses são para formas e preenchimentos; um rótulo dentro de uma caixa que você pintou usa um papel que contrasta com a caixa. A plataforma mede cada palavra contra os pixels atrás dela e devolve para correção o que ficar abaixo de 3:1 (4,5:1 no texto pequeno).
 - **Preço só do item.** `<PriceTag item={...}>` ou `<Price item={...}>`. Nunca escreva valor, moeda ou porcentagem.
-- **Texto da tela só em componente do kit.** `<Kinetic>`, `<WordSwap>`, `<Marquee>`, `<Title>`, `<Eyebrow>`, `<Caption>`, `<CallToAction>`, ou num componente seu que recebe o texto como `children` ou como `label`/`text`. É assim que o editor do dono acha e edita cada texto. Texto solto dentro de `<div>` não aparece para o dono.
+- **Texto da tela só em componente do kit.** `<Kinetic>`, `<Headline>`, `<WordSwap>`, `<Marquee>`, `<Title>`, `<Eyebrow>`, `<Caption>`, `<CallToAction>`, ou num componente seu que recebe o texto como `children` ou como `label`/`text`. É assim que o editor do dono acha e edita cada texto. Texto solto dentro de `<div>` não aparece para o dono.
 
 ## Tempo
 
@@ -183,10 +183,41 @@ Tudo recebe o quadro (`frame`) e devolve um valor. O quadro da cena começa em 0
 | Componente | Propriedades | Notas |
 |---|---|---|
 | `<Scene canvas>` | `duration`, `bg?: papel ou [papel, papel]`, `background?`, `transition?`, `transitionFrames?`, `sfx?`, `hits?: [{ at, kind }]`, `editedByOwner?` | Com `canvas`, os filhos ocupam o quadro inteiro (nada de coluna automática). `bg="text"` é fundo liso; `bg={["primary", "text"]}` é degradê. `sfx` toca no corte; `hits` toca até 3 efeitos nos quadros da cena em que a coisa acontece. Tipos: `whoosh`, `whoosh-long`, `impact`, `thud`, `tick`, `pop`, `stamp`, `riser`, `resolve`, `cha-ching` (veja `som.md`). |
-| `<Safe>` | `align?`, `justify?`, `gap?`, `style?` | A área segura do formato, em coluna flex. Texto, preço, logo e chamada vão aqui dentro. Em 1:1 e 16:9 ela encolhe o conteúdo para caber (nunca aumenta). |
+| `<Safe>` | `align?`, `justify?`, `gap?`, `style?` | A área segura do formato, em coluna flex. Texto, preço, logo e chamada vão aqui dentro. Em 1:1 e 16:9 ela encolhe o conteúdo para caber (nunca aumenta). Em cena nova, prefira `<Layout>` (abaixo): nunca `justify="flex-start"` para grudar o texto no topo. |
 | `<At>` | `x`, `y` (frações do quadro, 0 a 1), `style?` | Caixa centrada num ponto do quadro. Para elementos gráficos fora do texto. |
 | `useSafeBox()` | `{ left, top, width, height, frameWidth, frameHeight, scale }` | A área segura em px, para desenhar alinhado a ela. |
 | `SIZES`, `SAFE` | por formato | Tamanho do quadro e margens livres de cada formato (`9:16`, `4:5`, `1:1`, `16:9`). |
+
+## Composição, decoração e tipos (toda cena nova)
+
+O conteúdo da cena é UM bloco na grade de margens (`references/tipografia-e-layout.md`). Use `<Layout>` onde antes usaria `<Safe>`; o `<Safe>` segue valendo nas peças antigas.
+
+| Componente | Propriedades | Notas |
+|---|---|---|
+| `<Layout>` | `place?: "optical" \| "center" \| "upper" \| "lower" \| "split"` (padrão `optical`), `align?: "start" \| "center"`, `gap?` (px), `media?` (a imagem do `split`), `mediaAt?: "top" \| "bottom"`, `bleed?` | Um bloco só, em coluna, na margem da grade, no lugar pedido (`optical`: um pouco acima do meio). `split` com `media={<Picture ... />}`: palavras em cima, a imagem no resto do quadro, inteira nas margens (no 16:9, ao lado); `bleed` a sangra de propósito. `<Ornament>` e `<Numeral>` filhos dele vão para a zona livre acima ou abaixo do bloco, atrás das palavras. `<Kinetic fit>`, `<Headline>`, `<PromptBox>`, `<Checklist>` e `<CallToAction>` dentro dele medem a coluna do bloco; um `<Kinetic>` dentro dele sem peso escrito toma o peso, o espaçamento e a entrelinha da família (fora dele, o 800 do primeiro kit). |
+| `<Ornament>` | `shape?` (padrão `blob`), `keys?` (de `<Morph>`), `zone?: "top" \| "bottom" \| "auto"`, `side?: "start" \| "end" \| "center"` (padrão `end`), `size?` (fração da altura da zona, padrão 0,82), `bleed?` (fração da largura que vaza pela borda, padrão 0,3), `color?`, `opacity?` (0,06 a 0,4; padrão 0,18), `outline?`, `rotate?`, `spin?` (graus por segundo, padrão 3), `seed?` | Forma decorativa da marca, quieta, na zona livre do `<Layout>` (fora de um, na faixa da interface da rede acima ou abaixo da área de texto, onde palavra nunca vai). No máximo 2 por cena; conta como decoração (pelo menos 30% das cenas sem nenhuma). |
+| `<Numeral>` | `children` ("01", um ano, a inicial), `zone?`, `side?`, `size?` (padrão 0,9), `bleed?`, `color?`, `opacity?` (0,12 a 0,6; padrão 0,35), `filled?` | Numeral ou letra gigante de fundo, só contorno (ou preenchimento tênue com `filled`), na fonte de título com algarismos tabulares. Na mesma zona livre do `<Ornament>`: nunca encosta nas palavras. |
+| `<Surface>` | `grain?` (0 a 0,12, padrão 0,05), `contour?` (padrão ligado), `glow?` (padrão ligado), `tint?` (papel, padrão `accent`), `seed?` | Superfície de acabamento sobre o fundo: luz suave nas cores da marca, curvas de nível tênues que andam devagar e grão fino. Primeiro filho da cena, em estilos claros, editoriais e premium; estilos chapados ficam sem. Já traz o grão: não some um `<Grain>`. É filme, não decoração: não conta na regra de decoração por cena. Custa cerca de 15 ms por quadro na exportação (o grão). |
+| `<Headline>` | `children` (a ideia, uma string), `lead?` (a preparação, na tinta mais quieta), `size?: "xl" \| "l" \| "m"` (184, 150 e 140 px no 9:16; padrão `l`), `underline?`, `accent?` (palavra para papel), `color?`, `at?`, `mode?` (entrada do `<Kinetic>`, padrão `mask-up`), `italic?`, `align?` | A linha de display: a fonte de título no peso, espaçamento e entrelinha dela (serifa nunca a 800), na escala do formato, em linhas equilibradas que cabem na coluna (palavra maior que a coluna diminui o título: corte o texto). `lead`: duas cores; `underline`: a régua sob a ideia. Entra linha a linha. |
+| `<Eyebrow variant="rule">` | `children`, `delay?` | O rótulo do sistema de tipos: 48 px, caixa alta espaçada (0,16em), algarismos tabulares, na fonte de texto, com uma régua curta de destaque antes ("Passo 01 de 03", uma categoria). Não quebra linha: até cerca de 18 letras. |
+
+```tsx
+<Scene canvas duration={sec(2.4)} bg="background">
+  <Surface />
+  <Layout>
+    <Eyebrow variant="rule">Guia de rótulos</Eyebrow>
+    <Headline lead="Cosméticos" underline>sem mistério.</Headline>
+    <Ornament shape="flower" zone="top" color="primary" opacity={0.16} />
+  </Layout>
+</Scene>
+<Scene canvas duration={sec(2.6)} bg="background">
+  <Layout place="split" media={<Picture slot="rotulo" prompt="cosmetic pump bottle on kraft paper, soft top light, no lettering" />}>
+    <Eyebrow variant="rule">Passo 01 de 03</Eyebrow>
+    <Headline>Leia o rótulo</Headline>
+    <Numeral>01</Numeral>
+  </Layout>
+</Scene>
+```
 
 ## Câmera e profundidade
 
@@ -206,7 +237,7 @@ Tempo comum (`Timed`): `at` (quadro de início), `dur` (quadros), `ease`, ou `pr
 | Componente | Propriedades | Notas |
 |---|---|---|
 | `<Reveal>` | `shape?: forma ou "rect"`, `from?: "left" | "right" | "top" | "bottom" | "center"`, `origin?: [x, y]`, `rotate?`, mais o tempo | Recorte que abre e mostra o que está dentro. A revelação por forma da marca é um dos momentos mais fortes. |
-| `<Morph>` | `keys: [{ at, shape, ease?, seed? }]`, `size?` (raio em px), `color?`, `rotate?`, `spin?` (graus por segundo), `scale?`, `stroke?`, `strokeWidth?`, `x?`, `y?` | Uma forma que vira outra (círculo → estrela → flor). `blob` com `seed` diferente dá formas orgânicas. |
+| `<Morph>` | `keys: [{ at, shape, ease?, seed? }]`, `size?` (raio em px), `color?`, `rotate?`, `spin?` (graus por segundo), `scale?`, `stroke?`, `strokeWidth?`, `x?`, `y?` | Uma forma que vira outra (círculo → estrela → flor). `blob` com `seed` diferente dá formas orgânicas. É herói ou transição; como decoração perto de palavras, use `<Ornament>` (que aceita as mesmas `keys`). |
 | `<Shape>` | `shape`, e as mesmas de `<Morph>` sem `keys` | Uma forma parada (pode girar com `spin`). É forma abstrata da marca, nunca um objeto: coração, botão ou estrela de avaliação são `<Icon>`. |
 | `<PathDraw>` | `path?` ou `d?` (caixa 0 a 100), `width?`, `height?`, `color?`, `stroke?`, `tail?`, mais o tempo | Linha que se desenha. `tail` faz a linha sumir atrás, como um traço que passa. |
 
@@ -217,7 +248,7 @@ Quando o pedido nomeia um objeto, ele aparece como ele mesmo. Uma `<Shape>` no l
 | Componente | Propriedades | Notas |
 |---|---|---|
 | `<Icon>` | `name`, `size?` (px, padrão 96), `color?`, `solid?`, `weight?` (traço na grade de 24), `at?`, `entrance?: "pop" | "draw" | "none"`, `pulse?` (quadros por batida), `x?`, `y?`, `style?` | Ícone de verdade, uma família só (traço redondo). `name`: `heart`, `like`, `comment`, `share`, `send`, `bookmark`, `check`, `check-circle`, `cursor`, `play`, `sparkle`, `star`, `bolt`, `bell`, `cart`, `bag`, `gift`, `clock`, `calendar`, `pin`, `phone`, `music`, `camera`, `image`, `video`, `user`, `search`, `plus`, `arrow-right`, `trend-up`, `wand`, `eye`. `solid` preenche os que fazem sentido cheios (coração, estrela, play, raio, comentário, marcador, cursor, brilho). `pulse={15}` faz o coração bater. Com `x`/`y` fica solto no quadro, centrado no ponto. |
-| `<SocialPost>` | `label?` (nome da conta; padrão, o da marca), `likes?`, `from?`, `at?`, `countAt?`, `count?` (quadros da contagem), `pulse?`, `heart?` (papel), `width?` (px, padrão 760), `caption?`, `children` (a imagem), `style?` | A contagem termina até 60% da cena por padrão e fica no valor final (um `count` escrito vence). O cartão nunca passa de 60% da altura do quadro (no 9:16, `width` acima de cerca de 790 não muda nada). Fica sozinho: posicione com `<At x={0.5} y={0.6}>`, nunca numa coluna com título acima; decoração flutuante (corações, confete) não cruza a linha da legenda (as curtidas). Um post de verdade: avatar com o logo, nome, a imagem quadrada, a fileira de ações com ícones e o contador de curtidas que corre de `from` até `likes` enquanto o coração bate. A superfície segue o esquema da peça. A imagem vai como filho: `<SocialPost likes={12480}><Picture slot="post-demo" prompt="..." radius={0} /></SocialPost>`. `caption` troca a palavra "curtidas" quando a peça fala outra língua que a marca. |
+| `<SocialPost>` | `label?` (nome da conta; padrão, o da marca), `likes?`, `from?`, `at?`, `countAt?`, `count?` (quadros da contagem), `pulse?`, `heart?` (papel), `width?` (px, padrão 760), `caption?`, `children` (a imagem), `style?` | A contagem termina até 60% da cena por padrão e fica no valor final (um `count` escrito vence). O cartão nunca passa de 60% da altura do quadro (no 9:16, `width` acima de cerca de 790 não muda nada). Fica sozinho como a imagem de um `split`: `<Layout place="split" media={<SocialPost ... />}>` (inteiro sob a frase, dentro das margens); decoração flutuante (corações, confete) não cruza a linha da legenda (as curtidas). Um post de verdade: avatar com o logo, nome, a imagem quadrada, a fileira de ações com ícones e o contador de curtidas que corre de `from` até `likes` enquanto o coração bate. A superfície segue o esquema da peça. A imagem vai como filho: `<SocialPost likes={12480}><Picture slot="post-demo" prompt="..." radius={0} /></SocialPost>`. `caption` troca a palavra "curtidas" quando a peça fala outra língua que a marca. |
 
 ## Interface demonstrada
 

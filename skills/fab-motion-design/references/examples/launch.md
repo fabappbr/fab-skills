@@ -5,38 +5,18 @@ Cópia exata de `studio/src/motion/references/launch.tsx`. Medida de acabamento 
 ```tsx
 /* Fabapp Motion launch, kinetic typography, 9:16, 15 s.
  * 1 hook      2.0 s  "Sem tempo / designer / câmera"  camera push, word slot-swaps on the beat   impact
- * 2 prompt    2.0 s  a sentence typed into a pill       whip in, camera dives into the pill        whoosh
+ * 2 prompt    2.0 s  a sentence typed into a PromptBox  whip in, camera dives into the box         whoosh
  * 3 payoff    2.3 s  "Vira vídeo."                       zoom-through, outline-fill, morphing star  pop
  * 4 brand     2.3 s  "Com a sua marca/cor/fonte"         squircle wipe, palette swatches spring in  tick
  * 5 sound     2.2 s  "Trilha e efeitos no ritmo"         push up, equalizer + rings on the beat     whoosh
  * 6 formats   1.8 s  "Pronto para Reels/Stories/Status"  whip up, the frame morphs its aspect       pop
  * 7 end       2.4 s  logo, "Fabapp Motion", CTA          stack, marker draws, confetti              resolve
  */
-import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, Camera, Layer, Move, Kinetic, WordSwap, Morph,
-         Shape, PathDraw, Grid, Dots, Rings, Burst, Grain, Glow, LightLeak, Logo, Marquee, interpolate, spring,
-         useShot, usePalette } from "@fab/motion";
+import { Sequence, Scene, Soundtrack, CallToAction, sec, Safe, Layout, Eyebrow, PromptBox, Camera, Layer, Move, Kinetic,
+         WordSwap, Headline, Morph, Shape, PathDraw, Grid, Rings, Burst, Grain, Glow, LightLeak, Logo, Marquee, interpolate,
+         spring, useShot, usePalette } from "@fab/motion";
 
 const PROMPT = "Promoção de sábado, pão de queijo, chama no WhatsApp";
-
-function TypedPrompt() {
-  const { frame } = useShot();
-  const { c, alpha, body } = usePalette();
-  const n = Math.floor(interpolate(frame, [6, 40], [0, PROMPT.length]));
-  const caret = Math.floor(frame / 8) % 2 === 0 || n < PROMPT.length;
-  const pop = spring(frame, 0, "snappy");
-  return (
-    <div style={{ width: 900, padding: "44px 48px", borderRadius: 48, background: c("background"), fontFamily: body,
-                  boxShadow: `0 40px 120px ${alpha("text", 0.45)}`, transform: `scale(${0.85 + 0.15 * pop})`, opacity: pop }}>
-      <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: c("primary"), marginBottom: 18 }}>
-        Você escreve
-      </div>
-      <div style={{ fontSize: 58, fontWeight: 600, lineHeight: 1.2, color: c("text"), minHeight: 210 }}>
-        {PROMPT.slice(0, n)}
-        <span style={{ display: "inline-block", width: 6, height: 62, marginLeft: 4, verticalAlign: "-8px", background: c("primary"), opacity: caret ? 1 : 0 }} />
-      </div>
-    </div>
-  );
-}
 
 function Equalizer() {
   const { frame } = useShot();
@@ -80,10 +60,10 @@ export default function Piece() {
         <Camera keys={[{ at: 0, zoom: 1.18, rotate: -3 }, { at: 60, zoom: 1, rotate: 0, ease: "outQuint" }]}>
           <Layer depth={1.5}><Grid color="background" alpha={0.07} size={135} drift={[0, -40]} /></Layer>
           <Glow color="primary" x={0.5} y={0.42} size={0.9} intensity={0.55} />
-          <Safe align="flex-start">
+          <Layout gap={0}>
             <Kinetic mode="mask-up" size={190} color="background" at={2}>Sem</Kinetic>
-            <WordSwap words={["tempo.", "designer.", "câmera."]} at={4} every={14} mode="mask" size={190} color="accent" />
-          </Safe>
+            <WordSwap words={["tempo.", "designer.", "câmera."]} at={4} every={14} mode="mask" size={190} color="accent" align="left" />
+          </Layout>
         </Camera>
         <Grain amount={0.07} />
       </Scene>
@@ -91,8 +71,10 @@ export default function Piece() {
       {/* 2. the prompt: whip in, type, then the camera dives into the pill */}
       <Scene canvas duration={sec(2)} bg={["primary", "text"]} transition="whip-left" sfx="whoosh">
         <Camera keys={[{ at: 0, zoom: 1 }, { at: 44, zoom: 1.04 }, { at: 60, zoom: 3.2, y: -40, ease: "inExpo" }]}>
-          <Layer depth={2}><Dots color="background" alpha={0.14} size={54} line={3} drift={[20, 0]} /></Layer>
-          <Safe><TypedPrompt /></Safe>
+          <Layout place="center">
+            <Eyebrow variant="rule">Você escreve</Eyebrow>
+            <PromptBox at={6} step={1}>{PROMPT}</PromptBox>
+          </Layout>
         </Camera>
       </Scene>
 
@@ -107,22 +89,20 @@ export default function Piece() {
               </Move>
             </Safe>
           </Layer>
-          <Safe>
+          <Layout place="center" align="center">
             <Move keys={[{ at: 0, scale: 0.8 }, { at: 16, scale: 1, ease: "outBack" }]}>
               <Kinetic mode="outline-fill" size={250} color="primary" align="center" leading={1.02} tracking="-0.01em" step={8} dur={14} upper>{"Vira\nvídeo."}</Kinetic>
             </Move>
-          </Safe>
+          </Layout>
         </Camera>
-        <Burst at={20} seed={4} x={0.5} y={0.45} count={36} colors={["primary", "accent", "text"]} power={1300} />
       </Scene>
 
       {/* 4. brand: wipe through the brand's rounded square; the palette springs in */}
       <Scene canvas duration={sec(2.3)} bg="text" transition="shape-squircle" sfx="tick" hits={[{ at: 24, kind: "pop" }, { at: 36, kind: "pop" }]}>
-        <Layer><Rings color="primary" alpha={0.25} size={180} line={2} x={0.5} y={0.5} /></Layer>
-        <Safe align="flex-start" gap={56}>
+        <Layout gap={56}>
           <div>
             <Kinetic mode="mask-up" size={150} color="background" at={6}>Com a sua</Kinetic>
-            <WordSwap words={["marca.", "cor.", "fonte.", "logo."]} at={10} every={13} mode="slot" size={150} color="accent" />
+            <WordSwap words={["marca.", "cor.", "fonte.", "logo."]} at={10} every={13} mode="slot" size={150} color="accent" align="left" />
           </div>
           <div style={{ display: "flex", gap: 28 }}>
             {(["primary", "accent", "background"] as const).map((role, i) => (
@@ -131,32 +111,30 @@ export default function Piece() {
               </Move>
             ))}
           </div>
-        </Safe>
+        </Layout>
         <Grain amount={0.06} />
       </Scene>
 
       {/* 5. sound: the equalizer pumps on the beat, rings radiate */}
       <Scene canvas duration={sec(2.2)} bg="primary" transition="push-up" sfx="whoosh">
         <Rings color="background" alpha={0.12} size={160} line={4} drift={[0, 90]} />
-        <Safe gap={60}>
+        <Layout align="center" gap={60}>
           <Equalizer />
-          <Kinetic mode="mask-up" size={120} color="background" align="center" at={8} step={3} marks={{ ritmo: "underline" }} markColor="accent">
-            {"Trilha e efeitos\nno ritmo."}
-          </Kinetic>
-        </Safe>
+          <Headline lead="Trilha e efeitos" at={8} color="background" underline>no ritmo.</Headline>
+        </Layout>
         <LightLeak color="accent" second="background" intensity={0.25} />
       </Scene>
 
       {/* 6. formats: the frame itself changes aspect as the word swaps */}
       <Scene canvas duration={sec(1.8)} bg="background" transition="whip-up" sfx="pop" hits={[{ at: 16, kind: "tick" }, { at: 34, kind: "tick" }]}>
         <Marquee size={220} color="primary" alpha={0.08} y={0.7} speed={320}>REELS · STORIES · STATUS ·</Marquee>
-        <Safe gap={50}>
+        <Layout place="center" align="center" gap={50}>
           <FormatFrame />
           <div style={{ textAlign: "center" }}>
             <Kinetic mode="mask-up" size={96} color="text" align="center" at={0}>Pronto para</Kinetic>
-            <WordSwap words={["Reels.", "Stories.", "Status."]} at={0} every={17} mode="mask" size={130} color="primary" />
+            <WordSwap words={["Reels.", "Stories.", "Status."]} at={0} every={17} mode="mask" size={170} color="primary" />
           </div>
-        </Safe>
+        </Layout>
       </Scene>
 
       {/* 7. end: stacks over, the name lands, the marker draws, the CTA */}
@@ -164,7 +142,7 @@ export default function Piece() {
         <Camera keys={[{ at: 0, zoom: 1.06 }, { at: 72, zoom: 1 }]}>
           <Glow color="primary" x={0.5} y={0.38} size={1.1} intensity={0.7} pulse={1} />
           <Layer depth={1}><Grid color="background" alpha={0.05} size={135} drift={[0, -30]} /></Layer>
-          <Safe gap={44}>
+          <Layout place="center" align="center" gap={44}>
             <Move keys={[{ at: 0, opacity: 0, scale: 0.6 }, { at: 12, opacity: 1, scale: 1, ease: "outBack" }]}>
               <div style={{ background: c("white"), borderRadius: 40, padding: 22 }}><Logo height={110} /></div>
             </Move>
@@ -173,7 +151,7 @@ export default function Piece() {
             </Kinetic>
             <PathDraw path="swoosh" width={420} height={60} color="accent" stroke={10} at={30} dur={16} />
             <CallToAction action="link-in-bio" text="Crie seu primeiro vídeo" delay={34} />
-          </Safe>
+          </Layout>
         </Camera>
         <Burst at={30} seed={9} x={0.5} y={0.32} count={44} colors={["accent", "primary", "background"]} power={1500} spread={140} />
         <Grain amount={0.06} />
