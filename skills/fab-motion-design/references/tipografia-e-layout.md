@@ -44,6 +44,8 @@ As laterais de 6% são o mínimo para a interface da rede não cobrir nada, não
 
 O `<Layout>` posiciona as palavras dentro da área livre (o `<Safe>` segue valendo nas peças antigas e no cartão final). Numa cena cujo herói é uma imagem, use `place="split"`: a imagem desce pela faixa de baixo, inteira dentro das margens, e as palavras ficam acima dela. A faixa nunca recebe uma forma solta só para "preencher", e a cena nunca fica encolhida na metade de cima sobre um vazio.
 
+**A base do 9:16 (os 35% de baixo) é da legenda da rede: fica sem texto, sem botão e sem logo, mas nunca com o fundo liso da página.** Um visual entra nela e desce até a borda, para a legenda cobrir imagem e não um fundo vazio: `<Layout floor={<Picture slot="..." radius={0} />}>` (a foto enche de baixo do bloco até a borda, de lado a lado), `<Layout floor="primary">` (um campo na cor da marca), o `split` com a imagem embaixo das palavras e `bleed` (com `mediaAt="top"` a faixa fica vazia), ou um `<Numeral>` ou `<Ornament>` na zona abaixo do bloco. A plataforma mede a faixa na cena assentada e devolve para correção quando o que não é texto, nem botão, nem logo, cobre menos de um quinto dela. Cena sobre a cor primária ou de destaque da marca (ou um degradê), ou com foto ou vídeo de fundo inteiro, já está cheia. No 4:5, no 1:1 e no 16:9 a faixa da legenda não existe e a regra não vale.
+
 ## Nada parece vazio
 
 - Conteúdo de verdade (palavras, foto, produto, cartão, ícone) cobre pelo menos **35% do quadro**. `<Grid>`, `<Dots>`, `<Glow>` e `<Grain>` são decoração e não contam.
